@@ -1,8 +1,14 @@
 #pragma once
-class GameState
+#include "../Interface.h"
+
+class IRenderer : public Interface
 {
 public:
-	GameState();
-	~GameState();
+	virtual ~IRenderer() {}
+
+	virtual void Render() = 0;
+private:
+	int m_ScreenWidth;
+	int m_ScreenHeight;
 };
 

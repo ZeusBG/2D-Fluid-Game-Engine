@@ -2,8 +2,7 @@
 class BaseObject
 {
 public:
-	BaseObject();
-	~BaseObject();
+	virtual ~BaseObject() {}
 	virtual void Update(float delta) = 0;
 };
 

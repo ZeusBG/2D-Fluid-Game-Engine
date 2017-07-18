@@ -36,16 +36,19 @@
     <ClInclude Include="src\engine\GameState.h">
       <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\IEngineComponent.h">
+    <ClInclude Include="src\engine\IInput.h">
       <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\IInput.h">
+    <ClInclude Include="src\engine\Interface.h">
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\Physics.h">
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\StateStack.h">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\SystemSettings.h">
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\Transform.h">
@@ -55,6 +58,9 @@
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\rendering\IRenderer.h">
+      <Filter>engine\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\Renderer.h">
       <Filter>engine\rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\game\GameClient.h">
@@ -71,7 +77,19 @@
     <ClCompile Include="src\engine\Engine.cpp">
       <Filter>engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\Physics.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\World.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\Renderer.cpp">
+      <Filter>engine\rendering</Filter>
+    </ClCompile>
     <ClCompile Include="src\game\GameClient.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\main.cpp">
       <Filter>game</Filter>
     </ClCompile>
   </ItemGroup>

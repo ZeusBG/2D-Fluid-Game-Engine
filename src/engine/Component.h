@@ -1,4 +1,5 @@
 #pragma once
+class Entity;
 class Component : public BaseObject
 {
 	Entity* m_Owner;
@@ -7,4 +8,3 @@ public:
 
 	Entity* GetOwner() { return m_Owner; }
 };
-

@@ -2,8 +2,9 @@
 #include "../util/Collections.h"
 #include "BaseObject.h"
 #include "Entity.h"
+#include "Interface.h"
 
-class World
+class World : public Interface
 {
 private:
 	AVector<Entity> m_Entities;
@@ -13,7 +14,9 @@ private:
 public:
 	World();
 
-	float update(float delta);
+	void Update(float delta);
+	virtual void Init(Engine* engine);
+	virtual const char* GetName();
 
 	AVector<Entity>& getEntities() { return m_Entities; }
 	AVector<Entity*>& getDynamicEntities() { return m_DynamicEntities; }

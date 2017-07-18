@@ -1,4 +1,5 @@
 #pragma once
+class World;
 class GameState
 {
 public:

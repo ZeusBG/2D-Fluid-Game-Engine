@@ -5,7 +5,7 @@ class Entity : public BaseObject
 {
 	AVector<Component> m_Components;
 public:
-	Entity();
-	~Entity();
+	Entity() {}
+	~Entity() {}
 };
 

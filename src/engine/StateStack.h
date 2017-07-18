@@ -2,7 +2,7 @@
 class StateStack
 {
 public:
-	StateStack();
-	~StateStack();
+	StateStack() {}
+	~StateStack() {}
 };
 

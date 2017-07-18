@@ -4,6 +4,8 @@
 
 GameClient::GameClient()
 {
+	m_Engine.reset(new Engine());
+	m_Engine->Init();
 }
 
 
