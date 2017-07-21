@@ -1,12 +1,10 @@
 #pragma once
 class Engine;
-class Interface
+class IModule
 {
-protected:
-	Engine* m_Engine;
 public:
 	virtual void Init(Engine* engine) = 0;
 	virtual const char* GetName() = 0;
-	virtual ~Interface() {}
+	virtual ~IModule() {}
 };
 

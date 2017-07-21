@@ -1,6 +1,6 @@
 #pragma once
-#include "Interface.h"
-class Physics : public Interface
+#include "../core/IModule.h"
+class Physics : public IModule
 {
 public:
 	Physics();

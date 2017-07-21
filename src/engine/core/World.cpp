@@ -14,7 +14,6 @@ void World::Update(float delta)
 
 void World::Init(Engine* engine)
 {
-	m_Engine = engine;
 }
 
 

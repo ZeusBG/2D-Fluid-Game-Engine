@@ -1,7 +1,7 @@
 #pragma once
-#include "Interface.h"
+#include "IModule.h"
 
-class IInput : public Interface
+class IInput : public IModule
 {
 public:
 	IInput();

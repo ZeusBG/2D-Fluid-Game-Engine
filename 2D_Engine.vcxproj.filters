@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="engine">
@@ -13,48 +13,27 @@
     <Filter Include="util">
       <UniqueIdentifier>{43339F7C-2F6A-A00D-D856-8610C46C1C0F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="engine\physics">
+      <UniqueIdentifier>{02698ac4-8ebe-4642-9630-a0e6b10fe0c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\core">
+      <UniqueIdentifier>{230c3bc8-0862-40a9-a83e-34537d25f07f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\input">
+      <UniqueIdentifier>{f34531d9-8b54-417c-8f79-92a8360060a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\memory">
+      <UniqueIdentifier>{9f37b306-4bf9-4c90-be86-e77b288b2ea9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\engine\Allocator.h">
-      <Filter>engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\BaseObject.h">
-      <Filter>engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\Collider.h">
-      <Filter>engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\Component.h">
-      <Filter>engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\Engine.h">
-      <Filter>engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\Entity.h">
-      <Filter>engine</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\GameState.h">
-      <Filter>engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\IInput.h">
-      <Filter>engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\Interface.h">
-      <Filter>engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\Physics.h">
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\StateStack.h">
       <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\SystemSettings.h">
-      <Filter>engine</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\Transform.h">
-      <Filter>engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\World.h">
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\rendering\IRenderer.h">
@@ -72,17 +51,47 @@
     <ClInclude Include="src\util\Math.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="src\util\StringUtils.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\physics\Physics.h">
+      <Filter>engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\physics\Collider.h">
+      <Filter>engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\Entity.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\IModule.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\SystemSettings.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\Window.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\World.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\BaseObject.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\Component.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\Engine.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\input\IInput.h">
+      <Filter>engine\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\memory\Allocator.h">
+      <Filter>engine\memory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\engine\Engine.cpp">
-      <Filter>engine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\Physics.cpp">
-      <Filter>engine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\World.cpp">
-      <Filter>engine</Filter>
-    </ClCompile>
     <ClCompile Include="src\engine\rendering\Renderer.cpp">
       <Filter>engine\rendering</Filter>
     </ClCompile>
@@ -91,6 +100,18 @@
     </ClCompile>
     <ClCompile Include="src\game\main.cpp">
       <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\physics\Physics.cpp">
+      <Filter>engine\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\core\Window.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\core\World.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\core\Engine.cpp">
+      <Filter>engine\core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

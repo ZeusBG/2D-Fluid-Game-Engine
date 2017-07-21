@@ -1,10 +1,10 @@
 #pragma once
-#include "../util/Collections.h"
+#include "../../util/Collections.h"
 #include "BaseObject.h"
 #include "Entity.h"
-#include "Interface.h"
+#include "IModule.h"
 
-class World : public Interface
+class World : public IModule
 {
 private:
 	AVector<Entity> m_Entities;
