@@ -1,7 +1,7 @@
 #pragma once
 #include "../../util/Collections.h"
-#include "BaseObject.h"
-#include "Entity.h"
+#include "../object/BaseObject.h"
+#include "../object/Entity.h"
 #include "IModule.h"
 
 class World : public IModule
@@ -17,10 +17,11 @@ public:
 	void Update(float delta);
 	virtual void Init(Engine* engine);
 	virtual const char* GetName();
+	virtual void Destroy();
 
-	AVector<Entity>& getEntities() { return m_Entities; }
-	AVector<Entity*>& getDynamicEntities() { return m_DynamicEntities; }
-	AVector<Entity*>& getStaticEntities() { return m_StaticEntities; }
+	const AVector<Entity>& GetEntities() const { return m_Entities; }
+	const AVector<Entity*>& GetDynamicEntities() const { return m_DynamicEntities; }
+	const AVector<Entity*>& GetStaticEntities() const { return m_StaticEntities; }
 
 	~World();
 };

@@ -1,7 +1,7 @@
 #include "Engine.h"
-#include "../rendering/Renderer.h"
+#include "../rendering/RendererDX11.h"
 #include "World.h"
-#include "../input/IInput.h"
+#include "../input/Input.h"
 #include "../physics/Physics.h"
 #include "SystemSettings.h"
 
@@ -9,40 +9,38 @@ Engine::Engine()
 {
 }
 
-void Engine::Init(const SystemSettings* settings)
+void Engine::Init(const SystemSettings settings)
 {
-	if (settings)
-	{
-		m_Settings.reset(new SystemSettings(*settings));
-	}
-	m_Window.reset(new Window());
-	m_Window->Init(this);
+	m_Settings = settings;
+	m_EngineModules.push_back(new Window());
+	m_EngineModules.back()->Init(this);
 
-	m_Renderer.reset(new Renderer());
-	m_Renderer->Init(this);
+	m_EngineModules.push_back(new Input());
+	m_EngineModules.back()->Init(this);
 
-	m_World.reset(new World());
-	m_World->Init(this);
+	m_EngineModules.push_back(new RendererDX11());
+	m_EngineModules.back()->Init(this);
+
+	m_EngineModules.push_back(new World());
+	m_EngineModules.back()->Init(this);
 }
 
 void Engine::Run()
 {
 	m_IsRunning = true;
-	m_TimeStarted = std::chrono::steady_clock::now();
+	m_EngineClock.Start();
 	float delta = 0.0f;
 
 	while (m_IsRunning)
 	{
-		TimePoint loopStart = std::chrono::steady_clock::now();
-		m_Input->Update();
-		m_Window->Update();
-		m_World->Update(delta);
-		m_Physics->Update(delta);
-		m_Renderer->Render();
-
-		TimePoint loopEnd = std::chrono::steady_clock::now();
-		delta = std::chrono::duration_cast<std::chrono::microseconds>(loopEnd - loopStart).count() / 1000.0f;
+		for (IModule* module : m_EngineModules)
+		{
+			module->Update(delta);
+		}
+		delta = m_EngineClock.MeasureTime();
 	}
+
+	Destroy();
 }
 
 void Engine::Stop()
@@ -60,18 +58,19 @@ void Engine::PopState()
 
 float Engine::TimeSinceStart()
 {
-	return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - m_TimeStarted).count() / 1000.0f;
+	return m_EngineClock.GetTimeSinceStart();
 }
 
 void Engine::PushState(const GameState& state)
 {
 }
 
-void Engine::MakeWindow(const WindowInfo& info)
+void Engine::Destroy()
 {
-
-	m_Window.reset(new Window());
-	m_Window->MakeWindow(&info);
+	for (IModule* module : m_EngineModules)
+	{
+		module->Destroy();
+	}
 }
 
 Engine* Engine::GetEngine()

@@ -1,33 +1,33 @@
 #pragma once
-#include "Renderer.h"
+#include "RendererDX11.h"
 #include "../core/SystemSettings.h"
 #include "../core/Engine.h"
 #include <d3dcompiler.h>
 #include <directxmath.h>
 #include "../../util/StringUtils.h"
 
-Renderer::Renderer() {}
-Renderer::~Renderer() {}
+RendererDX11::RendererDX11() {}
+RendererDX11::~RendererDX11() {}
 using namespace DirectX;
 struct SimpleVertex
 {
 	XMFLOAT3 Pos;
 };
 
-void Renderer::Init(Engine* engine)
+void RendererDX11::Init(Engine* engine)
 {
 	const SystemSettings* settings = engine->GetSettings();
 	m_ScreenWidth = settings->ScreenWidth;
 	m_ScreenHeight = settings->ScreenHeight;
 	
-	const Window* window = engine->GetWindow();
+	const Window* window = engine->GetModule<Window>();
 	m_hWnd = window->GethWnd();
 	m_hInst = window->GetHInstance();
 
 	InitDevice();
 }
 
-HRESULT Renderer::InitDevice()
+HRESULT RendererDX11::InitDevice()
 {
 	HRESULT hr = S_OK;
 
@@ -175,14 +175,16 @@ HRESULT Renderer::InitDevice()
 	vp.TopLeftX = 0;
 	vp.TopLeftY = 0;
 	m_pImmediateContext->RSSetViewports(1, &vp);
+
+	return S_OK;
 }
 
-void Renderer::Render()
+void RendererDX11::Update(float delta)
 {
 
 }
 
-HRESULT Renderer::CompileShaderFromFile(const char* file, LPCSTR entryPoint, LPCSTR shaderModel, ID3DBlob** blobOut)
+HRESULT RendererDX11::CompileShaderFromFile(const char* file, LPCSTR entryPoint, LPCSTR shaderModel, ID3DBlob** blobOut)
 {
 	std::wstring fileName = StrToWstr(file);
 	HRESULT hr = S_OK;
@@ -216,7 +218,7 @@ HRESULT Renderer::CompileShaderFromFile(const char* file, LPCSTR entryPoint, LPC
 	return S_OK;
 }
 
-PSHandle Renderer::CreatePSFromFile(const char* file, ShaderVersion version)
+PSHandle RendererDX11::CreatePSFromFile(const char* file, ShaderVersion version)
 {
 	std::string shaderVersion;
 	//TODO this is dumb way of converting shader vesion to string
@@ -246,7 +248,7 @@ PSHandle Renderer::CreatePSFromFile(const char* file, ShaderVersion version)
 	return static_cast<void*>(PixelShader);
 }
 
-VSHandle Renderer::CreateVSFromFile(const char* file, ShaderVersion version)
+VSHandle RendererDX11::CreateVSFromFile(const char* file, ShaderVersion version)
 {
 	std::string shaderVersion;
 	//TODO this is dumb way of converting shader vesion to string
@@ -276,4 +278,16 @@ VSHandle Renderer::CreateVSFromFile(const char* file, ShaderVersion version)
 	return static_cast<void*>(VertexShader);
 }
 
-const char* Renderer::GetName() { return "Renderer"; }
+const char* RendererDX11::GetName() { return "Renderer"; }
+
+void RendererDX11::Destroy()
+{
+	if (m_pImmediateContext) m_pImmediateContext->ClearState();
+	if (m_pRenderTargetView) m_pRenderTargetView->Release();
+	if (m_pSwapChain1) m_pSwapChain1->Release();
+	if (m_pSwapChain) m_pSwapChain->Release();
+	if (m_pImmediateContext1) m_pImmediateContext1->Release();
+	if (m_pImmediateContext) m_pImmediateContext->Release();
+	if (m_pd3dDevice1) m_pd3dDevice1->Release();
+	if (m_pd3dDevice) m_pd3dDevice->Release();
+}

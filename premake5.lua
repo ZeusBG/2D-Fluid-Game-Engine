@@ -8,6 +8,7 @@ project "2D_Engine"
    files { "src/**.h", "src/**.c", "src/**.cpp" }
 
    flags { "WinMain" }
+   rtti ("On")
    links { "d3d11", "d3dcompiler" }
 
    filter "configurations:Debug"

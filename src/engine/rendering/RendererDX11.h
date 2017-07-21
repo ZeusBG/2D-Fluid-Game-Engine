@@ -3,7 +3,7 @@
 #include <d3d11_1.h>
 #include <d3dcompiler.h>
 
-class Renderer : public IRenderer
+class RendererDX11 : public IRenderer
 {
 	HINSTANCE               m_hInst = nullptr;
 	HWND                    m_hWnd = nullptr;
@@ -18,16 +18,16 @@ class Renderer : public IRenderer
 	ID3D11RenderTargetView* m_pRenderTargetView = nullptr;
 
 public:
-	Renderer();
-	virtual ~Renderer();
+	RendererDX11();
+	virtual ~RendererDX11();
 
-	void Render();
+	virtual void Update(float delta);
 	virtual void Init(Engine* engine);
 	virtual const char* GetName();
+	virtual void Destroy();
 
 	virtual PSHandle CreatePSFromFile(const char* file, ShaderVersion version);
 	virtual VSHandle CreateVSFromFile(const char* file, ShaderVersion version);
-
 
 private:
 	int m_ScreenWidth;

@@ -4,7 +4,8 @@
 class IInput : public IModule
 {
 public:
-	virtual ~IInput() {};
+	IInput();
+	~IInput();
 	
 	virtual bool IsKeyPressed(KeyCode code) = 0;
 	virtual bool IsMouseButtonPressed(KeyCode code) = 0;
@@ -15,10 +16,6 @@ public:
 	virtual bool IsKeyJustReleased(KeyCode code) = 0;
 	virtual bool IsMouseButtonJustReleased(KeyCode code) = 0;
 
-	friend class Window;
-
-private:
-	virtual void KeyPress(KeyCode) = 0;
-	virtual void MouseButtonPress(KeyCode) = 0;
+	virtual void Update() = 0;
 };
 

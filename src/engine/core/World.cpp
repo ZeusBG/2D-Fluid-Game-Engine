@@ -18,3 +18,7 @@ void World::Init(Engine* engine)
 
 
 const char* World::GetName() { return "World"; }
+
+void World::Destroy()
+{
+}

@@ -13,13 +13,13 @@ public:
 	Window();
 	~Window();
 
-	void Update();
+	void Update(float delta);
 	virtual void Init(Engine* engine);
 	virtual const char* GetName();
 
 	HRESULT MakeWindow(const WindowInfo* info);
 
-	void DeInit();
+	virtual void Destroy();
 	HINSTANCE GetHInstance() const { return m_hInst; }
 	HWND GethWnd() const { return m_hWnd; }
 private:

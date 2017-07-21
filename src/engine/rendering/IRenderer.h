@@ -13,7 +13,6 @@ class IRenderer : public IModule
 public:
 	virtual ~IRenderer() {}
 
-	virtual void Render() = 0;
 	virtual PSHandle CreatePSFromFile(const char* file, ShaderVersion version) = 0;
 	virtual VSHandle CreateVSFromFile(const char* file, ShaderVersion version) = 0;
 private:

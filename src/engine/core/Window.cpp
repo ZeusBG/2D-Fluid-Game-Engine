@@ -27,7 +27,7 @@ HRESULT Window::MakeWindow(const WindowInfo* info)
 	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wcex.lpszMenuName = nullptr;
-	wcex.lpszClassName = L"TutorialWindowClass";
+	wcex.lpszClassName = L"2D Game Engine";
 	wcex.hIconSm = nullptr;
 	if (!RegisterClassEx(&wcex))
 		return E_FAIL;
@@ -36,7 +36,7 @@ HRESULT Window::MakeWindow(const WindowInfo* info)
 
 	RECT rc = { 0, 0, 800, 600 };
 	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-	m_hWnd = CreateWindow(L"TutorialWindowClass", L"Direct3D 11 Tutorial 3: Shaders",
+	m_hWnd = CreateWindow(L"2D Game Engine", L"Pre-Alpha",
 		WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
 		CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, info->hInstance,
 		nullptr);
@@ -48,11 +48,14 @@ HRESULT Window::MakeWindow(const WindowInfo* info)
 	return S_OK;
 }
 
+void Window::Destroy()
+{
+}
+
 LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	PAINTSTRUCT ps;
 	HDC hdc;
-
 	switch (message)
 	{
 	case WM_PAINT:
@@ -62,18 +65,13 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	
 	case WM_DESTROY:
 		PostQuitMessage(0);
-
 		break;
-	
-		// Note that this tutorial does not handle resizing (WM_SIZE) requests,
-		// so we created the window without the resize border.
-	
 	default: return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 	return 0;
 }
 
-void Window::Update()
+void Window::Update(float delta)
 {
 	while (PeekMessage(&m_Msg, nullptr, 0, 0, PM_REMOVE))
 	{
@@ -81,14 +79,9 @@ void Window::Update()
 		DispatchMessage(&m_Msg);
 		if (WM_QUIT == m_Msg.message)
 		{
-			DeInit();
+			Engine::GetEngine()->Stop();
 		}
 	}
-}
-
-void Window::DeInit()
-{
-	Engine::GetEngine()->Stop();
 }
 
 const char* Window::GetName() { return "Window"; }
