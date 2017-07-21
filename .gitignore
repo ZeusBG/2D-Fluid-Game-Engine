@@ -4,6 +4,14 @@
 *.exe
 *.o
 *.so
+*.tlog
+*.obj
+*.pdb
+*.db
+*.opendb
+*.ilk
+*.log
+*.idb
 
 # Packages #
 *.7z
