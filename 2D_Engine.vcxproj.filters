@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="engine">
+      <UniqueIdentifier>{FBDB78FB-E77D-A3D1-D038-B725BC792A22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\core">
+      <UniqueIdentifier>{5341430D-BFF6-BB02-48EB-B5D9B49FB206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\input">
+      <UniqueIdentifier>{5A6C17B6-46CF-A65A-EF54-DF10DB9672DD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\memory">
+      <UniqueIdentifier>{23FFB481-8FBF-30B8-58FA-7935C4797594}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\object">
+      <UniqueIdentifier>{41352786-ADF5-A2BC-7630-EC39E2AFE798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\physics">
+      <UniqueIdentifier>{8D421EA7-7910-12AD-62A4-82D34E11EE11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\rendering">
+      <UniqueIdentifier>{283BEE99-1434-0DEC-3D66-F27029BEECF7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\time">
+      <UniqueIdentifier>{99794C0D-052F-C502-8E23-BFD9FAD7BB06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game">
+      <UniqueIdentifier>{9F35977C-8B6C-980D-3459-7E10206F140F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{43339F7C-2F6A-A00D-D856-8610C46C1C0F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\engine\GameState.h">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\StateStack.h">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\Transform.h">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\Engine.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\IModule.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\SystemSettings.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\Window.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\World.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\input\IInput.h">
+      <Filter>engine\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\input\Input.h">
+      <Filter>engine\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\input\KeyCodes.h">
+      <Filter>engine\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\input\KeyTableWin.h">
+      <Filter>engine\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\input\WinInputConverter.h">
+      <Filter>engine\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\memory\Allocator.h">
+      <Filter>engine\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\object\BaseObject.h">
+      <Filter>engine\object</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\object\Component.h">
+      <Filter>engine\object</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\object\Entity.h">
+      <Filter>engine\object</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\physics\Collider.h">
+      <Filter>engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\physics\Physics.h">
+      <Filter>engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\IRenderer.h">
+      <Filter>engine\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\RendererDX11.h">
+      <Filter>engine\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\time\Clock.h">
+      <Filter>engine\time</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\GameClient.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\Collections.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\Math.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\StringUtils.h">
+      <Filter>util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\engine\core\Engine.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\core\Window.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\core\World.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\input\Input.cpp">
+      <Filter>engine\input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\physics\Physics.cpp">
+      <Filter>engine\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\RendererDX11.cpp">
+      <Filter>engine\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\time\Clock.cpp">
+      <Filter>engine\time</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\GameClient.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\main.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
