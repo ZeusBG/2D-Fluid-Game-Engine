@@ -5,7 +5,10 @@ project "2D_Engine"
    kind "WindowedApp"
    language "C++"
    targetdir "bin/%{cfg.buildcfg}"
-   files { "src/**.h", "src/**.c", "src/**.cpp" }
+   includedirs { "$(ProjectDir)/src" }
+   files { "src/**.h", "src/**.c", "src/**.cpp", "src/**.hlsl" }
+   excludes { "*.hlsl" }
+   
 
    flags { "WinMain" }
    rtti ("On")

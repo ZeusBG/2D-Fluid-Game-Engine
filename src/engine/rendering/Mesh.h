@@ -2,14 +2,15 @@
 
 #include <directxmath.h>
 #include "RendererDX11.h"
+#include "util/Collections.h"
 
 using namespace DirectX;
 
 class VisualComponent;
-class GeometryHandler
+class Mesh
 {
 public:
-
+    //TODO remove;
     struct Vertex
     {
         XMVECTOR position;
@@ -21,6 +22,8 @@ public:
     void ReleaseResource();
 
 private:
+    AVector<float> m_Vertices;
+
     ID3D11Buffer* m_VertexBuffer;
     uint32_t m_VertexCount;
 

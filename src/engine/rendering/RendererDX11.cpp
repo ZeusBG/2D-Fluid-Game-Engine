@@ -296,6 +296,16 @@ VSHandle RendererDX11::CreateVSFromFile(const char* file, ShaderVersion version)
     return static_cast<void*>(VertexShader);
 }
 
+void RendererDX11::DestroyPS(PSHandle ps)
+{
+	static_cast<ID3D11PixelShader*>(ps)->Release();
+}
+
+void RendererDX11::DestroyVS(VSHandle vs)
+{
+	static_cast<ID3D11VertexShader*>(vs)->Release();
+}
+
 const char* RendererDX11::GetName() { return "Renderer"; }
 
 void RendererDX11::Destroy()

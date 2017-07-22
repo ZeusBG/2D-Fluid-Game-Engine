@@ -1,5 +1,6 @@
 #pragma once
-#include "../core/IModule.h"
+#include "engine/core/IModule.h"
+
 typedef void* PSHandle;
 typedef void* VSHandle;
 
@@ -15,6 +16,10 @@ public:
 
 	virtual PSHandle CreatePSFromFile(const char* file, ShaderVersion version) = 0;
 	virtual VSHandle CreateVSFromFile(const char* file, ShaderVersion version) = 0;
+
+	virtual void DestroyPS(PSHandle ps) = 0;
+	virtual void DestroyVS(VSHandle vs) = 0;
+
 private:
 	int m_ScreenWidth;
 	int m_ScreenHeight;

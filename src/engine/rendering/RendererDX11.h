@@ -29,6 +29,9 @@ public:
     virtual PSHandle CreatePSFromFile(const char* file, ShaderVersion version);
     virtual VSHandle CreateVSFromFile(const char* file, ShaderVersion version);
 
+	virtual void DestroyPS(PSHandle ps);
+	virtual void DestroyVS(VSHandle vs);
+
 private:
     int m_ScreenWidth;
     int m_ScreenHeight;

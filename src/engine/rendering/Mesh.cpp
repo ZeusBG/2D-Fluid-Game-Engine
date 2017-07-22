@@ -1,7 +1,7 @@
-#include "GeometryHandler.h"
-#include "../object/VisualComponent.h";
+#include "engine/rendering/Mesh.h"
+#include "engine/object/VisualComponent.h"
 
-void GeometryHandler::InitializeBuffers(ID3D11Device* device, VisualComponent* visualComponent)
+void Mesh::InitializeBuffers(ID3D11Device* device, VisualComponent* visualComponent)
 {
     Vertex* vertices;
     unsigned long* indices;
@@ -9,8 +9,7 @@ void GeometryHandler::InitializeBuffers(ID3D11Device* device, VisualComponent* v
     D3D11_SUBRESOURCE_DATA vertexData, indexData;
     HRESULT result;
 
-    vector<Vec2>& verticesFromComponent = visualComponent->GetVertices();
-    m_VertexCount = verticesFromComponent.size();
+    m_VertexCount = m_Vertices.size() / 2;
     m_IndexCount = m_VertexCount;
 
     // Create the vertex array.
@@ -22,7 +21,7 @@ void GeometryHandler::InitializeBuffers(ID3D11Device* device, VisualComponent* v
     // Load the vertex array with data.
     for (uint32_t i = 0; i < m_VertexCount; i++)
     {
-        vertices[i].position = XMVectorSet(verticesFromComponent[i].x, verticesFromComponent[i].y, 0.f, 0.f);
+        vertices[i].position = XMVectorSet(m_Vertices[2 * i], m_Vertices[2 * i + 1], 0.f, 0.f);
         indices[i] = i;
     }
 
@@ -66,7 +65,7 @@ void GeometryHandler::InitializeBuffers(ID3D11Device* device, VisualComponent* v
     indices = 0;
 }
 
-void GeometryHandler::RenderBuffers(ID3D11DeviceContext* deviceContext)
+void Mesh::RenderBuffers(ID3D11DeviceContext* deviceContext)
 {
     unsigned int stride;
     unsigned int offset;
@@ -88,7 +87,7 @@ void GeometryHandler::RenderBuffers(ID3D11DeviceContext* deviceContext)
     return;
 }
 
-void GeometryHandler::ReleaseResource()
+void Mesh::ReleaseResource()
 {
     // Release the index buffer.
     if (m_IndexBuffer)
