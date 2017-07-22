@@ -1,4 +1,6 @@
 #pragma once
+#include "BaseObject.h"
+
 class Entity;
 class Component : public BaseObject
 {
