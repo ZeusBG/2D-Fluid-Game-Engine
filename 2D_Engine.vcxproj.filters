@@ -10,6 +10,9 @@
     <Filter Include="engine\input">
       <UniqueIdentifier>{5A6C17B6-46CF-A65A-EF54-DF10DB9672DD}</UniqueIdentifier>
     </Filter>
+    <Filter Include="engine\logging">
+      <UniqueIdentifier>{B11F3D82-9DED-3088-8681-A1AE72EE0CED}</UniqueIdentifier>
+    </Filter>
     <Filter Include="engine\memory">
       <UniqueIdentifier>{23FFB481-8FBF-30B8-58FA-7935C4797594}</UniqueIdentifier>
     </Filter>
@@ -128,6 +131,9 @@
     </ClInclude>
     <ClInclude Include="src\game\SimpleVisualComponent.h">
       <Filter>game</Filter>
+    </ClInlude>
+    <ClInclude Include="src\engine\logging\Logging.h">
+      <Filter>engine\logging</Filter>
     </ClInclude>
     <ClInclude Include="src\game\SimpleEntity.h">
       <Filter>game</Filter>
@@ -172,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="src\game\main.cpp">
       <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\logging\Logging.cpp">
+      <Filter>engine\logging</Filter>
     </ClCompile>
     <ClCompile Include="src\util\Math.cpp">
       <Filter>util</Filter>
