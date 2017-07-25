@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 /*
 Loguru logging library for C++, by Emil Ernerfeldt.
 www.github.com/emilk/loguru
@@ -2853,3 +2854,4 @@ namespace loguru
 #endif // _WIN32
 
 #endif // LOGURU_IMPLEMENTATION
+#pragma warning(pop)

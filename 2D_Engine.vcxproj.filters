@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="engine">
@@ -6,6 +6,9 @@
     </Filter>
     <Filter Include="engine\core">
       <UniqueIdentifier>{5341430D-BFF6-BB02-48EB-B5D9B49FB206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\external">
+      <UniqueIdentifier>{AD341427-19C0-81EB-22D1-04E08EDBDDEB}</UniqueIdentifier>
     </Filter>
     <Filter Include="engine\input">
       <UniqueIdentifier>{5A6C17B6-46CF-A65A-EF54-DF10DB9672DD}</UniqueIdentifier>
@@ -63,6 +66,9 @@
     <ClInclude Include="src\engine\core\World.h">
       <Filter>engine\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\external\loguru.hpp">
+      <Filter>engine\external</Filter>
+    </ClInclude>
     <ClInclude Include="src\engine\input\IInput.h">
       <Filter>engine\input</Filter>
     </ClInclude>
@@ -74,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="src\engine\input\KeyTableWin.h">
       <Filter>engine\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\logging\Logging.h">
+      <Filter>engine\logging</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\memory\Allocator.h">
       <Filter>engine\memory</Filter>
@@ -120,6 +129,15 @@
     <ClInclude Include="src\game\GameClient.h">
       <Filter>game</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\SimpleEntity.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SimpleMesh.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SimpleVisualComponent.h">
+      <Filter>game</Filter>
+    </ClInclude>
     <ClInclude Include="src\util\Collections.h">
       <Filter>util</Filter>
     </ClInclude>
@@ -129,17 +147,11 @@
     <ClInclude Include="src\util\StringUtils.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\SimpleVisualComponent.h">
-      <Filter>game</Filter>
-    </ClInlude>
-    <ClInclude Include="src\engine\logging\Logging.h">
-      <Filter>engine\logging</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\SimpleEntity.h">
-      <Filter>game</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\Transform.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
     <ClCompile Include="src\engine\core\Engine.cpp">
       <Filter>engine\core</Filter>
     </ClCompile>
@@ -151,6 +163,12 @@
     </ClCompile>
     <ClCompile Include="src\engine\input\Input.cpp">
       <Filter>engine\input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\logging\Logging.cpp">
+      <Filter>engine\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\object\Entity.cpp">
+      <Filter>engine\object</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\object\VisualComponent.cpp">
       <Filter>engine\object</Filter>
@@ -176,26 +194,29 @@
     <ClCompile Include="src\game\GameClient.cpp">
       <Filter>game</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\main.cpp">
+    <ClCompile Include="src\game\SimpleEntity.cpp">
       <Filter>game</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\logging\Logging.cpp">
-      <Filter>engine\logging</Filter>
-    </ClCompile>
-    <ClCompile Include="src\util\Math.cpp">
-      <Filter>util</Filter>
+    <ClCompile Include="src\game\SimpleMesh.cpp">
+      <Filter>game</Filter>
     </ClCompile>
     <ClCompile Include="src\game\SimpleVisualComponent.cpp">
       <Filter>game</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\SimpleEntity.cpp">
+    <ClCompile Include="src\game\main.cpp">
       <Filter>game</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\object\Entity.cpp">
-      <Filter>engine\object</Filter>
+    <ClCompile Include="src\util\Math.cpp">
+      <Filter>util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\engine\rendering\shaders\SimplePS.hlsl">
+      <Filter>engine\rendering\shaders</Filter>
+    </None>
+    <None Include="src\engine\rendering\shaders\SimpleVS.hlsl">
+      <Filter>engine\rendering\shaders</Filter>
+    </None>
     <None Include="src\engine\rendering\shaders\SingleColorPS.hlsl">
       <Filter>engine\rendering\shaders</Filter>
     </None>
