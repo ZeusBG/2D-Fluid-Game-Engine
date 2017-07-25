@@ -23,10 +23,10 @@ public:
     inline void SetPixelShader(SharedShaderPtr shader) { m_PixelShader = shader; }
     inline SharedShaderPtr GetPixelShader() const { return m_PixelShader; }
 
-    //inline AVector<float>& GetVertices() { return m_Vertices; }
-    //inline float* GetRawData() { return m_Vertices.data(); }
     inline void AddVertex(float x, float y);
     
+	void Render(ID3D11DeviceContext* context);
+
     //Overrides:
     virtual void Init();
 

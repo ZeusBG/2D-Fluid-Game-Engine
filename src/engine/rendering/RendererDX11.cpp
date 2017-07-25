@@ -321,10 +321,11 @@ void RendererDX11::RenderEntities(const AVector<EntitySharedPtr> entities)
 	for (auto& entity : entities)
 	{
 		VisualComponent* visualComponent = entity->GetComponent<VisualComponent>();
-		visualComponent->GetMesh().RenderBuffers(m_pImmediateContext1);
-		visualComponent->GetPixelShader()->BindData(m_pImmediateContext1);
-		visualComponent->GetVertexShader()->BindData(m_pImmediateContext1);
-		m_pImmediateContext1->DrawIndexed(visualComponent->GetMesh().GetVerticesCount(), 0, 0);
+		if (visualComponent)
+		{
+			visualComponent->Render(m_pImmediateContext1);
+
+		}
 	}
 }
 

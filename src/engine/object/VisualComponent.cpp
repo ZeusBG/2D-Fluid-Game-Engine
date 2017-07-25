@@ -21,6 +21,14 @@ void VisualComponent::AddVertex(float x, float y)
 {
 }
 
+void VisualComponent::Render(ID3D11DeviceContext* context)
+{
+	m_PixelShader->BindData(context);
+	m_VertexShader->BindData(context);
+	m_Mesh.RenderBuffers(context);
+	context->DrawIndexed(m_Mesh.GetIndicesCount(), 0, 0);
+}
+
 void VisualComponent::Update(float delta)
 {
 }
