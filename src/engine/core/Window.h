@@ -27,6 +27,6 @@ private:
 	HWND m_hWnd = nullptr;
 	LPWSTR m_lpCmdLine;
 	int m_nCmdShow;
-	MSG m_Msg = { 0 };
+	MSG m_Msg;
 };
 

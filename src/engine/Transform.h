@@ -2,7 +2,7 @@
 class Transform
 {
 public:
-	Transform();
-	~Transform();
+	Transform() {}
+	~Transform() {}
 };
 

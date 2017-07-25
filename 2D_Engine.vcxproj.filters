@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="engine">
@@ -21,6 +21,9 @@
     </Filter>
     <Filter Include="engine\rendering">
       <UniqueIdentifier>{283BEE99-1434-0DEC-3D66-F27029BEECF7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\rendering\shaders">
+      <UniqueIdentifier>{21A09677-0DC5-E5F7-3610-CB872294E415}</UniqueIdentifier>
     </Filter>
     <Filter Include="engine\time">
       <UniqueIdentifier>{99794C0D-052F-C502-8E23-BFD9FAD7BB06}</UniqueIdentifier>
@@ -69,9 +72,6 @@
     <ClInclude Include="src\engine\input\KeyTableWin.h">
       <Filter>engine\input</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\input\WinInputConverter.h">
-      <Filter>engine\input</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\memory\Allocator.h">
       <Filter>engine\memory</Filter>
     </ClInclude>
@@ -84,6 +84,9 @@
     <ClInclude Include="src\engine\object\Entity.h">
       <Filter>engine\object</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\object\VisualComponent.h">
+      <Filter>engine\object</Filter>
+    </ClInclude>
     <ClInclude Include="src\engine\physics\Collider.h">
       <Filter>engine\physics</Filter>
     </ClInclude>
@@ -93,7 +96,19 @@
     <ClInclude Include="src\engine\rendering\IRenderer.h">
       <Filter>engine\rendering</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\rendering\IShader.h">
+      <Filter>engine\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\Mesh.h">
+      <Filter>engine\rendering</Filter>
+    </ClInclude>
     <ClInclude Include="src\engine\rendering\RendererDX11.h">
+      <Filter>engine\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\SimplePS.h">
+      <Filter>engine\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\SimpleVS.h">
       <Filter>engine\rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\time\Clock.h">
@@ -111,6 +126,12 @@
     <ClInclude Include="src\util\StringUtils.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\SimpleVisualComponent.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SimpleEntity.h">
+      <Filter>game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\engine\core\Engine.cpp">
@@ -125,10 +146,22 @@
     <ClCompile Include="src\engine\input\Input.cpp">
       <Filter>engine\input</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\object\VisualComponent.cpp">
+      <Filter>engine\object</Filter>
+    </ClCompile>
     <ClCompile Include="src\engine\physics\Physics.cpp">
       <Filter>engine\physics</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\rendering\Mesh.cpp">
+      <Filter>engine\rendering</Filter>
+    </ClCompile>
     <ClCompile Include="src\engine\rendering\RendererDX11.cpp">
+      <Filter>engine\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\SimplePS.cpp">
+      <Filter>engine\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\SimpleVS.cpp">
       <Filter>engine\rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\time\Clock.cpp">
@@ -140,5 +173,25 @@
     <ClCompile Include="src\game\main.cpp">
       <Filter>game</Filter>
     </ClCompile>
+    <ClCompile Include="src\util\Math.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\SimpleVisualComponent.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\SimpleEntity.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\object\Entity.cpp">
+      <Filter>engine\object</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\engine\rendering\shaders\SingleColorPS.hlsl">
+      <Filter>engine\rendering\shaders</Filter>
+    </None>
+    <None Include="src\engine\rendering\shaders\WorldTransformVS.hlsl">
+      <Filter>engine\rendering\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

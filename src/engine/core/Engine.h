@@ -4,6 +4,7 @@
 #include "../../util/Collections.h"
 #include "Window.h"
 #include "SystemSettings.h"
+#include "engine/object/Entity.h"
 #include "../time/Clock.h"
 #include <mutex>
 #include <chrono>
@@ -39,6 +40,8 @@ public:
 	const SystemSettings* GetSettings() const { return &m_Settings; }
 	void SetSystemSettings(const SystemSettings& settings) { m_Settings = settings; }
 	void Destroy();
+
+	void AddEntity(std::shared_ptr<Entity> entity);
 
 	template <typename T>
 	T* GetModule()
