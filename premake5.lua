@@ -6,7 +6,7 @@ project "2D_Engine"
    language "C++"
    targetdir "bin/%{cfg.buildcfg}"
    includedirs { "$(ProjectDir)/src" }
-   files { "src/**.h", "src/**.c", "src/**.cpp", "src/**.hlsl" }
+   files { "src/**.h", "src/**.c", "src/**.cpp", "src/**.hpp", "src/**.hlsl" }
    excludes { "*.hlsl" }
    
 
