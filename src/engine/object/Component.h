@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseObject.h"
-
+#include <memory>
 class Entity;
 class Component : public BaseObject
 {
@@ -10,3 +10,5 @@ public:
 
 	Entity* GetOwner() { return m_Owner; }
 };
+
+typedef std::shared_ptr<Component> ComponentSharedPtr;

@@ -19,7 +19,9 @@ public:
     IShader(const char* fileName) :m_FileName(fileName) {}
     virtual void Init() = 0;
     virtual void Destroy() = 0;
-    virtual void BindData(const VisualComponent* vc) = 0;
+
+	//TODO remvoe ID3D11DeviceContext from abstraction
+    virtual void BindData(ID3D11DeviceContext* context) = 0;
 
     //TODO make facotry for shaders
     template<typename T>

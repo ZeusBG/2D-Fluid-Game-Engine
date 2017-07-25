@@ -1,5 +1,5 @@
 #pragma once
-#include "IRenderer.h"
+#include "RendererDX11.h"
 #include "../core/Engine.h"
 #include "SimplePS.h"
 
@@ -8,14 +8,21 @@
 
 void SimplePS::Init()
 {
-	m_PSShader = Engine::GetEngine()->GetModule<IRenderer>()->CreatePSFromFile(m_FileName.data(), ShaderVersion::V4_0);
+	RendererDX11* renderer = Engine::GetEngine()->GetModule<RendererDX11>();
+	if (!renderer)
+	{
+		//TODO add log messsage after logger is merged
+		return;
+	}
+	m_PSShader = renderer->CreatePSFromFile(m_FileName.c_str(), ShaderVersion::V4_0);
 }
 
 void SimplePS::Destroy()
 {
-	Engine::GetEngine()->GetModule<IRenderer>()->DestroyPS(m_PSShader);
+	Engine::GetEngine()->GetModule<RendererDX11>()->DestroyPS(m_PSShader);
 }
 
-void SimplePS::BindData(const VisualComponent* vc)
+void SimplePS::BindData(ID3D11DeviceContext* context)
 {
+	context->PSSetShader(static_cast<ID3D11PixelShader*>(m_PSShader), nullptr, 0);
 }

@@ -16,8 +16,9 @@ class VisualComponent : public Component
 public:
     //costructor with mesh file, PS and VS ?
     //forward to Mesh
-    //inline void SetVertexShader(const string& vs) { m_VertexShader = vs; }
-    //inline string GetVertexShader() const { return m_VertexShader; }
+	VisualComponent();
+	inline void SetVertexShader(SharedShaderPtr shader) { m_VertexShader = shader; }
+	inline SharedShaderPtr GetVertexShader() const { return m_VertexShader; }
 
     inline void SetPixelShader(SharedShaderPtr shader) { m_PixelShader = shader; }
     inline SharedShaderPtr GetPixelShader() const { return m_PixelShader; }
@@ -30,11 +31,12 @@ public:
     virtual void Init();
 
     virtual void Update(float delta);
+	virtual const Mesh& GetMesh() { return m_Mesh; }
 
-private:
+protected:
     Mesh m_Mesh;
-    SharedShaderPtr m_VertexShader;
-    SharedShaderPtr m_PixelShader;
+    SharedShaderPtr m_VertexShader = nullptr;
+    SharedShaderPtr m_PixelShader = nullptr;
     // TODO Add texture
 
 };

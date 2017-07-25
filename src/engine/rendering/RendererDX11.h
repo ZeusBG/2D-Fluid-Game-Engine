@@ -27,10 +27,14 @@ public:
     virtual void Destroy();
 
     virtual PSHandle CreatePSFromFile(const char* file, ShaderVersion version);
-    virtual VSHandle CreateVSFromFile(const char* file, ShaderVersion version);
+    virtual VSData CreateVSFromFile(const char* file, D3D11_INPUT_ELEMENT_DESC* layout, int layoutSize, ShaderVersion version);
+
+	virtual ID3D11Device* GetDevice() { return m_pd3dDevice1; }
 
 	virtual void DestroyPS(PSHandle ps);
-	virtual void DestroyVS(VSHandle vs);
+	virtual void DestroyVS(VSData vs);
+
+	virtual void RenderEntities(const AVector<EntitySharedPtr> entities);
 
 private:
     int m_ScreenWidth;

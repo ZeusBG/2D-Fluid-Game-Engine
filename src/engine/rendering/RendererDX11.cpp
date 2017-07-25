@@ -2,9 +2,12 @@
 #include "RendererDX11.h"
 #include "../core/SystemSettings.h"
 #include "../core/Engine.h"
+#include "engine/core/World.h"
 #include <d3dcompiler.h>
 #include <directxmath.h>
+#include "engine/object/Entity.h"
 #include "../../util/StringUtils.h"
+#include "engine/object/VisualComponent.h"
 
 
 RendererDX11::RendererDX11() {}
@@ -187,16 +190,9 @@ void RendererDX11::Update(float delta)
     float color[4] = { 0.0f, 0.2f, 0.4f, 1.0f };
     m_pImmediateContext1->ClearRenderTargetView(m_pRenderTargetView, color);
 
-    // set the vertex buffer
-    //UINT stride = sizeof(VERTEX);
-    //UINT offset = 0;
-    //devcon->IASetVertexBuffers(0, 1, vertexbuffer.GetAddressOf(), &stride, &offset);
-
     // set the primitive topology
-    m_pImmediateContext1->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-    // draw 3 vertices, starting from vertex 0
-    //devconm_pImmediateContext1->Draw(3, 0);
+	auto& visibleEntities = Engine::GetEngine()->GetModule<World>()->GetVisibleEntities();
+	RenderEntities(visibleEntities);
 
     // switch the back buffer and the front buffer
     m_pSwapChain1->Present(1, 0);
@@ -220,7 +216,7 @@ HRESULT RendererDX11::CompileShaderFromFile(const char* file, LPCSTR entryPoint,
 #endif
 
     ID3DBlob* pErrorBlob = nullptr;
-    hr = D3DCompileFromFile(fileName.c_str(), nullptr, nullptr, entryPoint, shaderModel,
+    hr = D3DCompileFromFile(fileName.data(), nullptr, nullptr, entryPoint, shaderModel,
         dwShaderFlags, 0, blobOut, &pErrorBlob);
     if (FAILED(hr))
     {
@@ -266,9 +262,10 @@ PSHandle RendererDX11::CreatePSFromFile(const char* file, ShaderVersion version)
     return static_cast<void*>(PixelShader);
 }
 
-VSHandle RendererDX11::CreateVSFromFile(const char* file, ShaderVersion version)
+VSData RendererDX11::CreateVSFromFile(const char* file, D3D11_INPUT_ELEMENT_DESC* layoutDesc, int layoutSize,  ShaderVersion version)
 {
     std::string shaderVersion;
+	VSData result;
     //TODO this is dumb way of converting shader vesion to string
     switch (version)
     {
@@ -277,33 +274,58 @@ VSHandle RendererDX11::CreateVSFromFile(const char* file, ShaderVersion version)
         break;
     }
 
-    ID3DBlob* pPSBlob = nullptr;
-    HRESULT hr = this->CompileShaderFromFile(file, "VS", shaderVersion.c_str(), &pPSBlob);
+    ID3DBlob* pVSBlob = nullptr;
+    HRESULT hr = this->CompileShaderFromFile(file, "VS", shaderVersion.c_str(), &pVSBlob);
     if (FAILED(hr))
     {
         //TODO replace with logger when we have logger implemented
         MessageBox(nullptr,
             L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
-        return nullptr;
+        return result;
     }
 
     // Create the pixel shader
-    ID3D11VertexShader* VertexShader = nullptr;
-    hr = m_pd3dDevice->CreateVertexShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &VertexShader);
-    pPSBlob->Release();
+    ID3D11VertexShader* vertexShader = nullptr;
+	ID3D11InputLayout* layout = nullptr;
+    hr = m_pd3dDevice->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &vertexShader);
+
     if (FAILED(hr))
-        return nullptr;
-    return static_cast<void*>(VertexShader);
+        return result;
+
+
+
+	hr = m_pd3dDevice->CreateInputLayout(layoutDesc, layoutSize, pVSBlob->GetBufferPointer(),
+		pVSBlob->GetBufferSize(), &layout);
+	pVSBlob->Release();
+	result.VSPtr = static_cast<void*>(vertexShader);
+	result.LayoutPtr = static_cast<void*>(layout);
+	return result;
 }
 
 void RendererDX11::DestroyPS(PSHandle ps)
 {
-	static_cast<ID3D11PixelShader*>(ps)->Release();
+	if(ps)
+		static_cast<ID3D11PixelShader*>(ps)->Release();
 }
 
-void RendererDX11::DestroyVS(VSHandle vs)
+void RendererDX11::DestroyVS(VSData vs)
 {
-	static_cast<ID3D11VertexShader*>(vs)->Release();
+	if (vs.VSPtr)
+		static_cast<ID3D11VertexShader*>(vs.VSPtr)->Release();
+	if (vs.LayoutPtr)
+		static_cast<ID3D11InputLayout*>(vs.LayoutPtr)->Release();
+}
+
+void RendererDX11::RenderEntities(const AVector<EntitySharedPtr> entities)
+{
+	for (auto& entity : entities)
+	{
+		VisualComponent* visualComponent = entity->GetComponent<VisualComponent>();
+		visualComponent->GetMesh().RenderBuffers(m_pImmediateContext1);
+		visualComponent->GetPixelShader()->BindData(m_pImmediateContext1);
+		visualComponent->GetVertexShader()->BindData(m_pImmediateContext1);
+		m_pImmediateContext1->DrawIndexed(visualComponent->GetMesh().GetVerticesCount(), 0, 0);
+	}
 }
 
 const char* RendererDX11::GetName() { return "Renderer"; }

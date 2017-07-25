@@ -10,17 +10,11 @@ class VisualComponent;
 class Mesh
 {
 public:
-    //TODO remove;
-    struct Vertex
-    {
-        XMVECTOR position;
-        XMVECTOR color;
-    };
-
+	void SetVertices(const AVector<float>& vertices);
     void InitializeBuffers(ID3D11Device* device, VisualComponent* visualComponent);
-    void RenderBuffers(ID3D11DeviceContext* devcon);
+    void RenderBuffers(ID3D11DeviceContext* devcon) const;
     void ReleaseResource();
-
+	unsigned GetVerticesCount() const { return m_Vertices.size() / 2u; }
 private:
     AVector<float> m_Vertices;
 

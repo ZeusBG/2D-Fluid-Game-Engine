@@ -1,8 +1,17 @@
 #pragma once
 #include "engine/core/IModule.h"
+#include "engine/object/Entity.h"
 
 typedef void* PSHandle;
+typedef void* LayoutHandle;
 typedef void* VSHandle;
+
+struct VSData
+{
+	VSHandle VSPtr = nullptr;
+	LayoutHandle LayoutPtr = nullptr;
+};
+
 
 enum class ShaderVersion
 {
@@ -13,13 +22,7 @@ class IRenderer : public IModule
 {
 public:
 	virtual ~IRenderer() {}
-
-	virtual PSHandle CreatePSFromFile(const char* file, ShaderVersion version) = 0;
-	virtual VSHandle CreateVSFromFile(const char* file, ShaderVersion version) = 0;
-
-	virtual void DestroyPS(PSHandle ps) = 0;
-	virtual void DestroyVS(VSHandle vs) = 0;
-
+	virtual void RenderEntities(const AVector<EntitySharedPtr> entities) = 0;
 private:
 	int m_ScreenWidth;
 	int m_ScreenHeight;

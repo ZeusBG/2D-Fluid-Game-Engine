@@ -73,6 +73,11 @@ void Engine::Destroy()
 	}
 }
 
+void Engine::AddEntity(std::shared_ptr<Entity> entity)
+{
+	GetModule<World>()->AddEntity(entity);
+}
+
 Engine* Engine::GetEngine()
 {
 	if (!s_Engine)
