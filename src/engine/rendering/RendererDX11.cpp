@@ -191,8 +191,8 @@ void RendererDX11::Update(float delta)
     m_pImmediateContext1->ClearRenderTargetView(m_pRenderTargetView, color);
 
     // set the primitive topology
-	auto& visibleEntities = Engine::GetEngine()->GetModule<World>()->GetVisibleEntities();
-	RenderEntities(visibleEntities);
+    auto& visibleEntities = Engine::GetEngine()->GetModule<World>()->GetVisibleEntities();
+    RenderEntities(visibleEntities);
 
     // switch the back buffer and the front buffer
     m_pSwapChain1->Present(1, 0);
@@ -265,7 +265,7 @@ PSHandle RendererDX11::CreatePSFromFile(const char* file, ShaderVersion version)
 VSData RendererDX11::CreateVSFromFile(const char* file, D3D11_INPUT_ELEMENT_DESC* layoutDesc, int layoutSize,  ShaderVersion version)
 {
     std::string shaderVersion;
-	VSData result;
+    VSData result;
     //TODO this is dumb way of converting shader vesion to string
     switch (version)
     {
@@ -286,7 +286,7 @@ VSData RendererDX11::CreateVSFromFile(const char* file, D3D11_INPUT_ELEMENT_DESC
 
     // Create the pixel shader
     ID3D11VertexShader* vertexShader = nullptr;
-	ID3D11InputLayout* layout = nullptr;
+    ID3D11InputLayout* layout = nullptr;
     hr = m_pd3dDevice->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &vertexShader);
 
     if (FAILED(hr))
@@ -294,39 +294,60 @@ VSData RendererDX11::CreateVSFromFile(const char* file, D3D11_INPUT_ELEMENT_DESC
 
 
 
-	hr = m_pd3dDevice->CreateInputLayout(layoutDesc, layoutSize, pVSBlob->GetBufferPointer(),
-		pVSBlob->GetBufferSize(), &layout);
-	pVSBlob->Release();
-	result.VSPtr = static_cast<void*>(vertexShader);
-	result.LayoutPtr = static_cast<void*>(layout);
-	return result;
+    hr = m_pd3dDevice->CreateInputLayout(layoutDesc, layoutSize, pVSBlob->GetBufferPointer(),
+        pVSBlob->GetBufferSize(), &layout);
+    pVSBlob->Release();
+    result.VSPtr = static_cast<void*>(vertexShader);
+    result.LayoutPtr = static_cast<void*>(layout);
+    return result;
+}
+
+ID3D11Buffer* RendererDX11::CreateConstantBuffer(UINT size)
+{
+    D3D11_BUFFER_DESC matrixBufferDesc;
+
+    ZeroMemory(&matrixBufferDesc, sizeof(matrixBufferDesc));
+
+    ID3D11Buffer* result = nullptr;
+    // Setup the description of the dynamic matrix constant buffer that is in the vertex shader.
+    matrixBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+    matrixBufferDesc.ByteWidth = size;
+    matrixBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    matrixBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    matrixBufferDesc.MiscFlags = 0;
+    matrixBufferDesc.StructureByteStride = 0;
+
+    // Create the constant buffer pointer so we can access the vertex shader constant buffer from within this class.
+    m_pd3dDevice->CreateBuffer(&matrixBufferDesc, NULL, &result);
+
+    return result;
 }
 
 void RendererDX11::DestroyPS(PSHandle ps)
 {
-	if(ps)
-		static_cast<ID3D11PixelShader*>(ps)->Release();
+    if(ps)
+        static_cast<ID3D11PixelShader*>(ps)->Release();
 }
 
 void RendererDX11::DestroyVS(VSData vs)
 {
-	if (vs.VSPtr)
-		static_cast<ID3D11VertexShader*>(vs.VSPtr)->Release();
-	if (vs.LayoutPtr)
-		static_cast<ID3D11InputLayout*>(vs.LayoutPtr)->Release();
+    if (vs.VSPtr)
+        static_cast<ID3D11VertexShader*>(vs.VSPtr)->Release();
+    if (vs.LayoutPtr)
+        static_cast<ID3D11InputLayout*>(vs.LayoutPtr)->Release();
 }
 
-void RendererDX11::RenderEntities(const AVector<EntitySharedPtr> entities)
+void RendererDX11::RenderEntities(const AVector<EntitySharedPtr>& entities)
 {
-	for (auto& entity : entities)
-	{
-		VisualComponent* visualComponent = entity->GetComponent<VisualComponent>();
-		if (visualComponent)
-		{
-			visualComponent->Render(m_pImmediateContext1);
+    for (auto& entity : entities)
+    {
+        VisualComponent* visualComponent = entity->GetComponent<VisualComponent>();
+        if (visualComponent)
+        {
+            visualComponent->Render(m_pImmediateContext1);
 
-		}
-	}
+        }
+    }
 }
 
 const char* RendererDX11::GetName() { return "Renderer"; }

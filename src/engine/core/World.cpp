@@ -23,7 +23,7 @@ void World::Destroy()
 {
 }
 
-const AVector<EntitySharedPtr> World::GetVisibleEntities()
+const AVector<EntitySharedPtr>& World::GetVisibleEntities()
 {
 	return m_Entities;
 }

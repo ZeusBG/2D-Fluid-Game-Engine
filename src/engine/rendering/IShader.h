@@ -20,6 +20,9 @@ public:
     virtual void Init() = 0;
     virtual void Destroy() = 0;
 
+    //TODO istoilov : figure out generic way to pass down params
+    //virtual void UpdateShaderParams() {};
+
 	//TODO remvoe ID3D11DeviceContext from abstraction
     virtual void BindData(ID3D11DeviceContext* context) = 0;
 

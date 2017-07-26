@@ -1,7 +1,7 @@
 #pragma once
-#include "RendererDX11.h"
-#include "../core/Engine.h"
-#include "SimplePS.h"
+#include "engine/rendering/RendererDX11.h"
+#include "engine/core/Engine.h"
+#include "engine/rendering/shaderobjects/SimplePS.h"
 
 #include <d3d11_1.h>
 #include <d3dcompiler.h>

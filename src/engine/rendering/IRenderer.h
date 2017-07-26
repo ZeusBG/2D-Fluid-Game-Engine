@@ -22,7 +22,7 @@ class IRenderer : public IModule
 {
 public:
 	virtual ~IRenderer() {}
-	virtual void RenderEntities(const AVector<EntitySharedPtr> entities) = 0;
+	virtual void RenderEntities(const AVector<EntitySharedPtr>& entities) = 0;
 private:
 	int m_ScreenWidth;
 	int m_ScreenHeight;

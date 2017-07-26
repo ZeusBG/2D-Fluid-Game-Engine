@@ -2,6 +2,8 @@
 #include "../../util/Collections.h"
 #include "Component.h"
 #include "../Transform.h"
+#include <memory>
+
 class Entity : public BaseObject
 {
 	Transform m_Transform;

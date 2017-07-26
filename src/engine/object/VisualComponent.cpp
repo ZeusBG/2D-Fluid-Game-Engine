@@ -1,6 +1,6 @@
 #include "engine/rendering/IShader.h"
-#include "engine/rendering/SimpleVS.h"
-#include "engine/rendering/SimplePS.h"
+#include "engine/rendering/shaderobjects/SimpleVS.h"
+#include "engine/rendering/shaderobjects/SimplePS.h"
 #include "engine/core/Engine.h"
 #include "VisualComponent.h"
 
