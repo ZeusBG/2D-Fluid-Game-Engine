@@ -22,7 +22,7 @@ void SimplePS::Destroy()
 	Engine::GetEngine()->GetModule<RendererDX11>()->DestroyPS(m_PSShader);
 }
 
-void SimplePS::BindData(ID3D11DeviceContext* context)
+void SimplePS::BindData(ID3D11DeviceContext* context, VisualComponent* vc)
 {
 	context->PSSetShader(static_cast<ID3D11PixelShader*>(m_PSShader), nullptr, 0);
 }

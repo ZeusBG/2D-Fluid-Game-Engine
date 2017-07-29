@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="engine">
@@ -25,20 +25,23 @@
     <Filter Include="engine\rendering">
       <UniqueIdentifier>{283BEE99-1434-0DEC-3D66-F27029BEECF7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="engine\rendering\shaderobjects">
+      <UniqueIdentifier>{B84BB85A-A471-82C1-8DB7-078D797CA78D}</UniqueIdentifier>
+    </Filter>
     <Filter Include="engine\rendering\shaders">
       <UniqueIdentifier>{21A09677-0DC5-E5F7-3610-CB872294E415}</UniqueIdentifier>
     </Filter>
     <Filter Include="engine\time">
       <UniqueIdentifier>{99794C0D-052F-C502-8E23-BFD9FAD7BB06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="extern">
+      <UniqueIdentifier>{7BE134FC-6783-5FD2-503E-73263C7FE622}</UniqueIdentifier>
+    </Filter>
     <Filter Include="game">
       <UniqueIdentifier>{9F35977C-8B6C-980D-3459-7E10206F140F}</UniqueIdentifier>
     </Filter>
     <Filter Include="util">
       <UniqueIdentifier>{43339F7C-2F6A-A00D-D856-8610C46C1C0F}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="engine\rendering\shaderobjects">
-      <UniqueIdentifier>{82a841f2-b4fd-474d-a606-cf5f6fee12a5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -114,8 +117,20 @@
     <ClInclude Include="src\engine\rendering\RendererDX11.h">
       <Filter>engine\rendering</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\rendering\shaderobjects\SimplePS.h">
+      <Filter>engine\rendering\shaderobjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\shaderobjects\SimpleVS.h">
+      <Filter>engine\rendering\shaderobjects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\shaderobjects\WorldTransformVSObject.h">
+      <Filter>engine\rendering\shaderobjects</Filter>
+    </ClInclude>
     <ClInclude Include="src\engine\time\Clock.h">
       <Filter>engine\time</Filter>
+    </ClInclude>
+    <ClInclude Include="src\extern\loguru.hpp">
+      <Filter>extern</Filter>
     </ClInclude>
     <ClInclude Include="src\game\GameClient.h">
       <Filter>game</Filter>
@@ -135,17 +150,11 @@
     <ClInclude Include="src\util\StringUtils.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\rendering\shaderobjects\SimplePS.h">
-      <Filter>engine\rendering\shaderobjects</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\rendering\shaderobjects\SimpleVS.h">
-      <Filter>engine\rendering\shaderobjects</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\rendering\shaderobjects\WorldTransformVSObject.h">
-      <Filter>engine\rendering\shaderobjects</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\engine\Transform.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
     <ClCompile Include="src\engine\core\Engine.cpp">
       <Filter>engine\core</Filter>
     </ClCompile>
@@ -176,6 +185,15 @@
     <ClCompile Include="src\engine\rendering\RendererDX11.cpp">
       <Filter>engine\rendering</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\rendering\shaderobjects\SimplePS.cpp">
+      <Filter>engine\rendering\shaderobjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\shaderobjects\SimpleVS.cpp">
+      <Filter>engine\rendering\shaderobjects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\shaderobjects\WorldTransfromVSObject.cpp">
+      <Filter>engine\rendering\shaderobjects</Filter>
+    </ClCompile>
     <ClCompile Include="src\engine\time\Clock.cpp">
       <Filter>engine\time</Filter>
     </ClCompile>
@@ -193,18 +211,6 @@
     </ClCompile>
     <ClCompile Include="src\util\Math.cpp">
       <Filter>util</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\Transform.cpp">
-      <Filter>engine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\rendering\shaderobjects\SimplePS.cpp">
-      <Filter>engine\rendering\shaderobjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\rendering\shaderobjects\SimpleVS.cpp">
-      <Filter>engine\rendering\shaderobjects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\rendering\shaderobjects\WorldTransfromVSObject.cpp">
-      <Filter>engine\rendering\shaderobjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

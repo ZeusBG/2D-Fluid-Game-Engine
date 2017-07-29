@@ -2,5 +2,5 @@
 
 Transform::Transform()
 {
-    m_GlobalMatrix.SetIdentity();
+    m_GlobalMatrix = Mat3x3::Identity();
 }

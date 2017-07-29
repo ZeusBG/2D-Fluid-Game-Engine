@@ -13,4 +13,6 @@ SimpleEntity::SimpleEntity()
 void SimpleEntity::Update(float delta)
 {
 	Entity::Update(delta);
+
+	m_Transform.Translate(0.001f, 0.001f);
 }

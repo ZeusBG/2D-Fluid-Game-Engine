@@ -345,7 +345,6 @@ void RendererDX11::RenderEntities(const AVector<EntitySharedPtr>& entities)
         if (visualComponent)
         {
             visualComponent->Render(m_pImmediateContext1);
-
         }
     }
 }
