@@ -14,7 +14,7 @@ class IRenderer;
 class World;
 class IInput;
 struct SystemSettings;
-
+class RenderCommanderDx11;
 class Engine
 {
 	static Engine* s_Engine;

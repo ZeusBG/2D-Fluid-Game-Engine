@@ -49,17 +49,6 @@ void Mesh::InitializeBuffers(ID3D11Device* device, VisualComponent* visualCompon
     int a = 0;
 }
 
-enum RenderType
-{
-	SetVertexBuffers
-};
-
-struct RenderCommand
-{
-	RenderType Type;
-	void* data;
-};
-
 void Mesh::RenderBuffers(ID3D11DeviceContext* deviceContext) const
 {
     unsigned int stride;

@@ -349,6 +349,38 @@ void RendererDX11::RenderEntities(const AVector<EntitySharedPtr>& entities)
     }
 }
 
+void RendererDX11::AddRenderCommand(const RenderCommand& cmd)
+{
+    m_CommandBuffer.push(cmd);
+}
+
+void RendererDX11::DoRenderingCommands()
+{
+    while (!m_CommandBuffer.empty())
+    {
+        ProcessCommand(m_CommandBuffer.front());
+		m_CommandBuffer.pop();
+    }
+}
+
+void RendererDX11::ProcessCommand(RenderCommand& cmd)
+{
+    switch (cmd.type)
+    {
+		case RenderCmdType::UpdateSubResource:
+		{
+			// Reintepret cast is not a good idea, will remove it later
+			UpdateSubresourceData* data = reinterpret_cast<UpdateSubresourceData*>(&cmd.CommandStructure[0]);
+			m_pImmediateContext1->UpdateSubresource(data->Subresource,
+													data->DstSubresource,
+													data->DstBox,
+													cmd.CommandData,
+													data->SrcRowPitch,
+													data->SrcDepthPitch);
+		}
+    }
+}
+
 const char* RendererDX11::GetName() { return "Renderer"; }
 
 void RendererDX11::Destroy()

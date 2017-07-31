@@ -4,7 +4,7 @@
 #include "../input/Input.h"
 #include "../physics/Physics.h"
 #include "SystemSettings.h"
-
+#include "engine/rendering/RenderCommander.h"
 Engine::Engine()
 {
 }
@@ -19,6 +19,9 @@ void Engine::Init(const SystemSettings settings)
 	m_EngineModules.back()->Init(this);
 
 	m_EngineModules.push_back(new RendererDX11());
+	m_EngineModules.back()->Init(this);
+
+	m_EngineModules.push_back(new RenderCommanderDx11());
 	m_EngineModules.back()->Init(this);
 
 	m_EngineModules.push_back(new World());

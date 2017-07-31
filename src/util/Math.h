@@ -12,7 +12,7 @@ struct Vec2
 
     void Normalize()
     {
-        float length = sqrt(x *x + y * y);
+        float length = sqrtf(x *x + y * y);
         x /= length;
         y /= length;
     }
@@ -43,7 +43,7 @@ struct Vec3
 
     void Normalize()
     {
-        float length = sqrt(x *x + y * y + z * z);
+        float length = sqrtf(x *x + y * y + z * z);
         x /= length;
         y /= length;
         z /= length;
