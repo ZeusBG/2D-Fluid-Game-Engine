@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-#include "../engine/core/Engine.h"
-#include "../engine/core/SystemSettings.h"
+#include "engine/core/Engine.h"
+#include "engine/core/SystemSettings.h"
 
 class GameClient
 {

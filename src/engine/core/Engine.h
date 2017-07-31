@@ -9,6 +9,9 @@
 #include <mutex>
 #include <chrono>
 
+
+#define g_Engine Engine::GetEngine()
+
 class Physics;
 class IRenderer;
 class World;

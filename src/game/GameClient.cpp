@@ -1,7 +1,6 @@
 #include "GameClient.h"
 #include "SimpleEntity.h"
 
-
 GameClient::GameClient()
 {
 	m_Engine.reset(Engine::GetEngine());

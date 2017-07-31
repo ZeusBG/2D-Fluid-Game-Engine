@@ -1,7 +1,6 @@
 #pragma once
 
 #include "engine/rendering/IShader.h"
-#include "util/Math.h"
 
 #include <d3d11_1.h>
 #include <directXMath.h>
