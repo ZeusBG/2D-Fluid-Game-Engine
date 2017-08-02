@@ -3,7 +3,7 @@
 #include "engine/rendering/shaderobjects/SimplePS.h"
 #include "engine/core/Engine.h"
 #include "VisualComponent.h"
-
+#include "engine/rendering/RenderCommander.h"
 VisualComponent::VisualComponent()
 {
 }
@@ -26,7 +26,8 @@ void VisualComponent::Render(ID3D11DeviceContext* context)
 	m_PixelShader->BindData(context, this);
 	m_VertexShader->BindData(context, this);
 	m_Mesh.RenderBuffers(context);
-	context->DrawIndexed(m_Mesh.GetIndicesCount(), 0, 0);
+	auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
+	renderCommander->DrawIndexed(m_Mesh.GetIndicesCount(), 0, 0);
 }
 
 void VisualComponent::Update(float delta)

@@ -1,6 +1,7 @@
 #include "engine/rendering/Mesh.h"
 #include "engine/object/VisualComponent.h"
-
+#include "engine/core/Engine.h"
+#include "RenderCommander.h"
 void Mesh::SetVertices(const AVector<XMFLOAT2>& vertices)
 {
     m_Vertices = vertices;
@@ -60,14 +61,12 @@ void Mesh::RenderBuffers(ID3D11DeviceContext* deviceContext) const
     offset = 0;
 
     // Set the vertex buffer to active in the input assembler so it can be rendered.
-    deviceContext->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
-
+    auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
+	renderCommander->SetVertexBuffers(&m_VertexBuffer, stride, offset);
     // Set the index buffer to active in the input assembler so it can be rendered.
-    deviceContext->IASetIndexBuffer(m_IndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-
+    renderCommander->SetIndexBuffers(m_IndexBuffer, DataSizeFormat::R32_UINT, 0);
     // Set the type of primitive that should be rendered from this vertex buffer, in this case triangles.
-    deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
+    renderCommander->SetTopology(Topology::TRIANGLE_LIST);
     return;
 }
 

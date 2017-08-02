@@ -40,6 +40,7 @@ void Engine::Run()
 		{
 			module->Update(delta);
 		}
+		GetModule<IRenderer>()->DoRenderingCommands();
 		delta = m_EngineClock.MeasureTime();
 	}
 

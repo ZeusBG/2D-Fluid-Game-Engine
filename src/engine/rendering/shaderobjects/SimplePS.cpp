@@ -2,6 +2,7 @@
 #include "engine/rendering/RendererDX11.h"
 #include "engine/core/Engine.h"
 #include "engine/rendering/shaderobjects/SimplePS.h"
+#include "../RenderCommander.h"
 
 #include <d3d11_1.h>
 #include <d3dcompiler.h>
@@ -14,7 +15,7 @@ void SimplePS::Init()
 		//TODO add log messsage after logger is merged
 		return;
 	}
-	m_PSShader = renderer->CreatePSFromFile(m_FileName.c_str(), ShaderVersion::V4_0);
+	m_PSShader = (ID3D11PixelShader*)renderer->CreatePSFromFile(m_FileName.c_str(), ShaderVersion::V4_0);
 }
 
 void SimplePS::Destroy()
@@ -24,5 +25,6 @@ void SimplePS::Destroy()
 
 void SimplePS::BindData(ID3D11DeviceContext* context, VisualComponent* vc)
 {
-	context->PSSetShader(static_cast<ID3D11PixelShader*>(m_PSShader), nullptr, 0);
+	auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
+	renderCommander->BindPS(&m_PSShader, sizeof(ID3D11PixelShader*));
 }

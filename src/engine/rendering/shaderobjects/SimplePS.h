@@ -8,6 +8,7 @@
 #include <d3dcompiler.h>
 
 class VisualComponent;
+struct ID3D11PixelShader;
 class SimplePS : public IShader
 {
 public:
@@ -17,7 +18,7 @@ public:
     virtual void Destroy();
     virtual void BindData(ID3D11DeviceContext* context, VisualComponent* vc);
 private:
-    PSHandle m_PSShader = nullptr;
+	ID3D11PixelShader* m_PSShader = nullptr;
     //constant stuff
 };
 

@@ -49,11 +49,9 @@ void SimpleVS::BindData(ID3D11DeviceContext* context, VisualComponent* vc)
 	using namespace DirectX;
 
 	XMMATRIX test = vc->GetOwner()->GetTransform().GetMatrix().ToXMMATRIX();
-	//context->UpdateSubresource(m_WorldMatrix, 0, nullptr, &test, 0, 0);
-	RenderCommanderDx11* commander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
+	auto commander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
 	commander->UpdateSubresouce(m_WorldMatrix, &test, sizeof(test));
-	Engine::GetEngine()->GetModule<RendererDX11>()->DoRenderingCommands();
-	context->VSSetConstantBuffers(0, 1, &m_WorldMatrix);
-    context->VSSetShader(static_cast<ID3D11VertexShader*>(m_VSShader.VSPtr), nullptr, 0);
-    context->IASetInputLayout(static_cast<ID3D11InputLayout*>(m_VSShader.LayoutPtr));
+	commander->SetConstantBuffers(&m_WorldMatrix, sizeof(ID3D11Buffer));
+	commander->BindVS(&m_VSShader.VSPtr, sizeof(ID3D11VertexShader*));
+	commander->SetInputLayout(&m_VSShader.LayoutPtr, sizeof(ID3D11InputLayout*));
 }
