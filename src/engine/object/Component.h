@@ -4,7 +4,10 @@
 class Entity;
 class Component : public BaseObject
 {
+
+protected:
 	Entity* m_Owner;
+
 public:
 	void SetOwner(Entity* newOwner) { m_Owner = newOwner; }
 

@@ -16,6 +16,7 @@ public:
 	virtual void Update(float delta);
 	virtual void Destroy();
 	virtual const char* GetName();
+	virtual void Start() {}
 
 	void UpdateSubresouce(ID3D11Resource* subresouce, void* data, unsigned int dataSize);
 	void BindPS(void* ShaderPtr, unsigned int shaderInfoSize);

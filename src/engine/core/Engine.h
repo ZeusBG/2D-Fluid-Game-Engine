@@ -9,6 +9,9 @@
 #include <mutex>
 #include <chrono>
 
+
+#define g_Engine Engine::GetEngine()
+
 class Physics;
 class IRenderer;
 class World;
@@ -23,11 +26,14 @@ class Engine
 	Clock m_EngineClock;
 	AVector<IModule*> m_EngineModules;
 
+	const float m_FrameCap = 1.0f / 60.0f;
 	StateStack m_StateStack;
 	SystemSettings m_Settings;
 	bool m_IsRunning;
-	Engine();
 
+	void Sync(float dt);
+	Engine();
+    void StartModules();
 public:
 	void Init(const SystemSettings settings);
 	void Run();

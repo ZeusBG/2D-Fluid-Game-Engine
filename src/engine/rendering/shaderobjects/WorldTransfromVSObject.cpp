@@ -2,6 +2,7 @@
 #include "engine/rendering/RendererDX11.h"
 #include "engine/core/Engine.h"
 
+#include "util/math/MathUtils.h"
 #include <d3dcompiler.h>
 
 void WorldTransformVSObject::Init()

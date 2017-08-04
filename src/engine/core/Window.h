@@ -3,30 +3,31 @@
 #include "IModule.h"
 
 struct WindowInfo;
-
+struct SDL_Window;
 class Window : public IModule
 {
 private:
-	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+    static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 public:
-	Window();
-	~Window();
+    Window();
+    ~Window();
 
-	void Update(float delta);
-	virtual void Init(Engine* engine);
-	virtual const char* GetName();
+    void Update(float delta);
+    virtual void Init(Engine* engine);
+    virtual const char* GetName();
+    virtual void Start() {}
+    HRESULT MakeWindow(const WindowInfo* info);
 
-	HRESULT MakeWindow(const WindowInfo* info);
-
-	virtual void Destroy();
-	HINSTANCE GetHInstance() const { return m_hInst; }
-	HWND GethWnd() const { return m_hWnd; }
+    virtual void Destroy();
+    HINSTANCE GetHInstance() const { return m_hInst; }
+    HWND GethWnd() const { return m_hWnd; }
 private:
-	HINSTANCE m_hInst = nullptr;
-	HWND m_hWnd = nullptr;
-	LPWSTR m_lpCmdLine;
-	int m_nCmdShow;
-	MSG m_Msg;
+    SDL_Window* m_sdlWindow;
+    HINSTANCE m_hInst = nullptr;
+    HWND m_hWnd = nullptr;
+    LPWSTR m_lpCmdLine;
+    int m_nCmdShow;
+    MSG m_Msg;
 };
 
