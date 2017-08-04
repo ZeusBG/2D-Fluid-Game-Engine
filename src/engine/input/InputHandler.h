@@ -6,6 +6,8 @@
 
 #include <SDL.h>
 
+#define g_InputHandler Engine::GetEngine()->GetModule<InputHandler>()
+
 class InputHandler : public IModule
 {
 public :
@@ -33,8 +35,8 @@ public:
 
     //Overrides
     virtual void Update(float delta);
-	virtual void Start() {}
-    virtual void Init(Engine* engine) {}
+    virtual void Start() {}
+    virtual void Init(Engine* engine);  
     virtual const char* GetName() { return "Input"; }
 
     virtual void Destroy() {}
@@ -48,6 +50,10 @@ private:
     bool m_QuitRequested;
 
     void Reset();
+    void NormalizeMouseCoordinates(int& x, int& y);
+
+    Uint32 m_ScreenWidth;
+    Uint32 m_ScreenHeight;
 
     bool m_MousePreviousButtonStates[MouseButton::COUNT];
     bool m_MouseButtonStates[MouseButton::COUNT];

@@ -16,11 +16,14 @@ void CharacterControllerComponent::Update(float dt)
     if (!speed.EqualWithEpsilon(Vec2::Zero))
         speed = speed * m_MoveVelocity;
 
+    
     Vec2 sight = inputHandler->GetMousePosition();
     sight.Normalize();
+    
     //istoilov : Make proper API calls
+    
     m_Owner->AddTranslate(speed);
-    //m_Owner->SetSight(sight);
+    m_Owner->SetSight(sight);
 
     //if (InputHandler::Instance()->isMouseButtonJustPressed(MouseButton_LEFT))
     //{

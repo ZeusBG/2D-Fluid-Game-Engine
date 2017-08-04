@@ -31,7 +31,7 @@ void RendererDX11::Init(Engine* engine)
 
 void RendererDX11::Start()
 {
-	DoRenderingCommands();
+    DoRenderingCommands();
 }
 
 HRESULT RendererDX11::InitDevice()
@@ -365,36 +365,36 @@ void RendererDX11::DoRenderingCommands()
     while (!m_CommandBuffer.empty())
     {
         ProcessCommand(m_CommandBuffer.front());
-		m_CommandBuffer.pop();
+        m_CommandBuffer.pop();
     }
-	// switch the back buffer and the front buffer
-	m_pSwapChain1->Present(1, 0);
+    // switch the back buffer and the front buffer
+    m_pSwapChain1->Present(1, 0);
 }
 
 namespace
 {
 DXGI_FORMAT ConvertFormat(DataSizeFormat format)
 {
-	switch (format)
-	{
-		case DataSizeFormat::R32_UINT:
-		{
-			return DXGI_FORMAT_R32_UINT;
-		}
-	}
-	return DXGI_FORMAT_R32_UINT;
+    switch (format)
+    {
+        case DataSizeFormat::R32_UINT:
+        {
+            return DXGI_FORMAT_R32_UINT;
+        }
+    }
+    return DXGI_FORMAT_R32_UINT;
 }
 
 D3D11_PRIMITIVE_TOPOLOGY ConvertTopology(Topology topology)
 {
-	switch (topology)
-	{
-		case Topology::TRIANGLE_LIST:
-		{
-			return D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-		}
-	}
-	return D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+    switch (topology)
+    {
+        case Topology::TRIANGLE_LIST:
+        {
+            return D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+        }
+    }
+    return D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 }
 }
 
@@ -402,79 +402,79 @@ void RendererDX11::ProcessCommand(RenderCommand& cmd)
 {
     switch (cmd.type)
     {
-		case RenderCmdType::UpdateSubResource:
-		{
-			// Reintepret cast is not a good idea, will remove it later
-			auto data = reinterpret_cast<UpdateSubresourceData*>(cmd.CommandStructure);
-			m_pImmediateContext1->UpdateSubresource(data->Subresource,
-													data->DstSubresource,
-													data->DstBox,
-													cmd.CommandData,
-													data->SrcRowPitch,
-													data->SrcDepthPitch);
-		}
-		break;
-		case RenderCmdType::BindPS:
-		{
-			ID3D11PixelShader* shader = nullptr;
-			memcpy(&shader, cmd.CommandData, sizeof(ID3D11PixelShader*));
-			m_pImmediateContext1->PSSetShader(shader, nullptr, 0);
-		}
-		break;
-		case RenderCmdType::BindVS:
-		{
-			ID3D11VertexShader* shader = nullptr;
-			memcpy(&shader, cmd.CommandData, sizeof(ID3D11VertexShader*));
-			m_pImmediateContext1->VSSetShader(shader, nullptr, 0);
-		}
-		break;
-		case RenderCmdType::SetInputLayout:
-		{
-			ID3D11InputLayout* layout = nullptr;
-			memcpy(&layout, cmd.CommandData, sizeof(ID3D11VertexShader*));
-			m_pImmediateContext1->IASetInputLayout(layout);
-		}
-		break;
-		case RenderCmdType::SetConstantBuffers:
-		{
-			ID3D11Buffer** buffer = nullptr;
-			memcpy(&buffer, cmd.CommandData, sizeof(ID3D11Buffer**));
-			m_pImmediateContext1->VSSetConstantBuffers(0, 1, buffer);
-		}
-		break;
-		case RenderCmdType::SetVertexBuffers:
-		{
-			auto info = reinterpret_cast<VertexBufferInfo*>(cmd.CommandStructure);
-			m_pImmediateContext1->IASetVertexBuffers(0, 1,info->VB, &info->Stride, &info->Offset);
-		}
-		break;
-		case RenderCmdType::SetIndexBuffer:
-		{
-			auto info = reinterpret_cast<IndexBufferInfo*>(cmd.CommandStructure);
-			m_pImmediateContext1->IASetIndexBuffer(info->IB, ConvertFormat(info->Format), info->Offset);
-		}
-		break;
-		case RenderCmdType::SetTopology:
-		{
-			auto topology = reinterpret_cast<Topology*>(cmd.CommandData);
-			m_pImmediateContext1->IASetPrimitiveTopology(ConvertTopology(*topology));
-		}
-		break;
-		case RenderCmdType::DrawIndexed:
-		{
-			auto info = reinterpret_cast<DrawIndexedInfo*>(cmd.CommandStructure);
-			m_pImmediateContext1->DrawIndexed(info->IndexCount, info->StartIndex, info->BaseVertexlocation);
-		}
-		break;
-		case RenderCmdType::CreateBuffer:
-		{
-			CreateBufferInfo* info = reinterpret_cast<CreateBufferInfo*>(cmd.CommandStructure);
-			D3D11_SUBRESOURCE_DATA* initialData = nullptr;
-			if (info->InitialData)
-				initialData = reinterpret_cast<D3D11_SUBRESOURCE_DATA*>(cmd.CommandData);
-			auto result = m_pd3dDevice1->CreateBuffer(&info->Desc, initialData, info->Buffer);
-		}
-		break;
+        case RenderCmdType::UpdateSubResource:
+        {
+            // Reintepret cast is not a good idea, will remove it later
+            auto data = reinterpret_cast<UpdateSubresourceData*>(cmd.CommandStructure);
+            m_pImmediateContext1->UpdateSubresource(data->Subresource,
+                                                    data->DstSubresource,
+                                                    data->DstBox,
+                                                    cmd.CommandData,
+                                                    data->SrcRowPitch,
+                                                    data->SrcDepthPitch);
+        }
+        break;
+        case RenderCmdType::BindPS:
+        {
+            ID3D11PixelShader* shader = nullptr;
+            memcpy(&shader, cmd.CommandData, sizeof(ID3D11PixelShader*));
+            m_pImmediateContext1->PSSetShader(shader, nullptr, 0);
+        }
+        break;
+        case RenderCmdType::BindVS:
+        {
+            ID3D11VertexShader* shader = nullptr;
+            memcpy(&shader, cmd.CommandData, sizeof(ID3D11VertexShader*));
+            m_pImmediateContext1->VSSetShader(shader, nullptr, 0);
+        }
+        break;
+        case RenderCmdType::SetInputLayout:
+        {
+            ID3D11InputLayout* layout = nullptr;
+            memcpy(&layout, cmd.CommandData, sizeof(ID3D11VertexShader*));
+            m_pImmediateContext1->IASetInputLayout(layout);
+        }
+        break;
+        case RenderCmdType::SetConstantBuffers:
+        {
+            ID3D11Buffer** buffer = nullptr;
+            memcpy(&buffer, cmd.CommandData, sizeof(ID3D11Buffer**));
+            m_pImmediateContext1->VSSetConstantBuffers(0, 1, buffer);
+        }
+        break;
+        case RenderCmdType::SetVertexBuffers:
+        {
+            auto info = reinterpret_cast<VertexBufferInfo*>(cmd.CommandStructure);
+            m_pImmediateContext1->IASetVertexBuffers(0, 1,info->VB, &info->Stride, &info->Offset);
+        }
+        break;
+        case RenderCmdType::SetIndexBuffer:
+        {
+            auto info = reinterpret_cast<IndexBufferInfo*>(cmd.CommandStructure);
+            m_pImmediateContext1->IASetIndexBuffer(info->IB, ConvertFormat(info->Format), info->Offset);
+        }
+        break;
+        case RenderCmdType::SetTopology:
+        {
+            auto topology = reinterpret_cast<Topology*>(cmd.CommandData);
+            m_pImmediateContext1->IASetPrimitiveTopology(ConvertTopology(*topology));
+        }
+        break;
+        case RenderCmdType::DrawIndexed:
+        {
+            auto info = reinterpret_cast<DrawIndexedInfo*>(cmd.CommandStructure);
+            m_pImmediateContext1->DrawIndexed(info->IndexCount, info->StartIndex, info->BaseVertexlocation);
+        }
+        break;
+        case RenderCmdType::CreateBuffer:
+        {
+            CreateBufferInfo* info = reinterpret_cast<CreateBufferInfo*>(cmd.CommandStructure);
+            D3D11_SUBRESOURCE_DATA* initialData = nullptr;
+            if (info->InitialData)
+                initialData = reinterpret_cast<D3D11_SUBRESOURCE_DATA*>(cmd.CommandData);
+            auto result = m_pd3dDevice1->CreateBuffer(&info->Desc, initialData, info->Buffer);
+        }
+        break;
     }
 }
 

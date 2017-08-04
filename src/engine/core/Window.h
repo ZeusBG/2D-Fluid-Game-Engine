@@ -16,7 +16,7 @@ public:
     void Update(float delta);
     virtual void Init(Engine* engine);
     virtual const char* GetName();
-	virtual void Start() {}
+    virtual void Start() {}
     HRESULT MakeWindow(const WindowInfo* info);
 
     virtual void Destroy();

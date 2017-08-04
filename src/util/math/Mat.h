@@ -5,6 +5,17 @@
 class Mat2x2
 {
 public:
+    Mat2x2()
+    {}
+
+    Mat2x2(float x00, float x01, float x10, float x11)
+    {
+        mat[0][0] = x00;
+        mat[0][1] = x01;
+        mat[1][0] = x10;
+        mat[1][1] = x11;
+    }
+
     static Mat2x2 Identity()
     {
         Mat2x2 identity;
@@ -17,6 +28,12 @@ public:
     DirectX::XMMATRIX ToXMMATRIX() const;
     float* operator[](int idx) { return mat[idx]; }
 
+    Vec2 operator* (const Vec2& other)
+    {
+        Vec2 result;
+        result.x = mat[0][0] * other.x + mat[0][1] * other.y;
+        result.y = mat[1][0] * other.x + mat[1][1] * other.y;
+    }
 public:
     float mat[2][2];
 };
@@ -26,7 +43,10 @@ class Mat3x3
 public:
     //TODO istoilov : Figure a way to save the 2nd create;
     inline Vec3 GetRowI() const { return Vec3(mat[0][0], mat[0][1], mat[0][2]); }
+    
     inline Vec3 GetRowJ() const { return Vec3(mat[1][0], mat[1][1], mat[1][2]); }
+    inline Vec2 GetRowJ2() const { return Vec2(mat[1][0], mat[1][1]); }
+
     inline Vec3 GetRowK() const { return Vec3(mat[2][0], mat[2][1], mat[2][2]); }
 
     inline void SetRowI(const Vec2& v) { mat[0][0] = v.x, mat[0][1] = v.y; }

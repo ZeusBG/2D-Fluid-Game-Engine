@@ -1,9 +1,14 @@
+#include "engine/core/Engine.h"
+
 #include "engine/input/InputHandler.h"
+#include "engine/logging/Logging.h"
 
 InputHandler::InputHandler() :
-    m_MousePosition (0,0),
-    m_MousePreviousPosition(0,0),
-    m_QuitRequested(false)
+    m_MousePosition(0, 0),
+    m_MousePreviousPosition(0, 0),
+    m_QuitRequested(false),
+    m_ScreenWidth(0.f),
+    m_ScreenHeight(0.f)
 {
     Reset();
 }
@@ -23,6 +28,7 @@ void InputHandler::Update(float dt)
     int mouseX, mouseY;
 
     SDL_GetMouseState(&mouseX, &mouseY);
+    NormalizeMouseCoordinates(mouseX, mouseY);
 
     m_MousePosition.x = ((float)mouseX);
     m_MousePosition.y = ((float)mouseY);
@@ -30,7 +36,7 @@ void InputHandler::Update(float dt)
     while (SDL_PollEvent(&event))
     {
         if (event.type == SDL_MOUSEBUTTONDOWN)
-        {
+       {
             if(event.button.button == SDL_BUTTON_LEFT)   { m_MouseButtonStates[MouseButton::LEFT] = true;}
             if(event.button.button == SDL_BUTTON_MIDDLE) { m_MouseButtonStates[MouseButton::MIDDLE] = true;}
             if(event.button.button == SDL_BUTTON_RIGHT)  { m_MouseButtonStates[MouseButton::RIGHT] = true;}
@@ -110,4 +116,18 @@ void InputHandler::Reset()
     memset(m_MousePreviousButtonStates, 0 , sizeof(m_MousePreviousButtonStates));
     memset(m_PtrKeyState, 0 , sizeof(m_PtrKeyState));
     memset(m_PtrPreviousKeyState, 0 , sizeof(m_PtrPreviousKeyState));
+}
+
+void InputHandler::NormalizeMouseCoordinates(int& x, int& y)
+{
+    x -= m_ScreenWidth;
+    y -= m_ScreenHeight;
+}
+
+void InputHandler::Init(Engine* engine)
+{
+    const SystemSettings* settings = engine->GetSettings();
+
+    m_ScreenWidth = settings->ScreenWidth / 2;
+    m_ScreenHeight = settings->ScreenHeight / 2;
 }
