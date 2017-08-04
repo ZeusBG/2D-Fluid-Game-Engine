@@ -30,7 +30,9 @@ void SimpleVS::Init()
 	bd.ByteWidth = sizeof(DirectX::XMMATRIX);
 	bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	bd.CPUAccessFlags = 0;
-	renderer->GetDevice()->CreateBuffer(&bd, nullptr, &m_WorldMatrix);
+
+	auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
+	renderCommander->CreateBuffer(&bd, nullptr, &m_WorldMatrix);
 }
 
 void SimpleVS::Destroy()
@@ -44,7 +46,7 @@ void SimpleVS::UpdateShaderParams()
 
 }
 
-void SimpleVS::BindData(ID3D11DeviceContext* context, VisualComponent* vc)
+void SimpleVS::BindData(VisualComponent* vc)
 {
 	using namespace DirectX;
 

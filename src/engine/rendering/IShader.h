@@ -24,7 +24,7 @@ public:
     virtual void UpdateShaderParams() {};
 
 	//TODO remvoe ID3D11DeviceContext from abstraction
-    virtual void BindData(ID3D11DeviceContext* context, VisualComponent* vc) = 0;
+    virtual void BindData(VisualComponent* vc) = 0;
 
     //TODO make facotry for shaders
     template<typename T>

@@ -16,7 +16,7 @@ public:
 
     virtual void Init();
     virtual void Destroy();
-    virtual void BindData(ID3D11DeviceContext* context, VisualComponent* vc);
+    virtual void BindData(VisualComponent* vc);
 private:
 	ID3D11PixelShader* m_PSShader = nullptr;
     //constant stuff

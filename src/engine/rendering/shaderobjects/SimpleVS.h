@@ -14,7 +14,7 @@ public:
 
     virtual void Init();
     virtual void Destroy();
-    virtual void BindData(ID3D11DeviceContext* context, VisualComponent* vc);
+    virtual void BindData(VisualComponent* vc);
 	virtual void UpdateShaderParams();
 private:
     VSData m_VSShader;

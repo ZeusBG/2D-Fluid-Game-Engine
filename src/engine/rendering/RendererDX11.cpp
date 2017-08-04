@@ -196,7 +196,6 @@ void RendererDX11::Update(float delta)
     auto& visibleEntities = Engine::GetEngine()->GetModule<World>()->GetVisibleEntities();
     RenderEntities(visibleEntities);
 
-    // switch the back buffer and the front buffer
 
 }
 
@@ -346,7 +345,7 @@ void RendererDX11::RenderEntities(const AVector<EntitySharedPtr>& entities)
         VisualComponent* visualComponent = entity->GetComponent<VisualComponent>();
         if (visualComponent)
         {
-            visualComponent->Render(m_pImmediateContext1);
+            visualComponent->Render();
         }
     }
 }
@@ -363,6 +362,7 @@ void RendererDX11::DoRenderingCommands()
         ProcessCommand(m_CommandBuffer.front());
 		m_CommandBuffer.pop();
     }
+	// switch the back buffer and the front buffer
 	m_pSwapChain1->Present(1, 0);
 }
 
@@ -459,6 +459,15 @@ void RendererDX11::ProcessCommand(RenderCommand& cmd)
 		{
 			auto info = reinterpret_cast<DrawIndexedInfo*>(cmd.CommandStructure);
 			m_pImmediateContext1->DrawIndexed(info->IndexCount, info->StartIndex, info->BaseVertexlocation);
+		}
+		break;
+		case RenderCmdType::CreateBuffer:
+		{
+			CreateBufferInfo* info = reinterpret_cast<CreateBufferInfo*>(cmd.CommandStructure);
+			D3D11_SUBRESOURCE_DATA* initialData = nullptr;
+			if (info->InitialData)
+				initialData = reinterpret_cast<D3D11_SUBRESOURCE_DATA*>(cmd.CommandData);
+			auto result = m_pd3dDevice1->CreateBuffer(&info->Desc, initialData, info->Buffer);
 		}
 		break;
     }

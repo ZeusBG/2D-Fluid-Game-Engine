@@ -31,6 +31,11 @@ void Engine::Init(const SystemSettings settings)
 void Engine::Run()
 {
 	m_IsRunning = true;
+
+	// Do the init commands from other modules
+	// before any other rendering commands
+	GetModule<IRenderer>()->DoRenderingCommands();
+
 	m_EngineClock.Start();
 	float delta = 0.0f;
 

@@ -23,7 +23,7 @@ void SimplePS::Destroy()
 	Engine::GetEngine()->GetModule<RendererDX11>()->DestroyPS(m_PSShader);
 }
 
-void SimplePS::BindData(ID3D11DeviceContext* context, VisualComponent* vc)
+void SimplePS::BindData(VisualComponent* vc)
 {
 	auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
 	renderCommander->BindPS(&m_PSShader, sizeof(ID3D11PixelShader*));

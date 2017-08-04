@@ -21,11 +21,11 @@ void VisualComponent::AddVertex(float x, float y)
 {
 }
 
-void VisualComponent::Render(ID3D11DeviceContext* context)
+void VisualComponent::Render()
 {
-	m_PixelShader->BindData(context, this);
-	m_VertexShader->BindData(context, this);
-	m_Mesh.RenderBuffers(context);
+	m_PixelShader->BindData(this);
+	m_VertexShader->BindData(this);
+	m_Mesh.RenderBuffers();
 	auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
 	renderCommander->DrawIndexed(m_Mesh.GetIndicesCount(), 0, 0);
 }

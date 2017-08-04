@@ -31,11 +31,9 @@ void RenderCommanderDx11::UpdateSubresouce(ID3D11Resource* subresouce, void* dat
 	resourceData.DstBox = nullptr;
 	resourceData.SrcRowPitch = 0;
 	resourceData.SrcDepthPitch = 0;
-	cmd.AddStructure(resourceData, data, dataSize);
+	cmd.AddStructure<UpdateSubresourceData>(resourceData, data, dataSize);
 
 	m_Renderer->AddRenderCommand(cmd);
-
-	//m_Renderer->DoRenderingCommands();
 }
 
 void RenderCommanderDx11::BindPS(void* shaderInfo, unsigned int shaderInfoSize)
@@ -45,7 +43,6 @@ void RenderCommanderDx11::BindPS(void* shaderInfo, unsigned int shaderInfoSize)
 	memcpy(cmd.CommandData, shaderInfo, shaderInfoSize);
 
 	m_Renderer->AddRenderCommand(cmd);
-	//m_Renderer->DoRenderingCommands();
 }
 
 void RenderCommanderDx11::BindVS(void* shaderInfo, unsigned int shaderInfoSize)
@@ -55,7 +52,6 @@ void RenderCommanderDx11::BindVS(void* shaderInfo, unsigned int shaderInfoSize)
 	memcpy(cmd.CommandData, shaderInfo, shaderInfoSize);
 
 	m_Renderer->AddRenderCommand(cmd);
-	//m_Renderer->DoRenderingCommands();
 }
 
 void RenderCommanderDx11::SetInputLayout(void* layout, unsigned int dataSize)
@@ -65,7 +61,6 @@ void RenderCommanderDx11::SetInputLayout(void* layout, unsigned int dataSize)
 	memcpy(cmd.CommandData, layout, dataSize);
 
 	m_Renderer->AddRenderCommand(cmd);
-	//m_Renderer->DoRenderingCommands();
 }
 
 void RenderCommanderDx11::SetConstantBuffers(ID3D11Buffer** buffer, unsigned int dataSize)
@@ -75,19 +70,17 @@ void RenderCommanderDx11::SetConstantBuffers(ID3D11Buffer** buffer, unsigned int
 	memcpy(cmd.CommandData, &buffer, sizeof(ID3D11Buffer**));
 
 	m_Renderer->AddRenderCommand(cmd);
-	//m_Renderer->DoRenderingCommands();
-	
 }
 
 void RenderCommanderDx11::SetVertexBuffers(ID3D11Buffer* const* buffer, unsigned int stride, unsigned int offset)
 {
 	RenderCommand cmd;
 	cmd.type = RenderCmdType::SetVertexBuffers;
+
 	VertexBufferInfo info{buffer, stride, offset};
-	cmd.AddStructure(info, nullptr, 0);
+	cmd.AddStructure<VertexBufferInfo>(info, nullptr, 0);
 
 	m_Renderer->AddRenderCommand(cmd);
-	//m_Renderer->DoRenderingCommands();
 }
 
 void RenderCommanderDx11::SetTopology(Topology topology)
@@ -97,30 +90,40 @@ void RenderCommanderDx11::SetTopology(Topology topology)
 	memcpy(cmd.CommandData, &topology, sizeof(Topology));
 
 	m_Renderer->AddRenderCommand(cmd);
-	//m_Renderer->DoRenderingCommands();
 }
 
 void RenderCommanderDx11::DrawIndexed(unsigned int indexCount, unsigned int startIndex, unsigned int baseVertexlocation)
 {
 	RenderCommand cmd;
 	cmd.type = RenderCmdType::DrawIndexed;
+
 	DrawIndexedInfo info{ indexCount, startIndex, baseVertexlocation };
-	cmd.AddStructure(info, nullptr, 0);
+	cmd.AddStructure<DrawIndexedInfo>(info, nullptr, 0);
 
 	m_Renderer->AddRenderCommand(cmd);
-	//m_Renderer->DoRenderingCommands();
 }
 
-namespace
+void RenderCommanderDx11::CreateBuffer(D3D11_BUFFER_DESC* Desc, D3D11_SUBRESOURCE_DATA* InitialData, ID3D11Buffer** Buffer)
 {
+	RenderCommand cmd;
+	cmd.type = RenderCmdType::CreateBuffer;
+
+	CreateBufferInfo info;
+	info.Desc = *Desc;
+	info.InitialData = InitialData;
+	info.Buffer = Buffer;
+	cmd.AddStructure<CreateBufferInfo>(info, InitialData, sizeof(D3D11_SUBRESOURCE_DATA));
+
+	m_Renderer->AddRenderCommand(cmd);
 }
+
 void RenderCommanderDx11::SetIndexBuffers(ID3D11Buffer* indexBuffer, DataSizeFormat format, unsigned int offset)
 {
 	RenderCommand cmd;
 	cmd.type = RenderCmdType::SetIndexBuffer;
+
 	IndexBufferInfo info{ indexBuffer, format, offset };
-	cmd.AddStructure(info, nullptr, 0);
+	cmd.AddStructure<IndexBufferInfo>(info, nullptr, 0);
 
 	m_Renderer->AddRenderCommand(cmd);
-	//m_Renderer->DoRenderingCommands();
 }

@@ -23,7 +23,6 @@ void Mesh::InitializeBuffers(ID3D11Device* device, VisualComponent* visualCompon
     ZeroMemory(&indexBufferDesc, sizeof(indexBufferDesc));
     ZeroMemory(&vertexData, sizeof(vertexData));
     ZeroMemory(&indexData, sizeof(indexData));
-    HRESULT result;
    
     // Load the vertex array with data.
     // Set up the description of the static vertex buffer.
@@ -34,8 +33,9 @@ void Mesh::InitializeBuffers(ID3D11Device* device, VisualComponent* visualCompon
     // Give the subresource structure a pointer to the vertex data.
     vertexData.pSysMem = m_Vertices.data();
 
+	auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
     // Now create the vertex buffer.
-    result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_VertexBuffer);
+	renderCommander->CreateBuffer(&vertexBufferDesc, &vertexData, &m_VertexBuffer);
     // Set up the description of the static index buffer.
     indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
     indexBufferDesc.ByteWidth = sizeof(unsigned int)* m_Indices.size();
@@ -45,12 +45,10 @@ void Mesh::InitializeBuffers(ID3D11Device* device, VisualComponent* visualCompon
     indexData.pSysMem = m_Indices.data();
 
     // Create the index buffer.
-    result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_IndexBuffer);
-
-    int a = 0;
+	renderCommander->CreateBuffer(&indexBufferDesc, &indexData, &m_IndexBuffer);
 }
 
-void Mesh::RenderBuffers(ID3D11DeviceContext* deviceContext) const
+void Mesh::RenderBuffers() const
 {
     unsigned int stride;
     unsigned int offset;

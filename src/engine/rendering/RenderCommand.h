@@ -1,15 +1,13 @@
 #pragma once
 #include <cstring>
-
-struct ID3D11Resource;
-struct D3D11_BOX;
-struct ID3D11Buffer;
+#include <d3d11.h>
 
 #define STRUCTURE_SIZE 256
 #define DATA_BUFFER_SIZE 1024
 
 enum RenderCmdType
 {
+	CreateBuffer,
 	SetVS,
 	SetPS,
 	UpdateSubResource,
@@ -45,6 +43,13 @@ enum DataSizeFormat
 enum Topology
 {
 	TRIANGLE_LIST
+};
+
+struct CreateBufferInfo
+{
+	D3D11_BUFFER_DESC Desc;
+	D3D11_SUBRESOURCE_DATA* InitialData;
+	ID3D11Buffer** Buffer;
 };
 
 struct IndexBufferInfo
@@ -90,9 +95,9 @@ struct RenderCommand
 	}
 
 	template <typename T>
-	void AddStructure(const T& structure, void* userData, unsigned int dataSize)
+	void AddStructure(const T& structure, void* userData = nullptr, unsigned int dataSize = 0)
 	{
-		memcpy(CommandStructure, &structure, sizeof(structure));
+		memcpy(CommandStructure, &structure, sizeof(T));
 
 		if (userData)
 		{
