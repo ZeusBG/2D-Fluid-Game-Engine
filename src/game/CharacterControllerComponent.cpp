@@ -20,7 +20,7 @@ void CharacterControllerComponent::Update(float dt)
     sight.Normalize();
     //istoilov : Make proper API calls
     m_Owner->AddTranslate(speed);
-    m_Owner->SetSight(sight);
+    //m_Owner->SetSight(sight);
 
     //if (InputHandler::Instance()->isMouseButtonJustPressed(MouseButton_LEFT))
     //{

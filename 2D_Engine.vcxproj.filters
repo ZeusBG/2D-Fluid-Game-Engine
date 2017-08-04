@@ -111,12 +111,6 @@
     <ClInclude Include="src\engine\rendering\Mesh.h">
       <Filter>engine\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\rendering\RenderCommand.h">
-      <Filter>engine\rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\rendering\RenderCommander.h">
-      <Filter>engine\rendering</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\rendering\RendererDX11.h">
       <Filter>engine\rendering</Filter>
     </ClInclude>
@@ -150,9 +144,6 @@
     <ClInclude Include="src\util\StringUtils.h">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\rendering\RenderCommandStructuresDX11.h">
-      <Filter>engine\rendering</Filter>
-    </ClInclude>
     <ClInclude Include="src\util\math\Mat.h">
       <Filter>util\math</Filter>
     </ClInclude>
@@ -161,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="src\util\math\Vec.h">
       <Filter>util\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\RenderCommander.h">
+      <Filter>engine\rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -192,9 +186,6 @@
       <Filter>engine\physics</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\Mesh.cpp">
-      <Filter>engine\rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\rendering\RenderCommander.cpp">
       <Filter>engine\rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\RendererDX11.cpp">
@@ -235,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="src\util\math\Vec.cpp">
       <Filter>util\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\RenderCommander.cpp">
+      <Filter>engine\rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
