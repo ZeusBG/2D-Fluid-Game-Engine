@@ -4,7 +4,7 @@
 #include "../input/Input.h"
 #include "../physics/Physics.h"
 #include "SystemSettings.h"
-
+#include "engine/rendering/RenderCommander.h"
 Engine::Engine()
 {
 }
@@ -21,6 +21,9 @@ void Engine::Init(const SystemSettings settings)
 	m_EngineModules.push_back(new RendererDX11());
 	m_EngineModules.back()->Init(this);
 
+	m_EngineModules.push_back(new RenderCommanderDx11());
+	m_EngineModules.back()->Init(this);
+
 	m_EngineModules.push_back(new World());
 	m_EngineModules.back()->Init(this);
 }
@@ -28,6 +31,11 @@ void Engine::Init(const SystemSettings settings)
 void Engine::Run()
 {
 	m_IsRunning = true;
+
+	// Do the init commands from other modules
+	// before any other rendering commands
+	GetModule<IRenderer>()->DoRenderingCommands();
+
 	m_EngineClock.Start();
 	float delta = 0.0f;
 
@@ -37,6 +45,7 @@ void Engine::Run()
 		{
 			module->Update(delta);
 		}
+		GetModule<IRenderer>()->DoRenderingCommands();
 		delta = m_EngineClock.MeasureTime();
 	}
 

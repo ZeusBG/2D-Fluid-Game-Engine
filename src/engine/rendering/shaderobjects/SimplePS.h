@@ -1,12 +1,14 @@
 #pragma once
 
-#include "IRenderer.h"
-#include "IShader.h"
+#include "engine/rendering/IRenderer.h"
+#include "engine/rendering/IShader.h"
+
 #include <memory>
 #include <d3d11_1.h>
 #include <d3dcompiler.h>
 
 class VisualComponent;
+struct ID3D11PixelShader;
 class SimplePS : public IShader
 {
 public:
@@ -14,9 +16,9 @@ public:
 
     virtual void Init();
     virtual void Destroy();
-    virtual void BindData(ID3D11DeviceContext* context);
+    virtual void BindData(VisualComponent* vc);
 private:
-    PSHandle m_PSShader = nullptr;
+	ID3D11PixelShader* m_PSShader = nullptr;
     //constant stuff
 };
 

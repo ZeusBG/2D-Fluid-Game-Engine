@@ -25,7 +25,7 @@ public:
 
     inline void AddVertex(float x, float y);
     
-	void Render(ID3D11DeviceContext* context);
+	void Render();
 
     //Overrides:
     virtual void Init();

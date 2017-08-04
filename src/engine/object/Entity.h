@@ -2,12 +2,14 @@
 #include "../../util/Collections.h"
 #include "Component.h"
 #include "../Transform.h"
+#include <memory>
+
 class Entity : public BaseObject
 {
+protected:
 	Transform m_Transform;
 	AVector<Component*> m_Components;
 public:
-	Entity() {}
 	virtual void AddComponent(Component* component);
 	virtual void Update(float delta);
 	virtual void Init();
@@ -22,6 +24,8 @@ public:
 		}
 		return nullptr;
 	}
+
+	const Transform& GetTransform() { return m_Transform; }
 };
 
 typedef std::shared_ptr<Entity> EntitySharedPtr;

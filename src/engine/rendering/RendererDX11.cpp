@@ -1,13 +1,15 @@
 #pragma once
+
 #include "RendererDX11.h"
 #include "../core/SystemSettings.h"
 #include "../core/Engine.h"
 #include "engine/core/World.h"
-#include <d3dcompiler.h>
-#include <directxmath.h>
 #include "engine/object/Entity.h"
 #include "../../util/StringUtils.h"
 #include "engine/object/VisualComponent.h"
+
+#include <d3dcompiler.h>
+#include <directxmath.h>
 
 
 RendererDX11::RendererDX11() {}
@@ -191,11 +193,10 @@ void RendererDX11::Update(float delta)
     m_pImmediateContext1->ClearRenderTargetView(m_pRenderTargetView, color);
 
     // set the primitive topology
-	auto& visibleEntities = Engine::GetEngine()->GetModule<World>()->GetVisibleEntities();
-	RenderEntities(visibleEntities);
+    auto& visibleEntities = Engine::GetEngine()->GetModule<World>()->GetVisibleEntities();
+    RenderEntities(visibleEntities);
 
-    // switch the back buffer and the front buffer
-    m_pSwapChain1->Present(1, 0);
+
 }
 
 HRESULT RendererDX11::CompileShaderFromFile(const char* file, LPCSTR entryPoint, LPCSTR shaderModel, ID3DBlob** blobOut)
@@ -265,7 +266,7 @@ PSHandle RendererDX11::CreatePSFromFile(const char* file, ShaderVersion version)
 VSData RendererDX11::CreateVSFromFile(const char* file, D3D11_INPUT_ELEMENT_DESC* layoutDesc, int layoutSize,  ShaderVersion version)
 {
     std::string shaderVersion;
-	VSData result;
+    VSData result;
     //TODO this is dumb way of converting shader vesion to string
     switch (version)
     {
@@ -286,7 +287,7 @@ VSData RendererDX11::CreateVSFromFile(const char* file, D3D11_INPUT_ELEMENT_DESC
 
     // Create the pixel shader
     ID3D11VertexShader* vertexShader = nullptr;
-	ID3D11InputLayout* layout = nullptr;
+    ID3D11InputLayout* layout = nullptr;
     hr = m_pd3dDevice->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &vertexShader);
 
     if (FAILED(hr))
@@ -294,39 +295,182 @@ VSData RendererDX11::CreateVSFromFile(const char* file, D3D11_INPUT_ELEMENT_DESC
 
 
 
-	hr = m_pd3dDevice->CreateInputLayout(layoutDesc, layoutSize, pVSBlob->GetBufferPointer(),
-		pVSBlob->GetBufferSize(), &layout);
-	pVSBlob->Release();
-	result.VSPtr = static_cast<void*>(vertexShader);
-	result.LayoutPtr = static_cast<void*>(layout);
-	return result;
+    hr = m_pd3dDevice->CreateInputLayout(layoutDesc, layoutSize, pVSBlob->GetBufferPointer(),
+        pVSBlob->GetBufferSize(), &layout);
+    pVSBlob->Release();
+    result.VSPtr = static_cast<void*>(vertexShader);
+    result.LayoutPtr = static_cast<void*>(layout);
+    return result;
+}
+
+ID3D11Buffer* RendererDX11::CreateConstantBuffer(UINT size)
+{
+    D3D11_BUFFER_DESC matrixBufferDesc;
+
+    ZeroMemory(&matrixBufferDesc, sizeof(matrixBufferDesc));
+
+    ID3D11Buffer* result = nullptr;
+    // Setup the description of the dynamic matrix constant buffer that is in the vertex shader.
+    matrixBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+    matrixBufferDesc.ByteWidth = size;
+    matrixBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    matrixBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    matrixBufferDesc.MiscFlags = 0;
+    matrixBufferDesc.StructureByteStride = 0;
+
+    // Create the constant buffer pointer so we can access the vertex shader constant buffer from within this class.
+    m_pd3dDevice->CreateBuffer(&matrixBufferDesc, NULL, &result);
+
+    return result;
 }
 
 void RendererDX11::DestroyPS(PSHandle ps)
 {
-	if(ps)
-		static_cast<ID3D11PixelShader*>(ps)->Release();
+    if(ps)
+        static_cast<ID3D11PixelShader*>(ps)->Release();
 }
 
 void RendererDX11::DestroyVS(VSData vs)
 {
-	if (vs.VSPtr)
-		static_cast<ID3D11VertexShader*>(vs.VSPtr)->Release();
-	if (vs.LayoutPtr)
-		static_cast<ID3D11InputLayout*>(vs.LayoutPtr)->Release();
+    if (vs.VSPtr)
+        static_cast<ID3D11VertexShader*>(vs.VSPtr)->Release();
+    if (vs.LayoutPtr)
+        static_cast<ID3D11InputLayout*>(vs.LayoutPtr)->Release();
 }
 
-void RendererDX11::RenderEntities(const AVector<EntitySharedPtr> entities)
+void RendererDX11::RenderEntities(const AVector<EntitySharedPtr>& entities)
 {
-	for (auto& entity : entities)
-	{
-		VisualComponent* visualComponent = entity->GetComponent<VisualComponent>();
-		if (visualComponent)
-		{
-			visualComponent->Render(m_pImmediateContext1);
+    for (auto& entity : entities)
+    {
+        VisualComponent* visualComponent = entity->GetComponent<VisualComponent>();
+        if (visualComponent)
+        {
+            visualComponent->Render();
+        }
+    }
+}
 
+void RendererDX11::AddRenderCommand(const RenderCommand& cmd)
+{
+    m_CommandBuffer.push(cmd);
+}
+
+void RendererDX11::DoRenderingCommands()
+{
+    while (!m_CommandBuffer.empty())
+    {
+        ProcessCommand(m_CommandBuffer.front());
+		m_CommandBuffer.pop();
+    }
+	// switch the back buffer and the front buffer
+	m_pSwapChain1->Present(1, 0);
+}
+
+namespace
+{
+DXGI_FORMAT ConvertFormat(DataSizeFormat format)
+{
+	switch (format)
+	{
+		case DataSizeFormat::R32_UINT:
+		{
+			return DXGI_FORMAT_R32_UINT;
 		}
 	}
+	return DXGI_FORMAT_R32_UINT;
+}
+
+D3D11_PRIMITIVE_TOPOLOGY ConvertTopology(Topology topology)
+{
+	switch (topology)
+	{
+		case Topology::TRIANGLE_LIST:
+		{
+			return D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+		}
+	}
+	return D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+}
+}
+
+void RendererDX11::ProcessCommand(RenderCommand& cmd)
+{
+    switch (cmd.type)
+    {
+		case RenderCmdType::UpdateSubResource:
+		{
+			// Reintepret cast is not a good idea, will remove it later
+			auto data = reinterpret_cast<UpdateSubresourceData*>(cmd.CommandStructure);
+			m_pImmediateContext1->UpdateSubresource(data->Subresource,
+													data->DstSubresource,
+													data->DstBox,
+													cmd.CommandData,
+													data->SrcRowPitch,
+													data->SrcDepthPitch);
+		}
+		break;
+		case RenderCmdType::BindPS:
+		{
+			ID3D11PixelShader* shader = nullptr;
+			memcpy(&shader, cmd.CommandData, sizeof(ID3D11PixelShader*));
+			m_pImmediateContext1->PSSetShader(shader, nullptr, 0);
+		}
+		break;
+		case RenderCmdType::BindVS:
+		{
+			ID3D11VertexShader* shader = nullptr;
+			memcpy(&shader, cmd.CommandData, sizeof(ID3D11VertexShader*));
+			m_pImmediateContext1->VSSetShader(shader, nullptr, 0);
+		}
+		break;
+		case RenderCmdType::SetInputLayout:
+		{
+			ID3D11InputLayout* layout = nullptr;
+			memcpy(&layout, cmd.CommandData, sizeof(ID3D11VertexShader*));
+			m_pImmediateContext1->IASetInputLayout(layout);
+		}
+		break;
+		case RenderCmdType::SetConstantBuffers:
+		{
+			ID3D11Buffer** buffer = nullptr;
+			memcpy(&buffer, cmd.CommandData, sizeof(ID3D11Buffer**));
+			m_pImmediateContext1->VSSetConstantBuffers(0, 1, buffer);
+		}
+		break;
+		case RenderCmdType::SetVertexBuffers:
+		{
+			auto info = reinterpret_cast<VertexBufferInfo*>(cmd.CommandStructure);
+			m_pImmediateContext1->IASetVertexBuffers(0, 1,info->VB, &info->Stride, &info->Offset);
+		}
+		break;
+		case RenderCmdType::SetIndexBuffer:
+		{
+			auto info = reinterpret_cast<IndexBufferInfo*>(cmd.CommandStructure);
+			m_pImmediateContext1->IASetIndexBuffer(info->IB, ConvertFormat(info->Format), info->Offset);
+		}
+		break;
+		case RenderCmdType::SetTopology:
+		{
+			auto topology = reinterpret_cast<Topology*>(cmd.CommandData);
+			m_pImmediateContext1->IASetPrimitiveTopology(ConvertTopology(*topology));
+		}
+		break;
+		case RenderCmdType::DrawIndexed:
+		{
+			auto info = reinterpret_cast<DrawIndexedInfo*>(cmd.CommandStructure);
+			m_pImmediateContext1->DrawIndexed(info->IndexCount, info->StartIndex, info->BaseVertexlocation);
+		}
+		break;
+		case RenderCmdType::CreateBuffer:
+		{
+			CreateBufferInfo* info = reinterpret_cast<CreateBufferInfo*>(cmd.CommandStructure);
+			D3D11_SUBRESOURCE_DATA* initialData = nullptr;
+			if (info->InitialData)
+				initialData = reinterpret_cast<D3D11_SUBRESOURCE_DATA*>(cmd.CommandData);
+			auto result = m_pd3dDevice1->CreateBuffer(&info->Desc, initialData, info->Buffer);
+		}
+		break;
+    }
 }
 
 const char* RendererDX11::GetName() { return "Renderer"; }

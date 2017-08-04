@@ -1,9 +1,9 @@
 #include "engine/rendering/IShader.h"
-#include "engine/rendering/SimpleVS.h"
-#include "engine/rendering/SimplePS.h"
+#include "engine/rendering/shaderobjects/SimpleVS.h"
+#include "engine/rendering/shaderobjects/SimplePS.h"
 #include "engine/core/Engine.h"
 #include "VisualComponent.h"
-
+#include "engine/rendering/RenderCommander.h"
 VisualComponent::VisualComponent()
 {
 }
@@ -21,12 +21,13 @@ void VisualComponent::AddVertex(float x, float y)
 {
 }
 
-void VisualComponent::Render(ID3D11DeviceContext* context)
+void VisualComponent::Render()
 {
-	m_PixelShader->BindData(context);
-	m_VertexShader->BindData(context);
-	m_Mesh.RenderBuffers(context);
-	context->DrawIndexed(m_Mesh.GetIndicesCount(), 0, 0);
+	m_PixelShader->BindData(this);
+	m_VertexShader->BindData(this);
+	m_Mesh.RenderBuffers();
+	auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
+	renderCommander->DrawIndexed(m_Mesh.GetIndicesCount(), 0, 0);
 }
 
 void VisualComponent::Update(float delta)

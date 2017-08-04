@@ -14,24 +14,24 @@ cbuffer MatrixBuffer
 struct VertexInputType
 {
     float4 position : POSITION;
-    float4 color : COLOR;
+    //float4 color : COLOR;
 };
 
 struct PixelInputType
 {
     float4 position : SV_POSITION;
-    float4 color : COLOR;
+    //float4 color : COLOR;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 // Vertex Shader
 ////////////////////////////////////////////////////////////////////////////////
-PixelInputType ColorVertexShader(VertexInputType input)
+PixelInputType VS(VertexInputType input)
 {
     PixelInputType output;
 
     // istoilov: Because it's a 2D Game 
-    input.position.z = 2.0f;
+    input.position.z = 0.0f;
     // Change the position vector to be 4 units for proper matrix calculations.
     input.position.w = 1.0f;
 
@@ -41,7 +41,7 @@ PixelInputType ColorVertexShader(VertexInputType input)
     output.position = mul(output.position, projectionMatrix);
 
     // Store the input color for the pixel shader to use.
-    output.color = input.color;
+    //output.color = input.color;
 
     return output;
 }
