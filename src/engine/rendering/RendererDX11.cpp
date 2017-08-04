@@ -29,6 +29,11 @@ void RendererDX11::Init(Engine* engine)
     InitDevice();
 }
 
+void RendererDX11::Start()
+{
+	DoRenderingCommands();
+}
+
 HRESULT RendererDX11::InitDevice()
 {
     HRESULT hr = S_OK;

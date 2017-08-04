@@ -42,7 +42,7 @@ public:
     virtual void RenderEntities(const AVector<EntitySharedPtr>& entities);
     virtual void AddRenderCommand(const RenderCommand& cmd);
     virtual void DoRenderingCommands();
-
+	virtual void Start();
 private:
     int m_ScreenWidth;
     int m_ScreenHeight;

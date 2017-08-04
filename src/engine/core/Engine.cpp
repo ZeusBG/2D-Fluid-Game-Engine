@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <thread>
 
 #include "engine/rendering/RendererDX11.h"
 
@@ -10,6 +11,7 @@
 #include "engine/input/InputHandler.h"
 
 #include "engine/physics/Physics.h"
+#include "engine/logging/Logging.h"
 Engine::Engine()
 {
 }
@@ -26,32 +28,50 @@ void Engine::Init(const SystemSettings settings)
     m_EngineModules.push_back(new RendererDX11());
     m_EngineModules.back()->Init(this);
 
-	m_EngineModules.push_back(new RenderCommanderDx11());
-	m_EngineModules.back()->Init(this);
+    m_EngineModules.push_back(new RenderCommanderDx11());
+    m_EngineModules.back()->Init(this);
 
     m_EngineModules.push_back(new World());
     m_EngineModules.back()->Init(this);
 }
 
+void Engine::Sync(float delta)
+{
+    float timeLeft = (m_FrameCap - delta) * 1000;
+    if (timeLeft < 0)
+        return;
+    LOG_L2(INFO, INFO, "Sleeping for %f", timeLeft);
+    using namespace std::chrono_literals;
+    std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(timeLeft)));
+}
+
+void Engine::StartModules()
+{
+    for (IModule* m : m_EngineModules)
+    {
+        m->Start();
+    }
+}
+
 void Engine::Run()
 {
     m_IsRunning = true;
-
-	// Do the init commands from other modules
-	// before any other rendering commands
-	GetModule<IRenderer>()->DoRenderingCommands();
+    StartModules();
 
     m_EngineClock.Start();
     float delta = 0.0f;
 
     while (m_IsRunning)
     {
+        m_EngineClock.MeasureTime();
         for (IModule* module : m_EngineModules)
         {
             module->Update(delta);
         }
-		GetModule<IRenderer>()->DoRenderingCommands();
+        GetModule<IRenderer>()->DoRenderingCommands();
         delta = m_EngineClock.MeasureTime();
+
+        Sync(delta);
     }
 
     Destroy();

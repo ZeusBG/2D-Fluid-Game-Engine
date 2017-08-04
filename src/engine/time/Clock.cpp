@@ -16,7 +16,8 @@ void Clock::Start()
 float Clock::MeasureTime()
 {
 	TimePoint now = std::chrono::steady_clock::now();
-	m_Delta = (std::chrono::duration_cast<std::chrono::microseconds>(now - m_LastMeasured).count() / 1000.0f) * m_TimeSpeed;
+	m_Delta = (std::chrono::duration_cast<std::chrono::microseconds>(now - m_LastMeasured).count() / 1000000.0f) * m_TimeSpeed;
+	m_LastMeasured = now;
 	return m_Delta;
 }
 
@@ -27,5 +28,5 @@ float Clock::GetLastDelta()
 
 float Clock::GetTimeSinceStart()
 {
-	return (std::chrono::duration_cast<std::chrono::microseconds>(m_TimeStarted - m_LastMeasured).count() / 1000.0f);
+	return (std::chrono::duration_cast<std::chrono::microseconds>(m_TimeStarted - m_LastMeasured).count() / 1000000.0f);
 }

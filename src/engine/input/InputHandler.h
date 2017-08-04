@@ -33,7 +33,7 @@ public:
 
     //Overrides
     virtual void Update(float delta);
-
+	virtual void Start() {}
     virtual void Init(Engine* engine) {}
     virtual const char* GetName() { return "Input"; }
 
