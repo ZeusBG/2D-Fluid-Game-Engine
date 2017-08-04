@@ -40,8 +40,8 @@ public:
     static Mat3x3 GetRotateMatrix(const float rad)
     {
         Mat3x3 result;
-        result[0][0] = cos(rad); result[0][1] = -sin(rad); result[0][2]= 0.f;
-        result[1][0] = sin(rad); result[1][1] =  cos(rad); result[1][2]= 0.f;
+        result[0][0] = cosf(rad); result[0][1] = -sinf(rad); result[0][2]= 0.f;
+        result[1][0] = sinf(rad); result[1][1] =  cosf(rad); result[1][2]= 0.f;
         result[2][0] =      0.f; result[2][1] =       0.f; result[2][2]= 1.f;
         return result;
     }

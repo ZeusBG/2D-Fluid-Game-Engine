@@ -7,7 +7,7 @@ Vec2 Vec2::Zero = Vec2();
 
 void Vec2::Normalize()
 {
-    float length = sqrt(x *x + y * y);
+    float length = sqrtf(x *x + y * y);
     x /= length;
     y /= length;
 }
@@ -38,7 +38,7 @@ Vec2::Vec2() : x(0.f), y(0.f)
 
 void Vec3::Normalize()
 {
-    float length = sqrt(x *x + y * y + z * z);
+    float length = sqrtf(x *x + y * y + z * z);
     x /= length;
     y /= length;
     z /= length;

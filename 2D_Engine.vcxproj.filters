@@ -41,7 +41,7 @@
       <UniqueIdentifier>{43339F7C-2F6A-A00D-D856-8610C46C1C0F}</UniqueIdentifier>
     </Filter>
     <Filter Include="util\math">
-      <UniqueIdentifier>{b679d1c0-dc67-4865-8789-c989b4d8c295}</UniqueIdentifier>
+      <UniqueIdentifier>{1CA6F0CE-8810-A545-D14E-56EB3DF8829A}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="src\engine\core\World.h">
       <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\input\InputHandler.h">
+      <Filter>engine\input</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\input\KeyCodes.h">
       <Filter>engine\input</Filter>
@@ -129,6 +132,9 @@
     <ClInclude Include="src\engine\time\Clock.h">
       <Filter>engine\time</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\CharacterControllerComponent.h">
+      <Filter>game</Filter>
+    </ClInclude>
     <ClInclude Include="src\game\GameClient.h">
       <Filter>game</Filter>
     </ClInclude>
@@ -147,19 +153,13 @@
     <ClInclude Include="src\engine\rendering\RenderCommandStructuresDX11.h">
       <Filter>engine\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\input\InputHandler.h">
-      <Filter>engine\input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\CharacterControllerComponent.h">
-      <Filter>game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\math\Vec.h">
-      <Filter>util\math</Filter>
-    </ClInclude>
     <ClInclude Include="src\util\math\Mat.h">
       <Filter>util\math</Filter>
     </ClInclude>
     <ClInclude Include="src\util\math\MathUtils.h">
+      <Filter>util\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\math\Vec.h">
       <Filter>util\math</Filter>
     </ClInclude>
   </ItemGroup>
@@ -175,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="src\engine\core\World.cpp">
       <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\input\InputHandler.cpp">
+      <Filter>engine\input</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\logging\Logging.cpp">
       <Filter>engine\logging</Filter>
@@ -209,6 +212,9 @@
     <ClCompile Include="src\engine\time\Clock.cpp">
       <Filter>engine\time</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\CharacterControllerComponent.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
     <ClCompile Include="src\game\GameClient.cpp">
       <Filter>game</Filter>
     </ClCompile>
@@ -221,19 +227,13 @@
     <ClCompile Include="src\game\main.cpp">
       <Filter>game</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\input\InputHandler.cpp">
-      <Filter>engine\input</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\CharacterControllerComponent.cpp">
-      <Filter>game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\util\math\Vec.cpp">
-      <Filter>util\math</Filter>
-    </ClCompile>
     <ClCompile Include="src\util\math\Mat.cpp">
       <Filter>util\math</Filter>
     </ClCompile>
     <ClCompile Include="src\util\math\MathUtils.cpp">
+      <Filter>util\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\math\Vec.cpp">
       <Filter>util\math</Filter>
     </ClCompile>
   </ItemGroup>
