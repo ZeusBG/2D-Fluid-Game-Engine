@@ -20,11 +20,11 @@ public:
     virtual const char* GetName();
     void Destroy();
     void AddEntity(std::shared_ptr<Entity>& entity) { entity->Init(); m_Entities.push_back(entity); }
-    const AVector<EntitySP> GetVisibleEntities();
+    const AVector<EntitySP>& GetVisibleEntities();
 
     const AVector<EntitySP>& GetEntities() const { return m_Entities; }
     
-	virtual void Start() {}
+    virtual void Start() {}
     
     //const AVector<Entity*>& GetDynamicEntities() const { return m_DynamicEntities; }
     //const AVector<Entity*>& GetStaticEntities() const { return m_StaticEntities; }

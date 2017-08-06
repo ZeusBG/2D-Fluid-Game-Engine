@@ -18,7 +18,7 @@ public:
     virtual void Destroy();
     virtual void BindData(VisualComponent* vc);
 private:
-	ID3D11PixelShader* m_PSShader = nullptr;
+    ID3D11PixelShader* m_PSShader = nullptr;
     //constant stuff
 };
 

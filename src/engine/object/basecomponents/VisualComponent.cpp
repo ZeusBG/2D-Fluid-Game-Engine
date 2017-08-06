@@ -2,7 +2,7 @@
 #include "engine/rendering/shaderobjects/SimpleVS.h"
 #include "engine/rendering/shaderobjects/SimplePS.h"
 #include "engine/core/Engine.h"
-#include "VisualComponent.h"
+#include "engine/object/basecomponents/visualcomponent.h"
 #include "engine/rendering/RenderCommander.h"
 
 IMPLEMENT_METADATA(VisualComponent)

@@ -1,5 +1,5 @@
 #pragma once
-#include "engine/object/Component.h"
+#include "engine/object/basecomponents/Component.h"
 
 
 /*

@@ -1,14 +1,16 @@
 #include <SDL.h>
 #include <thread>
 
-#include "engine/rendering/RendererDX11.h"
-
 #include "engine/core/World.h"
 #include "engine/core/SystemSettings.h"
-#include "engine/rendering/RenderCommander.h"
 #include "engine/core/Engine.h"
 
+#include "engine/rendering/RenderCommander.h"
+#include "engine/rendering/RendererDX11.h"
+
 #include "engine/input/InputHandler.h"
+
+#include "engine/camera/CameraHandler.h"
 
 #include "engine/physics/Physics.h"
 #include "engine/logging/Logging.h"
@@ -32,6 +34,9 @@ void Engine::Init(const SystemSettings settings)
     m_EngineModules.back()->Init(this);
 
     m_EngineModules.push_back(std::make_shared<RenderCommanderDx11>());
+    m_EngineModules.back()->Init(this);
+
+    m_EngineModules.push_back(new CameraHandler());
     m_EngineModules.back()->Init(this);
 
 }

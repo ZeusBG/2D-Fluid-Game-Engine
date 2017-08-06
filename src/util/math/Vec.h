@@ -12,8 +12,12 @@ public:
     Vec2 GetNormalized();
 
     void operator= (const Vec2& rhs) { x = rhs.x; y = rhs.y; }
+
     bool operator!= (const Vec2& rhs) const { return (x != rhs.x || y != rhs.y); }
+
     Vec2 operator* (const float c) const { return Vec2(x*c, y * c); }
+    Vec2 operator- (const Vec2& rhs) const { return Vec2(x - rhs.x, y - rhs.y); }
+    Vec2 operator+ (const Vec2& rhs) const { return Vec2(x + rhs.x, y + rhs.y); }
 
     bool EqualWithEpsilon(const Vec2& rhs) const;
 
@@ -41,6 +45,8 @@ public:
     }
 
     static Vec2 Zero;
+    static Vec2 BaseI;
+    static Vec2 BaseJ;
 public:
     float x;
     float y;
@@ -50,10 +56,25 @@ public:
 class Vec3
 {
 public:
+    Vec3() : x(0), y(0), z(0)
+    {}
     Vec3(float x, float y, float z) : x(x), y(y), z(z)
     {}
 
     void Normalize();
+
+    void operator= (const Vec3& rhs) { x = rhs.x; y = rhs.y; z = rhs.z; }
+
+    bool operator!= (const Vec3& rhs) const { return (x != rhs.x || y != rhs.y || z != rhs.z); }
+
+    Vec3 operator* (const float c)   const { return Vec3(x*c, y * c, z*c); }
+    Vec3 operator- (const Vec3& rhs) const { return Vec3(x - rhs.x, y - rhs.y, z - rhs.z); }
+    Vec3 operator+ (const Vec3& rhs) const { return Vec3(x + rhs.x, y + rhs.y, z + rhs.z); }
+
+    static Vec3 Zero;
+    static Vec3 BaseI;
+    static Vec3 BaseJ;
+    static Vec3 BaseK;
 
 public:
     float x;

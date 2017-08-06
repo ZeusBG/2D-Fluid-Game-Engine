@@ -1,5 +1,5 @@
 #pragma once
-#include <engine/object/VisualComponent.h>
+#include "engine/object/basecomponents/VisualComponent.h"
 
 class SimpleVisualComponent : public VisualComponent
 {

@@ -1,7 +1,9 @@
 #pragma once
 #include "util/Collections.h"
-#include "Component.h"
-#include "engine/Transform.h"
+
+#include "engine/object/basecomponents/Component.h"
+#include "engine/object/Transform.h"
+
 #include <memory>
 
 class Entity : public BaseObject

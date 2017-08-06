@@ -10,6 +10,8 @@ struct VS_INPUT
 cbuffer World
 {
 	matrix WorldMat;
+	matrix ViewMat;
+	matrix ProjMat;
 };
 
 struct PS_INPUT
@@ -21,6 +23,9 @@ PS_INPUT VS( VS_INPUT input )
 {
     PS_INPUT output = (PS_INPUT)0;
     output.Pos = mul(input.Pos, WorldMat);
+	output.Pos = mul(output.Pos, ViewMat);
+	output.Pos = mul(output.Pos, ProjMat);
+	
     return output;
 }
 

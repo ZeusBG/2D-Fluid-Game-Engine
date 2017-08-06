@@ -49,9 +49,14 @@ public:
 
     inline Vec3 GetRowK() const { return Vec3(mat[2][0], mat[2][1], mat[2][2]); }
 
-    inline void SetRowI(const Vec2& v) { mat[0][0] = v.x, mat[0][1] = v.y; }
-    inline void SetRowJ(const Vec2& v) { mat[1][0] = v.x, mat[1][1] = v.y; }
-    inline void SetRowK(const Vec2& v) { mat[2][0] = v.x, mat[2][1] = v.y; }
+    inline void SetRowI(const Vec2& v) { mat[0][0] = v.x; mat[0][1] = v.y; }
+    inline void SetRowJ(const Vec2& v) { mat[1][0] = v.x; mat[1][1] = v.y; }
+    inline void SetRowK(const Vec2& v) { mat[2][0] = v.x; mat[2][1] = v.y; }
+
+
+    inline void SetRowI(const Vec3& v) { mat[0][0] = v.x; mat[0][1] = v.y; mat[0][2] = v.z; }
+    inline void SetRowJ(const Vec3& v) { mat[1][0] = v.x; mat[1][1] = v.y; mat[1][2] = v.z; }
+    inline void SetRowK(const Vec3& v) { mat[2][0] = v.x; mat[2][1] = v.y; mat[2][2] = v.z; }
 
 
     void operator*= (const Mat3x3& right);
@@ -84,6 +89,12 @@ public:
         //mat[2][2] += z;
     }
 
+    void Scale(float c)
+    {
+        mat[0][0] *= c;
+        mat[1][1] *= c;
+        //mat[2][2] *= c;
+    }
     
 
 public:

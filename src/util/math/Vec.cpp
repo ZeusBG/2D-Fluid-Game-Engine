@@ -4,6 +4,8 @@
 #include <math.h>
 
 Vec2 Vec2::Zero = Vec2();
+Vec2 Vec2::BaseI = Vec2(1.f, 0.f);
+Vec2 Vec2::BaseJ = Vec2(0.f, 1.f);
 
 void Vec2::Normalize()
 {
@@ -35,6 +37,14 @@ Vec2::Vec2(float x, float y) : x(x), y(y)
 Vec2::Vec2() : x(0.f), y(0.f)
 {}
 
+// ==================================
+// ====== Vec3 Implementation =======
+// ==================================
+
+Vec3 Vec3::Zero  = Vec3(0.f, 0.f, 0.f);
+Vec3 Vec3::BaseI = Vec3(1.f, 0.f, 0.f);
+Vec3 Vec3::BaseJ = Vec3(0.f, 1.f, 0.f);
+Vec3 Vec3::BaseK = Vec3(0.f, 0.f, 1.f);
 
 void Vec3::Normalize()
 {
