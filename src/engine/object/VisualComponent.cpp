@@ -4,6 +4,9 @@
 #include "engine/core/Engine.h"
 #include "VisualComponent.h"
 #include "engine/rendering/RenderCommander.h"
+
+IMPLEMENT_METADATA(VisualComponent)
+
 VisualComponent::VisualComponent()
 {
 }

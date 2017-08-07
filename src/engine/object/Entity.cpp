@@ -1,6 +1,8 @@
 #pragma once
 #include "Entity.h"
 
+IMPLEMENT_METADATA(Entity);
+
 void Entity::Update(float delta)
 {
     for(auto& component : m_Components)

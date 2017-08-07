@@ -111,6 +111,12 @@
     <ClInclude Include="src\engine\rendering\Mesh.h">
       <Filter>engine\rendering</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\rendering\RenderCommand.h">
+      <Filter>engine\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\RenderCommander.h">
+      <Filter>engine\rendering</Filter>
+    </ClInclude>
     <ClInclude Include="src\engine\rendering\RendererDX11.h">
       <Filter>engine\rendering</Filter>
     </ClInclude>
@@ -153,8 +159,11 @@
     <ClInclude Include="src\util\math\Vec.h">
       <Filter>util\math</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\rendering\RenderCommander.h">
-      <Filter>engine\rendering</Filter>
+    <ClInclude Include="src\engine\core\MetaData.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ObjectsFactory.h">
+      <Filter>game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +195,9 @@
       <Filter>engine\physics</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\Mesh.cpp">
+      <Filter>engine\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\RenderCommander.cpp">
       <Filter>engine\rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\RendererDX11.cpp">
@@ -227,8 +239,11 @@
     <ClCompile Include="src\util\math\Vec.cpp">
       <Filter>util\math</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\rendering\RenderCommander.cpp">
-      <Filter>engine\rendering</Filter>
+    <ClCompile Include="src\engine\core\MetaData.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\ObjectsFactory.cpp">
+      <Filter>game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

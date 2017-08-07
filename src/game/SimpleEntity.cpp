@@ -7,6 +7,8 @@
 #include "engine/rendering/shaderobjects/SimplePS.h"
 #include "engine/rendering/shaderobjects/SimpleVS.h"
 
+IMPLEMENT_METADATA(SimpleEntity);
+
 SimpleEntity::SimpleEntity()
 {
     //ComponentSharedPtr c(new SimpleVisualComponent());

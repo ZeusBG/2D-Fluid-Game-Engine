@@ -12,6 +12,7 @@
 
 class VisualComponent : public Component
 {
+    ADD_SOLID_CLASS_METADATA(VisualComponent)
 public:
     //costructor with mesh file, PS and VS ?
     //forward to Mesh

@@ -5,6 +5,7 @@
 
 class SimpleEntity : public Entity
 {
+    ADD_SOLID_CLASS_METADATA(SimpleEntity)
 public:
 	SimpleEntity();
 	virtual void Update(float delta);

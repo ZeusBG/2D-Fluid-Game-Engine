@@ -12,6 +12,7 @@ TODO istoilov :
 
 class CharacterControllerComponent : public Component
 {
+    ADD_SOLID_CLASS_METADATA(CharacterControllerComponent)
 public:
     CharacterControllerComponent();
 
