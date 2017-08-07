@@ -1,4 +1,5 @@
 #pragma once
+#include "engine/core/MetaData.h"
 class BaseObject
 {
 public:

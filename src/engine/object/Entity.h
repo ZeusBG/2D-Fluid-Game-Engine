@@ -6,6 +6,7 @@
 
 class Entity : public BaseObject
 {
+    ADD_SOLID_CLASS_METADATA(Entity)
 protected:
     Transform m_Transform;
     AVector<Component*> m_Components;

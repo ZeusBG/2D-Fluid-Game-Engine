@@ -3,6 +3,7 @@
 
 class SimpleVisualComponent : public VisualComponent
 {
+    ADD_SOLID_CLASS_METADATA(SimpleVisualComponent)
 	std::unique_ptr<Engine> m_Engine;
 public:
 	SimpleVisualComponent();

@@ -3,9 +3,12 @@
 class Physics : public IModule
 {
 public:
-	Physics();
-	~Physics();
+    Physics();
+    ~Physics();
 
-	void Update(float delta);
+    void Update(float delta);
+
+private:
+    //AVector<Component*> m_Components;
 };
 

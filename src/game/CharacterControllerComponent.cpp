@@ -5,6 +5,8 @@
 
 #include "util/math/Vec.h"
 
+IMPLEMENT_METADATA(CharacterControllerComponent)
+
 void CharacterControllerComponent::Update(float dt)
 {
     InputHandler* inputHandler = g_Engine->GetModule<InputHandler>();

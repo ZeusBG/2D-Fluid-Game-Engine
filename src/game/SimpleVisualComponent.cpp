@@ -4,6 +4,8 @@
 #include "engine/rendering/shaderobjects/SimplePS.h"
 #include "engine/rendering/shaderobjects/SimpleVS.h"
 
+IMPLEMENT_METADATA(SimpleVisualComponent)
+
 SimpleVisualComponent::SimpleVisualComponent()
 {
     m_PixelShader = std::static_pointer_cast<IShader>(IShader::ShaderSharedPtr<SimplePS>("src/engine/rendering/shaders/SimpleShader.fx"));
