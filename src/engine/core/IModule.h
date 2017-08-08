@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 class Engine;
 class IModule
@@ -14,4 +15,6 @@ public:
 	virtual const char* GetName() = 0;
 	virtual ~IModule() {}
 };
+
+typedef std::shared_ptr<IModule> IModuleSP;
 

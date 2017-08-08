@@ -19,19 +19,19 @@ Engine::Engine()
 void Engine::Init(const SystemSettings settings)
 {
     m_Settings = settings;
-    m_EngineModules.push_back(new Window());
+    m_EngineModules.push_back(std::make_shared<Window>());
     m_EngineModules.back()->Init(this);
 
-    m_EngineModules.push_back(new InputHandler());
+    m_EngineModules.push_back(std::make_shared<InputHandler>());
     m_EngineModules.back()->Init(this);
 
-    m_EngineModules.push_back(new RendererDX11());
+    m_EngineModules.push_back(std::make_shared<RendererDX11>());
     m_EngineModules.back()->Init(this);
 
-    m_EngineModules.push_back(new RenderCommanderDx11());
+    m_EngineModules.push_back(std::make_shared<RenderCommanderDx11>());
     m_EngineModules.back()->Init(this);
 
-    m_EngineModules.push_back(new World());
+    m_EngineModules.push_back(std::make_shared<World>());
     m_EngineModules.back()->Init(this);
 }
 
@@ -47,7 +47,7 @@ void Engine::Sync(float delta)
 
 void Engine::StartModules()
 {
-    for (IModule* m : m_EngineModules)
+    for (const auto& m : m_EngineModules)
     {
         m->Start();
     }
@@ -64,7 +64,7 @@ void Engine::Run()
     while (m_IsRunning)
     {
         m_EngineClock.MeasureTime();
-        for (IModule* module : m_EngineModules)
+        for (const auto& module : m_EngineModules)
         {
             module->Update(delta);
         }
@@ -101,7 +101,7 @@ void Engine::PushState(const GameState& state)
 
 void Engine::Destroy()
 {
-    for (IModule* module : m_EngineModules)
+    for (const auto& module : m_EngineModules)
     {
         module->Destroy();
     }

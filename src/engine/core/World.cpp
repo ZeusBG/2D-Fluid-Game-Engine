@@ -6,7 +6,7 @@ World::~World() {};
 
 void World::Update(float delta)
 {
-	for (EntitySharedPtr& e : m_Entities)
+	for (EntitySP& e : m_Entities)
 	{
 		e->Update(delta);
 	}
@@ -23,7 +23,7 @@ void World::Destroy()
 {
 }
 
-const AVector<EntitySharedPtr>& World::GetVisibleEntities()
+const AVector<EntitySP> World::GetVisibleEntities()
 {
 	return m_Entities;
 }

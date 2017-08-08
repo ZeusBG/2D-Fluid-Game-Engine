@@ -22,7 +22,7 @@ void RendererDX11::Init(Engine* engine)
     m_ScreenWidth = settings->ScreenWidth;
     m_ScreenHeight = settings->ScreenHeight;
     
-    const Window* window = engine->GetModule<Window>();
+    const auto window = engine->GetModule<Window>();
     m_hWnd = window->GethWnd();
     m_hInst = window->GetHInstance();
 
@@ -197,11 +197,6 @@ void RendererDX11::Update(float delta)
     float color[4] = { 0.0f, 0.2f, 0.4f, 1.0f };
     m_pImmediateContext1->ClearRenderTargetView(m_pRenderTargetView, color);
 
-    // set the primitive topology
-    auto& visibleEntities = Engine::GetEngine()->GetModule<World>()->GetVisibleEntities();
-    RenderEntities(visibleEntities);
-
-
 }
 
 HRESULT RendererDX11::CompileShaderFromFile(const char* file, LPCSTR entryPoint, LPCSTR shaderModel, ID3DBlob** blobOut)
@@ -341,18 +336,6 @@ void RendererDX11::DestroyVS(VSData vs)
         static_cast<ID3D11VertexShader*>(vs.VSPtr)->Release();
     if (vs.LayoutPtr)
         static_cast<ID3D11InputLayout*>(vs.LayoutPtr)->Release();
-}
-
-void RendererDX11::RenderEntities(const AVector<EntitySharedPtr>& entities)
-{
-    for (auto& entity : entities)
-    {
-        VisualComponent* visualComponent = entity->GetComponent<VisualComponent>();
-        if (visualComponent)
-        {
-            visualComponent->Render();
-        }
-    }
 }
 
 void RendererDX11::AddRenderCommand(const RenderCommand& cmd)

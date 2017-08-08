@@ -72,12 +72,6 @@
     <ClInclude Include="src\engine\input\InputHandler.h">
       <Filter>engine\input</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\input\KeyCodes.h">
-      <Filter>engine\input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\input\KeyTableWin.h">
-      <Filter>engine\input</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\logging\Logging.h">
       <Filter>engine\logging</Filter>
     </ClInclude>

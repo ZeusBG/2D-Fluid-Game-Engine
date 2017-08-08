@@ -10,7 +10,7 @@ void GameClient::Init(const SystemSettings& settings)
 {
     m_Engine->SetSystemSettings(settings);
     m_Engine->Init(settings);
-    std::shared_ptr<Entity> simpleEntity(static_cast<Entity*>(ObjectsFactory::CreteObject("SimpleEntity")));
+    std::shared_ptr<Entity> simpleEntity(std::static_pointer_cast<Entity>(ObjectsFactory::CreteObject("SimpleEntity")));
     m_Engine->AddEntity(simpleEntity);
 }
 

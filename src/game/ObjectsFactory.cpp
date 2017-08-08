@@ -1,7 +1,7 @@
 #pragma once
 #include "ObjectsFactory.h"
 #include "engine/core/MetaData.h"
-BaseObject* ObjectsFactory::CreteObject(const std::string& name)
+std::shared_ptr<BaseObject> ObjectsFactory::CreteObject(const std::string& name)
 {
-    return MetaDataStorage::GetInstance()->Get(name)->CreateInstance<BaseObject>();
+    return std::static_pointer_cast<BaseObject>(MetaDataStorage::GetInstance()->Get(name)->CreateInstance<BaseObject>());
 }

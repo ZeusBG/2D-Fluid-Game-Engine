@@ -26,4 +26,4 @@ private:
     float m_RotationVelocity;
 };
 
-
+using CharacterControllerComponentSP = std::shared_ptr<CharacterControllerComponent>;

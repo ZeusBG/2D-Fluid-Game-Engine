@@ -24,7 +24,7 @@ class Engine
 	static std::mutex s_SingletonMutex;
 
 	Clock m_EngineClock;
-	AVector<IModule*> m_EngineModules;
+	AVector<std::shared_ptr<IModule>> m_EngineModules;
 
 	const float m_FrameCap = 1.0f / 60.0f;
 	StateStack m_StateStack;
@@ -50,12 +50,12 @@ public:
 	void AddEntity(std::shared_ptr<Entity> entity);
 
 	template <typename T>
-	T* GetModule()
+    std::shared_ptr<T> GetModule()
 	{
-		for (IModule* module : m_EngineModules)
+		for (IModuleSP module : m_EngineModules)
 		{
-			T* result = dynamic_cast<T*>(module);
-			if (result)
+            std::shared_ptr<T> result = std::dynamic_pointer_cast<T>(module);
+			if (result.get())
 			{
 				return result;
 			}

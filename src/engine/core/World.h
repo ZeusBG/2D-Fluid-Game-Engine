@@ -7,7 +7,7 @@
 class World : public IModule
 {
 private:
-    AVector<EntitySharedPtr> m_Entities;
+    AVector<EntitySP> m_Entities;
 
     //AVector<Entity*> m_DynamicEntities;
     //AVector<Entity*> m_StaticEntities;
@@ -20,9 +20,9 @@ public:
     virtual const char* GetName();
     void Destroy();
     void AddEntity(std::shared_ptr<Entity>& entity) { entity->Init(); m_Entities.push_back(entity); }
-    const AVector<EntitySharedPtr>& GetVisibleEntities();
+    const AVector<EntitySP> GetVisibleEntities();
 
-    const AVector<EntitySharedPtr>& GetEntities() const { return m_Entities; }
+    const AVector<EntitySP>& GetEntities() const { return m_Entities; }
     
 	virtual void Start() {}
     

@@ -25,8 +25,6 @@ public:
 
     inline void AddVertex(float x, float y);
 
-    void Render();
-
     //Overrides:
     virtual void Init();
 
@@ -40,3 +38,5 @@ protected:
     // TODO Add texture
 
 };
+
+using VisualComponentSP = std::shared_ptr<VisualComponent>;

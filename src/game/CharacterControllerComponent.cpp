@@ -9,7 +9,7 @@ IMPLEMENT_METADATA(CharacterControllerComponent)
 
 void CharacterControllerComponent::Update(float dt)
 {
-    InputHandler* inputHandler = g_Engine->GetModule<InputHandler>();
+    auto inputHandler = g_Engine->GetModule<InputHandler>();
 
     Vec2 speed;
     speed.x = ((float)inputHandler->IsKeyPressed(SDL_SCANCODE_D) - (float)inputHandler->IsKeyPressed(SDL_SCANCODE_A));

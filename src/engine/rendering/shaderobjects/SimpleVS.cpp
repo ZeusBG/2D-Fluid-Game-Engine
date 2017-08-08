@@ -12,7 +12,7 @@
 
 void SimpleVS::Init()
 {
-    RendererDX11* renderer = Engine::GetEngine()->GetModule<RendererDX11>();
+    auto renderer = Engine::GetEngine()->GetModule<RendererDX11>();
     if (!renderer)
     {
         //TODO add log messsage after logger is merged

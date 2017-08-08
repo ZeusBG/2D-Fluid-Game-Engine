@@ -4,7 +4,7 @@
 #include <functional>
 #include <memory>
 #include "engine/logging/Logging.h"
-typedef  std::function<void*()> factoryFunc;
+typedef  std::function<std::shared_ptr<void>()> factoryFunc;
 
 class MetaData
 {
@@ -12,9 +12,11 @@ private:
     std::string m_Name;
     factoryFunc m_FactoryFunc;
 public:
-    MetaData(std::string name, std::function<void*()> factoryFunc):
+    MetaData(){}
+
+    MetaData(const std::string& name, factoryFunc f):
         m_Name(name),
-        m_FactoryFunc(factoryFunc)
+        m_FactoryFunc(f)
     {
         LOG_L1(METADATA, INFO, "Metadata for class %s created!", name.c_str());
     }
@@ -23,9 +25,9 @@ public:
     inline const factoryFunc& GetFactoryFunc() const { return m_FactoryFunc; }
 
     template <typename T>
-    T* CreateInstance() const
+    std::shared_ptr<void> CreateInstance() const
     {
-        return static_cast<T*>(m_FactoryFunc());
+        return m_FactoryFunc();
     }
 };
 
@@ -66,7 +68,7 @@ private: \
 
 #define ADD_SOLID_CLASS_METADATA(CLASS) \
     META_DATA_COMMON \
-    static CLASS* FactoryFunc() { return new CLASS; }
+    static std::shared_ptr<void> FactoryFunc() { return std::static_pointer_cast<void>(std::make_shared<CLASS>()); } \
 
 #define IMPLEMENT_METADATA(CLASS) \
 const MetaData CLASS::s_MetaData = MetaData(std::string(#CLASS), CLASS::FactoryFunc); \
