@@ -39,7 +39,6 @@ public:
     virtual void DestroyPS(PSHandle ps);
     virtual void DestroyVS(VSData vs);
 
-    virtual void RenderEntities(const AVector<EntitySharedPtr>& entities);
     virtual void AddRenderCommand(const RenderCommand& cmd);
     virtual void DoRenderingCommands();
 	virtual void Start();
@@ -50,3 +49,5 @@ private:
     HRESULT InitDevice();
     std::queue<RenderCommand> m_CommandBuffer;
 };
+
+using RendererDX11SP = std::shared_ptr<RendererDX11>;

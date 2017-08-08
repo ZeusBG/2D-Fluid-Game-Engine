@@ -10,7 +10,7 @@ struct ID3D11InputLayout;
 class RenderCommanderDx11 : public IModule
 {
 private:
-	RendererDX11* m_Renderer;
+    std::shared_ptr<RendererDX11> m_Renderer;
 public:
 	virtual void Init(Engine* engine);
 	virtual void Update(float delta);

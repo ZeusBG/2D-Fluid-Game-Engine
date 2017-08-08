@@ -1,7 +1,7 @@
 #pragma once
-#include "../../util/Collections.h"
+#include "util/Collections.h"
 #include "Component.h"
-#include "../Transform.h"
+#include "engine/Transform.h"
 #include <memory>
 
 class Entity : public BaseObject
@@ -34,5 +34,4 @@ public:
 
 };
 
-typedef std::shared_ptr<Entity> EntitySharedPtr;
-
+using EntitySP = std::shared_ptr<Entity>;

@@ -9,3 +9,4 @@ public:
 	SimpleVisualComponent();
 };
 
+using SimpleVisualComponentSP = std::shared_ptr<SimpleVisualComponent>;

@@ -21,8 +21,7 @@ enum class ShaderVersion
 class IRenderer : public IModule
 {
 public:
-	virtual ~IRenderer() {}
-	virtual void RenderEntities(const AVector<EntitySharedPtr>& entities) = 0;
+    virtual ~IRenderer() {}
     virtual void AddRenderCommand(const RenderCommand& cmd) = 0;
     
     // If multithreaded the thread calling this method

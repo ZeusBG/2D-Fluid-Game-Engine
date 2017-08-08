@@ -14,4 +14,4 @@ public:
     Entity* GetOwner() { return m_Owner; }
 };
 
-typedef std::shared_ptr<Component> ComponentSharedPtr;
+using ComponentSP = std::shared_ptr<Component>;
