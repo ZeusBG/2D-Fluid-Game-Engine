@@ -117,6 +117,19 @@ void RenderCommanderDx11::CreateBuffer(D3D11_BUFFER_DESC* Desc, D3D11_SUBRESOURC
 	m_Renderer->AddRenderCommand(cmd);
 }
 
+void RenderCommanderDx11::ReleaseResource(void* resourcePtr, ResourceType type)
+{
+    RenderCommand cmd;
+    cmd.type = RenderCmdType::ReleaseResource;
+
+    RelaseResourceInfo info;
+    info.Ptr = resourcePtr;
+    info.Type = type;
+    cmd.AddStructure<RelaseResourceInfo>(info);
+
+    m_Renderer->AddRenderCommand(cmd);
+}
+
 void RenderCommanderDx11::SetIndexBuffers(ID3D11Buffer* indexBuffer, DataSizeFormat format, unsigned int offset)
 {
 	RenderCommand cmd;

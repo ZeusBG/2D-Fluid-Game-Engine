@@ -34,6 +34,7 @@ class Engine
 	void Sync(float dt);
 	Engine();
     void StartModules();
+    void Destroy();
 public:
 	void Init(const SystemSettings settings);
 	void Run();
@@ -45,14 +46,13 @@ public:
 	float TimeSinceStart();
 	const SystemSettings* GetSettings() const { return &m_Settings; }
 	void SetSystemSettings(const SystemSettings& settings) { m_Settings = settings; }
-	void Destroy();
 
 	void AddEntity(std::shared_ptr<Entity> entity);
 
 	template <typename T>
     std::shared_ptr<T> GetModule()
 	{
-		for (IModuleSP module : m_EngineModules)
+		for (const auto& module : m_EngineModules)
 		{
             std::shared_ptr<T> result = std::dynamic_pointer_cast<T>(module);
 			if (result.get())

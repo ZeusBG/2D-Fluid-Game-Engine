@@ -6,21 +6,19 @@
 
 #include "engine/rendering/shaderobjects/SimplePS.h"
 #include "engine/rendering/shaderobjects/SimpleVS.h"
-
+#include "game/ObjectsFactory.h"
 IMPLEMENT_METADATA(SimpleEntity);
 
 SimpleEntity::SimpleEntity()
 {
     //ComponentSharedPtr c(new SimpleVisualComponent());
-    AddComponent(new SimpleVisualComponent());
-    AddComponent(new CharacterControllerComponent());
+    AddComponent(ObjectsFactory::CreateComponent("SimpleVisualComponent"));
+    AddComponent(ObjectsFactory::CreateComponent("CharacterControllerComponent"));
 }
 
 void SimpleEntity::Update(float delta)
 {
     Entity::Update(delta);
-
-    //m_Transform.Translate(0.001f, 0.001f);
 }
 SimpleEntity::~SimpleEntity()
 {

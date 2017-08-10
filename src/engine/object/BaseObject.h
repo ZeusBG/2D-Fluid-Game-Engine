@@ -8,6 +8,7 @@ public:
     virtual ~BaseObject() {}
     virtual void Update(float delta) = 0;
     virtual void BeginPlay() {}
+    virtual void Destroy() {};
 };
 
 using BaseObjectSP = std::shared_ptr<BaseObject>;

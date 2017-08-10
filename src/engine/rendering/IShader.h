@@ -34,16 +34,8 @@ protected:
     std::string m_FileName;
 };
 
-struct IShaderDeleter {
-    void operator()(IShader* p) const {
-        p->Destroy();
-        delete p;
-    }
-};
-
 template <typename T>
 SharedShaderPtr IShader::ShaderSharedPtr(const char* fileName)
 {
-    T* shader = new T(fileName);
-    return SharedShaderPtr(shader, IShaderDeleter());
+    return std::make_shared<T>(fileName);
 }

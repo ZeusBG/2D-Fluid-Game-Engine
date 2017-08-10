@@ -19,6 +19,7 @@ public:
     void AddIndex(unsigned int i1, unsigned int i2, unsigned int i3);
     unsigned GetVerticesCount() const { return m_Vertices.size(); }
     unsigned GetIndicesCount() const { return m_Indices.size(); }
+    void Destroy();
 private:
     AVector<XMFLOAT2> m_Vertices;
     AVector<unsigned int> m_Indices;

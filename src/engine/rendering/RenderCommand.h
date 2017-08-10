@@ -18,7 +18,22 @@ enum RenderCmdType
     SetTopology,
     SetInputLayout,
     SetConstantBuffers,
-    DrawIndexed
+    DrawIndexed,
+    ReleaseResource
+};
+
+enum ResourceType
+{
+    PS,
+    VS,
+    InputLayout,
+    Buffer
+};
+
+struct RelaseResourceInfo
+{
+    void* Ptr;
+    ResourceType Type;
 };
 
 struct DrawIndexedInfo

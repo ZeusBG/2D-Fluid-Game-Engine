@@ -28,8 +28,11 @@ public:
     //Overrides:
     virtual void Init();
 
+    virtual void Destroy();
+
     virtual void Update(float delta);
     virtual const Mesh& GetMesh() { return m_Mesh; }
+
 
 protected:
     Mesh m_Mesh;

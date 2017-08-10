@@ -20,7 +20,8 @@ void SimplePS::Init()
 
 void SimplePS::Destroy()
 {
-	Engine::GetEngine()->GetModule<RendererDX11>()->DestroyPS(m_PSShader);
+    auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
+    renderCommander->ReleaseResource(m_PSShader, ResourceType::PS);
 }
 
 void SimplePS::BindData(VisualComponent* vc)

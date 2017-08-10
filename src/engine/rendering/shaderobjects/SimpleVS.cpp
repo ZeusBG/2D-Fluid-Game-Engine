@@ -37,8 +37,10 @@ void SimpleVS::Init()
 
 void SimpleVS::Destroy()
 {
-    auto renderer = Engine::GetEngine()->GetModule<RendererDX11>();
-    Engine::GetEngine()->GetModule<RendererDX11>()->DestroyVS(m_VSShader);
+    auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
+    renderCommander->ReleaseResource(m_VSShader.VSPtr, ResourceType::VS);
+    renderCommander->ReleaseResource(m_VSShader.LayoutPtr, ResourceType::InputLayout);
+    renderCommander->ReleaseResource(m_WorldMatrix, ResourceType::Buffer);
 }
 
 void SimpleVS::UpdateShaderParams()

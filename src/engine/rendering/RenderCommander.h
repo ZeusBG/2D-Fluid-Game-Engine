@@ -28,4 +28,5 @@ public:
 	void SetTopology(Topology topology);
 	void DrawIndexed(unsigned int indexCount, unsigned int startIndex, unsigned int baseVertexlocation);
 	void CreateBuffer(D3D11_BUFFER_DESC* Desc, D3D11_SUBRESOURCE_DATA* InitialData, ID3D11Buffer** Buffer);
+    void ReleaseResource(void* resourcePtr, ResourceType type);
 };

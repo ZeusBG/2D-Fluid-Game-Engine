@@ -26,8 +26,6 @@ private:
     SDL_Window* m_sdlWindow;
     HINSTANCE m_hInst = nullptr;
     HWND m_hWnd = nullptr;
-    LPWSTR m_lpCmdLine;
-    int m_nCmdShow;
     MSG m_Msg;
 };
 

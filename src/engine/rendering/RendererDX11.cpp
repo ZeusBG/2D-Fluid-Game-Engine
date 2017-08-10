@@ -458,6 +458,19 @@ void RendererDX11::ProcessCommand(RenderCommand& cmd)
             auto result = m_pd3dDevice1->CreateBuffer(&info->Desc, initialData, info->Buffer);
         }
         break;
+        case RenderCmdType::ReleaseResource:
+        {
+            auto info = reinterpret_cast<RelaseResourceInfo*>(cmd.CommandStructure);
+            if (info->Type == ResourceType::Buffer)
+                static_cast<ID3D11Buffer*>(info->Ptr)->Release();
+            else if (info->Type == ResourceType::VS)
+                static_cast<ID3D11VertexShader*>(info->Ptr)->Release();
+            else if (info->Type == ResourceType::PS)
+                static_cast<ID3D11PixelShader*>(info->Ptr)->Release();
+            else if (info->Type == ResourceType::InputLayout)
+                static_cast<ID3D11InputLayout*>(info->Ptr)->Release();
+        }
+        break;
     }
 }
 
@@ -465,6 +478,7 @@ const char* RendererDX11::GetName() { return "Renderer"; }
 
 void RendererDX11::Destroy()
 {
+    DoRenderingCommands();
     if (m_pImmediateContext) m_pImmediateContext->ClearState();
     if (m_pRenderTargetView) m_pRenderTargetView->Release();
     if (m_pSwapChain1) m_pSwapChain1->Release();

@@ -24,7 +24,6 @@ public:
     inline const std::string& GetName() const { return m_Name; }
     inline const factoryFunc& GetFactoryFunc() const { return m_FactoryFunc; }
 
-    template <typename T>
     std::shared_ptr<void> CreateInstance() const
     {
         return m_FactoryFunc();

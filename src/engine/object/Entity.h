@@ -9,24 +9,25 @@ class Entity : public BaseObject
     ADD_SOLID_CLASS_METADATA(Entity)
 protected:
     Transform m_Transform;
-    AVector<Component*> m_Components;
+    AVector<ComponentSP> m_Components;
 public:
-    virtual void AddComponent(Component* component);
+    virtual void AddComponent(ComponentSP component);
     virtual void Update(float delta);
     virtual void Init();
-    
+    virtual void Destroy();
+
     const Transform& GetTransform() { return m_Transform; }
 
     inline void AddTranslate(const Vec2& dir) { m_Transform.Translate(dir.x, dir.y); }
     void SetSight(const Vec2& sight);
 
     template <typename T>
-    T* GetComponent()
+    std::shared_ptr<T> GetComponent()
     {
-        for (Component* component : m_Components)
+        for (const auto& component : m_Components)
         {
-            T* result = dynamic_cast<T*>(component);
-            if (result)
+            std::shared_ptr<T> result = dynamic_pointer_cast<T>(component);
+            if (result.get())
                 return result;
         }
         return nullptr;

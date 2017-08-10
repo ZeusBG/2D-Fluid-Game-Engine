@@ -93,3 +93,10 @@ void Mesh::AddIndex(unsigned int i1, unsigned int i2, unsigned int i3)
     m_Indices.push_back(i2);
     m_Indices.push_back(i3);
 }
+
+void Mesh::Destroy()
+{
+    auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
+    renderCommander->ReleaseResource(m_IndexBuffer, ResourceType::Buffer);
+    renderCommander->ReleaseResource(m_VertexBuffer, ResourceType::Buffer);
+}

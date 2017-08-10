@@ -11,7 +11,7 @@ void Entity::Update(float delta)
     }
 }
 
-void Entity::AddComponent(Component* component)
+void Entity::AddComponent(ComponentSP component)
 { 
     m_Components.push_back(component);
     component->SetOwner(this);
@@ -19,9 +19,17 @@ void Entity::AddComponent(Component* component)
 
 void Entity::Init()
 {
-    for (auto component : m_Components)
+    for (const auto& component : m_Components)
     {
         component->Init();
+    }
+}
+
+void Entity::Destroy()
+{
+    for (const auto& component : m_Components)
+    {
+        component->Destroy();
     }
 }
 

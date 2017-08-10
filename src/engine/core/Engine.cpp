@@ -25,14 +25,15 @@ void Engine::Init(const SystemSettings settings)
     m_EngineModules.push_back(std::make_shared<InputHandler>());
     m_EngineModules.back()->Init(this);
 
+    m_EngineModules.push_back(std::make_shared<World>());
+    m_EngineModules.back()->Init(this);
+
     m_EngineModules.push_back(std::make_shared<RendererDX11>());
     m_EngineModules.back()->Init(this);
 
     m_EngineModules.push_back(std::make_shared<RenderCommanderDx11>());
     m_EngineModules.back()->Init(this);
 
-    m_EngineModules.push_back(std::make_shared<World>());
-    m_EngineModules.back()->Init(this);
 }
 
 void Engine::Sync(float delta)
@@ -73,8 +74,6 @@ void Engine::Run()
 
         Sync(delta);
     }
-
-    Destroy();
 }
 
 void Engine::Stop()
@@ -132,4 +131,5 @@ std::mutex Engine::s_SingletonMutex;
 
 Engine::~Engine()
 {
+    Destroy();
 }

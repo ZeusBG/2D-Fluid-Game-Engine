@@ -21,6 +21,10 @@ const char* World::GetName() { return "World"; }
 
 void World::Destroy()
 {
+    for (EntitySP& e : m_Entities)
+    {
+        e->Destroy();
+    }
 }
 
 const AVector<EntitySP> World::GetVisibleEntities()
