@@ -1,13 +1,6 @@
 #include "GameClient.h"
 #include "SimpleEntity.h"
 #include "ObjectsFactory.h"
-#include "game/SimpleVisualComponent.h"
-#include "game/CharacterControllerComponent.h"
-
-#include "engine/rendering/shaderobjects/SimplePS.h"
-#include "engine/rendering/shaderobjects/SimpleVS.h"
-
-#include "engine/camera/CameraHandler.h"
 
 GameClient::GameClient()
 {
@@ -20,20 +13,17 @@ void GameClient::Init(const SystemSettings& settings)
     m_Engine->Init(settings);
     std::shared_ptr<Entity> simpleEntity(std::static_pointer_cast<Entity>(ObjectsFactory::CreteObject("SimpleEntity")));
 
-    simpleEntity->AddComponent(new SimpleVisualComponent());
-    simpleEntity->AddComponent(new CharacterControllerComponent());
+    simpleEntity->AddComponent(ObjectsFactory::CreateComponent("SimpleVisualComponent"));
+    simpleEntity->AddComponent(ObjectsFactory::CreateComponent("CharacterControllerComponent"));
+    simpleEntity->AddComponent(ObjectsFactory::CreateComponent("CameraComponent"));
 
     m_Engine->AddEntity(simpleEntity);
 
     std::shared_ptr<Entity> simpleEntity2(new SimpleEntity());
-    simpleEntity2->AddComponent(new SimpleVisualComponent());
-    //simpleEntity2->AddTranslate(Vec2(0.5f, 0.5f));
+    simpleEntity2->AddComponent(ObjectsFactory::CreateComponent("SimpleVisualComponent"));
     m_Engine->AddEntity(simpleEntity2);
 
-    Camera* camera = g_CameraHandler->GetActiveCamera();
-    camera->SetFollowEntity(simpleEntity);
-
-    int a = 0;
+    
 }
 
 GameClient::~GameClient()

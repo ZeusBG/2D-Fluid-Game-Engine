@@ -1,6 +1,5 @@
 #pragma once
 #include "util/math/Mat.h"
-#include "engine/object/Entity.h"
 
 class Camera
 {
@@ -11,10 +10,16 @@ public:
 
     void Update(float dt);
 
+    inline void SetPosition(const Vec2& pos) { m_Position = pos; }
+    inline void SetPosition(const Vec3& pos) { m_Position = pos; }
+    
+    inline void SetMoveVelocity(const Vec3& vel) { m_MoveVelocity = vel; }
+
+    inline const Vec3& GetMoveVelocity() const { return m_MoveVelocity; }
+    inline Vec3& GetMoveVelocity() { return m_MoveVelocity; }
+
     inline Mat3x3& GetViewMatrix() { return m_ViewMatrix; }
     inline Mat3x3& GetProjectionMatrix() { return m_ProjectionMatrix; }
-
-    inline void SetFollowEntity(EntitySP entity) { m_FollowEntity = entity; }
 
 private:
     //Up is by default Y axis
@@ -27,7 +32,7 @@ private:
     Vec3 m_Position;
     Vec3 m_LookAtPoint;
 
-    EntitySP m_FollowEntity;
+    Vec3 m_MoveVelocity;
 
     //m_Position is the postion of the camera screen => m_Position + m_Offeset = Center Of Projection
     Vec3 m_CenterOfProjectionOffset;
@@ -39,3 +44,4 @@ private:
     int m_ScreenHeight;
 
 };
+

@@ -64,12 +64,22 @@ public:
     void Normalize();
 
     void operator= (const Vec3& rhs) { x = rhs.x; y = rhs.y; z = rhs.z; }
+    void operator= (const Vec2& rhs) { x = rhs.x; y = rhs.y; }
+
+    float GetLength() const { return sqrtf(Dot(*this)); }
+    float GetLengthSqr() const { return Dot(*this); }
+
+    float Dot(const Vec3& rhs) const { return x * rhs.x + y * rhs.y + z * rhs.z; }
 
     bool operator!= (const Vec3& rhs) const { return (x != rhs.x || y != rhs.y || z != rhs.z); }
 
     Vec3 operator* (const float c)   const { return Vec3(x*c, y * c, z*c); }
     Vec3 operator- (const Vec3& rhs) const { return Vec3(x - rhs.x, y - rhs.y, z - rhs.z); }
     Vec3 operator+ (const Vec3& rhs) const { return Vec3(x + rhs.x, y + rhs.y, z + rhs.z); }
+    void operator+= (const Vec3& rhs) { x += rhs.x; y += rhs.y; z += rhs.z; }
+
+    bool operator< (const Vec3& rhs) { return GetLengthSqr() < rhs.GetLengthSqr(); }
+    bool operator> (const Vec3& rhs) { return GetLengthSqr() > rhs.GetLengthSqr(); }
 
     static Vec3 Zero;
     static Vec3 BaseI;

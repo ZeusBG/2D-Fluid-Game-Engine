@@ -8,9 +8,11 @@ Camera::Camera(float fov, float aspectRatio) :
 {
 }
 
+
 void Camera::Update(float dt)
 {
-    m_Position = m_FollowEntity->GetTransform().GetGlobalPosition3();
+    m_Position += m_MoveVelocity;
+
     BuildViewMatrix();
 }
 

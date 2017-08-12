@@ -7,9 +7,9 @@ class SimpleEntity : public Entity
 {
     ADD_SOLID_CLASS_METADATA(SimpleEntity)
 public:
-	SimpleEntity();
+    SimpleEntity();
     virtual ~SimpleEntity();
-	virtual void Update(float delta);
+    virtual void Update(float delta);
 };
 
 using SimpleEntitySP = std::shared_ptr<SimpleEntity>;

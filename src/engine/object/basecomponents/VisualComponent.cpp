@@ -2,7 +2,7 @@
 #include "engine/rendering/shaderobjects/SimpleVS.h"
 #include "engine/rendering/shaderobjects/SimplePS.h"
 #include "engine/core/Engine.h"
-#include "engine/object/basecomponents/visualcomponent.h"
+#include "engine/object/basecomponents/VisualComponent.h"
 #include "engine/rendering/RenderCommander.h"
 
 IMPLEMENT_METADATA(VisualComponent)
@@ -13,10 +13,10 @@ VisualComponent::VisualComponent()
 
 void VisualComponent::Init()
 {
-	auto device = Engine::GetEngine()->GetModule<RendererDX11>()->GetDevice();
-	m_Mesh.InitializeBuffers(device, this);
-	m_VertexShader->Init();
-	m_PixelShader->Init();
+    auto device = Engine::GetEngine()->GetModule<RendererDX11>()->GetDevice();
+    m_Mesh.InitializeBuffers(device, this);
+    m_VertexShader->Init();
+    m_PixelShader->Init();
 }
 
 void VisualComponent::Destroy()

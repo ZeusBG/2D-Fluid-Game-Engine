@@ -4,9 +4,6 @@
 
 #include "util/Collections.h"
 
-
-typedef std::shared_ptr<Camera> CameraSharedPtr;
-
 class Engine;
 class CameraHandler : public IModule
 {
@@ -27,4 +24,3 @@ private:
 };
 
 #define g_CameraHandler Engine::GetEngine()->GetModule<CameraHandler>()
-

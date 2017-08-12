@@ -17,11 +17,17 @@ public:
     virtual void Update(float delta);
     virtual void Init();
     virtual void Destroy();
-
-    const Transform& GetTransform() { return m_Transform; }
+        
+    inline const Transform& GetTransform() { return m_Transform; }
+    inline Vec2 GetGlobalPosition() const { return m_Transform.GetTranslate(); }
+    inline Vec3 GetGlobalPosition3() const { return m_Transform.GetTranslate3(); }
 
     inline void AddTranslate(const Vec2& dir) { m_Transform.Translate(dir.x, dir.y); }
     void SetSight(const Vec2& sight);
+
+    Vec2 GetSight() const { return m_Transform.GetSight(); }
+    Vec3 GetSight3() const { return m_Transform.GetSight3(); }
+
 
     template <typename T>
     std::shared_ptr<T> GetComponent()
