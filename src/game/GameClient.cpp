@@ -11,7 +11,7 @@ void GameClient::Init(const SystemSettings& settings)
 {
     m_Engine->SetSystemSettings(settings);
     m_Engine->Init(settings);
-    m_Engine->LoadMap("Levels/SimpleLevel.json");
+    m_Engine->LoadMap("resources/levels/SimpleLevel.json");
 
     simpleEntity->AddComponent(ObjectsFactory::CreateComponent("SimpleVisualComponent"));
     simpleEntity->AddComponent(ObjectsFactory::CreateComponent("CharacterControllerComponent"));
