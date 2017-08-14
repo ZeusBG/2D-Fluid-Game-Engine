@@ -1,0 +1,26 @@
+{
+	"Entities" :
+	[
+	{
+		"Class" : "SimpleEntity",
+		"Components" :
+			[
+			{
+			"Component" : "SimpleVisualComponent"
+			},
+			{
+			"Component" : "CharacterControllerComponent"
+			}
+			]
+	},
+	{
+		"Class" : "SimpleEntity",
+		"Components" :
+			[
+			{
+			"Component" : "SimpleVisualComponent"
+			}
+			]
+	}
+	]
+}
