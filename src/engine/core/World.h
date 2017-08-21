@@ -24,7 +24,7 @@ public:
 
     const AVector<EntitySP>& GetEntities() const { return m_Entities; }
     
-	virtual void Start() {}
+    virtual void Start() {}
     
     //const AVector<Entity*>& GetDynamicEntities() const { return m_DynamicEntities; }
     //const AVector<Entity*>& GetStaticEntities() const { return m_StaticEntities; }

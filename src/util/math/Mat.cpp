@@ -18,7 +18,7 @@ DirectX::XMMATRIX Mat3x3::ToXMMATRIX() const
     DirectX::XMMATRIX result;
     result.r[0] = DirectX::XMVectorSet(mat[0][0], mat[0][1], 0, mat[0][2]);
     result.r[1] = DirectX::XMVectorSet(mat[1][0], mat[1][1], 0, mat[1][2]);
-    result.r[2] = DirectX::XMVectorSet(mat[2][0], mat[2][1], 1, mat[2][2]);
+    result.r[2] = DirectX::XMVectorSet(mat[2][0], mat[2][1], 1, 0);
     result.r[3] = DirectX::XMVectorSet(0, 0, 0, 1);
 
     return result;

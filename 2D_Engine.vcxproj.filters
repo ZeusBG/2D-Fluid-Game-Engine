@@ -1,8 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="engine">
       <UniqueIdentifier>{FBDB78FB-E77D-A3D1-D038-B725BC792A22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\camera">
+      <UniqueIdentifier>{33DC186A-9F9C-94A0-68D7-DD1DD456D97C}</UniqueIdentifier>
     </Filter>
     <Filter Include="engine\core">
       <UniqueIdentifier>{5341430D-BFF6-BB02-48EB-B5D9B49FB206}</UniqueIdentifier>
@@ -18,6 +21,9 @@
     </Filter>
     <Filter Include="engine\object">
       <UniqueIdentifier>{41352786-ADF5-A2BC-7630-EC39E2AFE798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine\object\basecomponents">
+      <UniqueIdentifier>{913AB35E-7DF5-A20A-26AD-1B551247ED9A}</UniqueIdentifier>
     </Filter>
     <Filter Include="engine\physics">
       <UniqueIdentifier>{8D421EA7-7910-12AD-62A4-82D34E11EE11}</UniqueIdentifier>
@@ -51,13 +57,19 @@
     <ClInclude Include="src\engine\StateStack.h">
       <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\Transform.h">
-      <Filter>engine</Filter>
+    <ClInclude Include="src\engine\camera\Camera.h">
+      <Filter>engine\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\camera\CameraHandler.h">
+      <Filter>engine\camera</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\core\Engine.h">
       <Filter>engine\core</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\core\IModule.h">
+      <Filter>engine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\core\MetaData.h">
       <Filter>engine\core</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\core\SystemSettings.h">
@@ -81,14 +93,20 @@
     <ClInclude Include="src\engine\object\BaseObject.h">
       <Filter>engine\object</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\object\Component.h">
-      <Filter>engine\object</Filter>
-    </ClInclude>
     <ClInclude Include="src\engine\object\Entity.h">
       <Filter>engine\object</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\object\VisualComponent.h">
+    <ClInclude Include="src\engine\object\Transform.h">
       <Filter>engine\object</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\object\basecomponents\CameraComponent.h">
+      <Filter>engine\object\basecomponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\object\basecomponents\Component.h">
+      <Filter>engine\object\basecomponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\object\basecomponents\VisualComponent.h">
+      <Filter>engine\object\basecomponents</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\physics\Collider.h">
       <Filter>engine\physics</Filter>
@@ -132,6 +150,9 @@
     <ClInclude Include="src\game\GameClient.h">
       <Filter>game</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\ObjectsFactory.h">
+      <Filter>game</Filter>
+    </ClInclude>
     <ClInclude Include="src\game\SimpleEntity.h">
       <Filter>game</Filter>
     </ClInclude>
@@ -153,18 +174,18 @@
     <ClInclude Include="src\util\math\Vec.h">
       <Filter>util\math</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\core\MetaData.h">
-      <Filter>engine\core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\ObjectsFactory.h">
-      <Filter>game</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\engine\Transform.cpp">
-      <Filter>engine</Filter>
+    <ClCompile Include="src\engine\camera\Camera.cpp">
+      <Filter>engine\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\camera\CameraHandler.cpp">
+      <Filter>engine\camera</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\core\Engine.cpp">
+      <Filter>engine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\core\MetaData.cpp">
       <Filter>engine\core</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\core\Window.cpp">
@@ -182,8 +203,14 @@
     <ClCompile Include="src\engine\object\Entity.cpp">
       <Filter>engine\object</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\object\VisualComponent.cpp">
+    <ClCompile Include="src\engine\object\Transform.cpp">
       <Filter>engine\object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\object\basecomponents\CameraComponent.cpp">
+      <Filter>engine\object\basecomponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\object\basecomponents\VisualComponent.cpp">
+      <Filter>engine\object\basecomponents</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\physics\Physics.cpp">
       <Filter>engine\physics</Filter>
@@ -215,6 +242,9 @@
     <ClCompile Include="src\game\GameClient.cpp">
       <Filter>game</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\ObjectsFactory.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
     <ClCompile Include="src\game\SimpleEntity.cpp">
       <Filter>game</Filter>
     </ClCompile>
@@ -232,12 +262,6 @@
     </ClCompile>
     <ClCompile Include="src\util\math\Vec.cpp">
       <Filter>util\math</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\core\MetaData.cpp">
-      <Filter>engine\core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\ObjectsFactory.cpp">
-      <Filter>game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

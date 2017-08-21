@@ -1,12 +1,12 @@
 #pragma once
 
 #include "RendererDX11.h"
-#include "../core/SystemSettings.h"
-#include "../core/Engine.h"
+#include "engine/core/SystemSettings.h"
+#include "engine/core/Engine.h"
 #include "engine/core/World.h"
 #include "engine/object/Entity.h"
-#include "../../util/StringUtils.h"
-#include "engine/object/VisualComponent.h"
+#include "util/StringUtils.h"
+#include "engine/object/basecomponents/VisualComponent.h"
 
 #include <d3dcompiler.h>
 #include <directxmath.h>

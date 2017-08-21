@@ -25,6 +25,7 @@ void CharacterControllerComponent::Update(float dt)
     //istoilov : Make proper API calls
     
     m_Owner->AddTranslate(speed);
+    sight = sight * 100; // Fix rotation please
     m_Owner->SetSight(sight);
 
     //if (InputHandler::Instance()->isMouseButtonJustPressed(MouseButton_LEFT))
@@ -52,6 +53,6 @@ void CharacterControllerComponent::Update(float dt)
 }
 
 CharacterControllerComponent::CharacterControllerComponent() :
-    m_MoveVelocity(0.01f),
+    m_MoveVelocity(10.f),
     m_RotationVelocity(1.f)
 {}

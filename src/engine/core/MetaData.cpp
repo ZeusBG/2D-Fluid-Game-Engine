@@ -1,7 +1,10 @@
-#include "MetaData.h"
+#include "engine/core/MetaData.h"
 #include "engine/logging/Logging.h"
 #include <assert.h>
 #pragma once
+
+
+std::mutex MetaDataStorage::s_SingletonMutex;
 
 const MetaData* MetaDataStorage::Get(const std::string& str)
 {
@@ -26,4 +29,5 @@ void MetaDataStorage::Register(const MetaData* data)
     m_StringMap.insert(std::pair<std::string, const MetaData*>(data->GetName(), data));
 }
 
-std::unique_ptr<MetaDataStorage> MetaDataStorage::s_Instance;
+//std::shared_ptr<MetaDataStorage> MetaDataStorage::s_Instance;
+MetaDataStorage* MetaDataStorage::s_Instance = nullptr;

@@ -1,5 +1,5 @@
 #include "engine/rendering/Mesh.h"
-#include "engine/object/VisualComponent.h"
+#include "engine/object/basecomponents/VisualComponent.h"
 #include "engine/core/Engine.h"
 #include "RenderCommander.h"
 void Mesh::SetVertices(const AVector<XMFLOAT2>& vertices)
@@ -33,9 +33,9 @@ void Mesh::InitializeBuffers(ID3D11Device* device, VisualComponent* visualCompon
     // Give the subresource structure a pointer to the vertex data.
     vertexData.pSysMem = m_Vertices.data();
 
-	auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
+    auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
     // Now create the vertex buffer.
-	renderCommander->CreateBuffer(&vertexBufferDesc, &vertexData, &m_VertexBuffer);
+    renderCommander->CreateBuffer(&vertexBufferDesc, &vertexData, &m_VertexBuffer);
     // Set up the description of the static index buffer.
     indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
     indexBufferDesc.ByteWidth = sizeof(unsigned int)* m_Indices.size();
@@ -45,7 +45,7 @@ void Mesh::InitializeBuffers(ID3D11Device* device, VisualComponent* visualCompon
     indexData.pSysMem = m_Indices.data();
 
     // Create the index buffer.
-	renderCommander->CreateBuffer(&indexBufferDesc, &indexData, &m_IndexBuffer);
+    renderCommander->CreateBuffer(&indexBufferDesc, &indexData, &m_IndexBuffer);
 }
 
 void Mesh::RenderBuffers() const
@@ -60,7 +60,7 @@ void Mesh::RenderBuffers() const
 
     // Set the vertex buffer to active in the input assembler so it can be rendered.
     auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
-	renderCommander->SetVertexBuffers(&m_VertexBuffer, stride, offset);
+    renderCommander->SetVertexBuffers(&m_VertexBuffer, stride, offset);
     // Set the index buffer to active in the input assembler so it can be rendered.
     renderCommander->SetIndexBuffers(m_IndexBuffer, DataSizeFormat::R32_UINT, 0);
     // Set the type of primitive that should be rendered from this vertex buffer, in this case triangles.

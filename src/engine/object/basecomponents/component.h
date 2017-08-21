@@ -1,5 +1,5 @@
 #pragma once
-#include "BaseObject.h"
+#include "engine/object/BaseObject.h"
 #include <memory>
 class Entity;
 class Component : public BaseObject

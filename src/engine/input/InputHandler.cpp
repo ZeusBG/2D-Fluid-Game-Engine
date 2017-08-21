@@ -7,8 +7,8 @@ InputHandler::InputHandler() :
     m_MousePosition(0, 0),
     m_MousePreviousPosition(0, 0),
     m_QuitRequested(false),
-    m_ScreenWidth(0.f),
-    m_ScreenHeight(0.f)
+    m_ScreenWidth(0),
+    m_ScreenHeight(0)
 {
     Reset();
 }
