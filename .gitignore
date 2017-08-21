@@ -12,6 +12,7 @@
 *.log
 *.idb
 *.ipch
+*.orig
 
 # Packages #
 *.7z
