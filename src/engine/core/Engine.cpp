@@ -1,6 +1,6 @@
 #include <SDL.h>
 #include <thread>
-
+#include <fstream>
 #include "engine/core/World.h"
 #include "engine/core/SystemSettings.h"
 #include "engine/core/Engine.h"
@@ -14,6 +14,10 @@
 
 #include "engine/physics/Physics.h"
 #include "engine/logging/Logging.h"
+
+#include "rapidjson/document.h"
+
+#include "rapidjson/istreamwrapper.h"
 Engine::Engine()
 {
 }
@@ -86,8 +90,18 @@ void Engine::Stop()
     m_IsRunning = false;
 }
 
-void Engine::LoadMap()
+void Engine::LoadMap(const char* map)
 {
+    // TODO: Make file reading on a separate thread
+    std::ifstream ifs(map);
+    bool t = ifs.good();
+    rapidjson::IStreamWrapper isw(ifs);
+
+    rapidjson::Document doc;
+    doc.ParseStream(isw);
+
+    GetModule<World>()->LoadLevel(doc);
+
 }
 
 void Engine::PopState()

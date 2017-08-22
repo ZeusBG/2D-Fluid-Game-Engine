@@ -40,7 +40,7 @@ public:
     void Init(const SystemSettings settings);
     void Run();
     void Stop();
-    void LoadMap();
+    void LoadMap(const char* map);
     void PushState(const GameState& state);
     void PopState();
 
