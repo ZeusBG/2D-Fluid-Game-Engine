@@ -9,17 +9,20 @@
 #include "engine/rendering/RendererDX11.h"
 
 #include "engine/input/InputHandler.h"
-
 #include "engine/camera/CameraHandler.h"
-
 #include "engine/physics/Physics.h"
 #include "engine/logging/Logging.h"
+#include "networking/networkutil/Buffer.h"
+#include "game/ObjectsFactory.h"
+
+// TODO remove this later
+#include "game/SimpleVisualComponent.h"
 
 #include "rapidjson/document.h"
-
 #include "rapidjson/istreamwrapper.h"
 Engine::Engine()
 {
+	m_NetworkManager = nullptr;
 }
 
 void Engine::Init(const SystemSettings settings)
@@ -73,11 +76,18 @@ void Engine::Run()
 
     while (m_IsRunning)
     {
+		RemovePendingEntities();
         m_EngineClock.MeasureTime();
         for (const auto& module : m_EngineModules)
         {
             module->Update(delta);
         }
+		if (m_NetworkManager != nullptr)
+		{
+			m_NetworkManager->DoSnapShot();
+			m_NetworkManager->HandleRecievedPackets();
+			m_NetworkManager->SendPendingPackets();
+		}
         GetModule<IRenderer>()->DoRenderingCommands();
         delta = m_EngineClock.MeasureTime();
 
@@ -108,6 +118,11 @@ void Engine::PopState()
 {
 }
 
+void Engine::DoSnapShot(ByteStream* bsstream)
+{
+	GetModule<World>()->DoSnapShot(bsstream);
+}
+
 float Engine::TimeSinceStart()
 {
     return m_EngineClock.GetTimeSinceStart();
@@ -125,9 +140,52 @@ void Engine::Destroy()
     }
 }
 
+void Engine::_RemoveEntity(EntitySP entity)
+{
+	GetModule<World>()->RemoveEntityByID(entity->GetID());
+}
+
+void Engine::RemovePendingEntities()
+{
+	for (const auto& entity : m_EntitiesToBeRemoved)
+	{
+		_RemoveEntity(entity);
+	}
+}
+
 void Engine::AddEntity(std::shared_ptr<Entity> entity)
 {
     GetModule<World>()->AddEntity(entity);
+}
+
+EntitySP Engine::GetEntityByID(int id)
+{
+	return GetModule<World>()->GetEntityByID(id);
+}
+
+EntitySP Engine::CreateEntityWithID(const char* name, int id)
+{
+	EntitySP entity = ObjectsFactory::CreteEntity(name);
+	entity->SetID(id);
+	//GetModule<World>()->AddEntity(entity);
+	return entity;
+}
+
+EntitySP Engine::CreateEntity(const char* name)
+{
+	auto entity = ObjectsFactory::CreteEntity(name);
+	entity->AddComponent(std::make_shared<SimpleVisualComponent>());
+	return entity;
+}
+
+bool Engine::RemoveEntityByID(int id)
+{
+	auto entity = GetModule<World>()->GetEntityByID(id);
+	if (!entity)
+		return false;
+	m_EntitiesToBeRemoved.push_back(GetModule<World>()->GetEntityByID(id));
+	return true;
+	//return GetModule<World>()->RemoveEntityByID(id);
 }
 
 Engine* Engine::GetEngine()

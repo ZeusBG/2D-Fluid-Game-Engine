@@ -10,14 +10,21 @@ class Entity : public BaseObject
 {
     ADD_SOLID_CLASS_METADATA(Entity)
 protected:
+	static int s_IDGen;
+	int m_ID;
     Transform m_Transform;
     AVector<ComponentSP> m_Components;
 public:
+	Entity();
+	Entity(const Entity& other);
+
     virtual void AddComponent(ComponentSP component);
     virtual void Update(float delta);
     virtual void Init();
     virtual void Destroy();
-        
+
+	inline void SetID(int newID) { m_ID = newID; }
+	inline int GetID() { return m_ID; }
     inline const Transform& GetTransform() { return m_Transform; }
     inline Vec2 GetGlobalPosition() const { return m_Transform.GetTranslate(); }
     inline Vec3 GetGlobalPosition3() const { return m_Transform.GetTranslate3(); }

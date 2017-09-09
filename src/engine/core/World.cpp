@@ -1,7 +1,16 @@
 #pragma once
 #include "World.h"
 #include "game/ObjectsFactory.h"
+#include <algorithm>
+
 World::World() {};
+void World::DoSnapShot(ByteStream* stream)
+{
+	for (const auto& entity : m_Entities)
+	{
+		entity->Serialize(stream);
+	}
+}
 World::~World() {};
 
 void World::Update(float delta)
@@ -37,7 +46,33 @@ void World::LoadLevel(const rapidjson::Value& val)
     }
 }
 
+void World::AddEntity(std::shared_ptr<Entity>& entity)
+{
+	entity->Init();
+	m_Entities.push_back(entity);
+	m_IDToEntityMap.insert({ entity->GetID(), entity });
+}
+
+EntitySP World::GetEntityByID(int id)
+{
+	auto entity = m_IDToEntityMap.find(id);
+	if (entity != m_IDToEntityMap.end())
+		return entity->second;
+	return nullptr;
+}
+
 const AVector<EntitySP> World::GetVisibleEntities()
 {
 	return m_Entities;
+}
+
+bool World::RemoveEntityByID(int id)
+{
+	auto entity = m_IDToEntityMap.find(id);
+	if (entity == m_IDToEntityMap.end())
+		return false;
+	EntitySP entityPtr = entity->second;
+	m_IDToEntityMap.erase(id);
+	m_Entities.erase(std::remove(m_Entities.begin(), m_Entities.end(), entityPtr));
+	return true;
 }

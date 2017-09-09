@@ -20,6 +20,7 @@ public:
     inline Vec3 GetSight3() const { return m_GlobalMatrix.GetRowJ(); }
 
     const Mat3x3& GetMatrix() const { return m_GlobalMatrix; }
+	Mat3x3& GetMatrix() { return m_GlobalMatrix; }
 private:
     Mat3x3 m_GlobalMatrix;
 };

@@ -3,12 +3,23 @@
 
 IMPLEMENT_METADATA(Entity);
 
+int Entity::s_IDGen = 0;
 void Entity::Update(float delta)
 {
     for(auto& component : m_Components)
     {
         component->Update(delta);
     }
+}
+
+Entity::Entity()
+{
+	m_ID = s_IDGen++;
+}
+
+Entity::Entity(const Entity& other)
+{
+	m_ID = s_IDGen++;
 }
 
 void Entity::AddComponent(ComponentSP component)

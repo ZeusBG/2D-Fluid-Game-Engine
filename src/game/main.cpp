@@ -1,4 +1,5 @@
 #pragma once
+
 #include <windows.h>
 #include "GameClient.h"
 
@@ -6,7 +7,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
-    
    
     GameClient client;
     WindowInfo info;
@@ -21,6 +21,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     settings.WindowInfo = info;
 
     client.Init(settings);
-    client.Start();
+	client.InitFromFile("resources/StartInfo.txt");
     return 0;
 }
