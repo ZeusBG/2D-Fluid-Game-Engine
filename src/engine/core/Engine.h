@@ -52,6 +52,7 @@ public:
     void PushState(const GameState& state);
     void PopState();
 	void DoSnapShot(ByteStream* bs);
+	void DoCreationSnapShot(ByteStream* bs);
 
     float TimeSinceStart();
     const SystemSettings* GetSettings() const { return &m_Settings; }

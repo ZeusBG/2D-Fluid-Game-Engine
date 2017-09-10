@@ -1,14 +1,29 @@
 #pragma once
 #include "World.h"
 #include "game/ObjectsFactory.h"
+#include "networking/networkutil/Buffer.h"
 #include <algorithm>
 
 World::World() {};
-void World::DoSnapShot(ByteStream* stream)
+void World::DoSnapShot(ByteStream* bs)
 {
+	const short numEntities = m_Entities.size();
+	bs->AddData(&numEntities, sizeof(short));
 	for (const auto& entity : m_Entities)
 	{
-		entity->Serialize(stream);
+		entity->Serialize(bs);
+	}
+}
+void World::DoCreationSnapShot(ByteStream * bs)
+{
+	const short numEntities = m_Entities.size();
+	bs->AddData(&numEntities, sizeof(short));
+	for (const auto& entity : m_Entities)
+	{
+		int entityTypeID = entity->GetTypeID();
+		int entityID = entity->GetID();
+		bs->AddData(&entityID, sizeof(int));
+		bs->AddData(&entityTypeID, sizeof(int));
 	}
 }
 World::~World() {};
@@ -24,7 +39,6 @@ void World::Update(float delta)
 void World::Init(Engine* engine)
 {
 }
-
 
 const char* World::GetName() { return "World"; }
 

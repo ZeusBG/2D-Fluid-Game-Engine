@@ -61,6 +61,18 @@ void ByteStream::BeginCommand(NetCommand cmd)
 	AddData(&cmd, sizeof(NetCommand));
 }
 
+void ByteStream::SkipBytes(unsigned int numBytes)
+{
+	Index += numBytes;
+}
+
+std::string ByteStream::ReadString()
+{
+	std::string result(reinterpret_cast<char*>(Data) + Index);
+	Index += result.length() + 1;
+	return result;
+}
+
 ByteStream::~ByteStream()
 {
 	delete Data;

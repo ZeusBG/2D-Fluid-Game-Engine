@@ -29,10 +29,6 @@ void ClientController::HandleRecievedPackets()
 		{
 		case ENET_EVENT_TYPE_CONNECT:
 		{
-			//LOG_L1("A new client connected from %d:%d.\n",
-			//	e.peer->address.host,
-			//	e.peer->address.port);
-			/* Store any relevant client information here. */
 			e.peer->data = "Client information";
 			break;
 		}
@@ -43,7 +39,6 @@ void ClientController::HandleRecievedPackets()
 				e.packet->data,
 				e.peer->data,
 				e.channelID);
-			/* Clean up the packet now that we're done using it. */
 			ByteStream bs(e.packet->data, e.packet->dataLength);
 			enet_packet_destroy(e.packet);
 			UnpackRecievedData(bs);
@@ -52,7 +47,6 @@ void ClientController::HandleRecievedPackets()
 
 		case ENET_EVENT_TYPE_DISCONNECT:
 		{
-
 			printf("%s disconnected.\n", e.peer->data);
 			/* Reset the peer's client information. */
 			e.peer->data = NULL;
@@ -65,7 +59,6 @@ void ClientController::SendPendingPackets()
 {
 	m_Client->Send(&m_BStream);
 	m_BStream.EmptyByteStream();
-	//m_Client->SendPendingMessages();
 }
 
 void ClientController::Init(const char* ip, int port)
@@ -86,23 +79,31 @@ void ClientController::UnpackRecievedData(ByteStream& bs)
 		{
 			case NetCommand::CreateEntity:
 			{
-				int id = bs.ReadType<int>();
-				int objectTypeId = bs.ReadType<int>();
-				SpawnEntity(objectTypeId, id);
+				short numEntities = bs.ReadType<short>();
+				for (int i = 0; i < numEntities; ++i)
+				{
+					int id = bs.ReadType<int>();
+					int objectTypeId = bs.ReadType<int>();
+					SpawnEntity(objectTypeId, id);
+				}
 				break;
 			}
 			case NetCommand::UpdateEntity:
 			{
-				int objectID = bs.ReadType<int>();
-
-				// TODO remove this later when extrapolation is done
-				if (objectID != m_Player->GetID())
+				short numEntities = bs.ReadType<short>();
+				for (int i = 0; i < numEntities; ++i)
 				{
-					auto entity = m_Engine->GetEntityByID(objectID);
-					if (entity)
+					int objectID = bs.ReadType<int>();
+					if (objectID != m_Player->GetID())
+					{
+						auto entity = m_Engine->GetEntityByID(objectID);
 						entity->DeSerialize(&bs);
-					else
-						SpawnEntity(2, objectID);
+					}
+					else 
+					{
+						// TODO remove this later when extrapolation is done
+						bs.SkipBytes(9u * sizeof(float));
+					}
 				}
 				break;
 			}
@@ -110,6 +111,12 @@ void ClientController::UnpackRecievedData(ByteStream& bs)
 			{
 				int objectID = bs.ReadType<int>();
 				m_Engine->RemoveEntityByID(objectID);
+				break;
+			}
+			case NetCommand::TextMessage:
+			{
+				std::string message = bs.ReadString();
+				LOG_L1(INFO, INFO, "%s", message.c_str());
 			}
 		}
 	}
@@ -151,6 +158,7 @@ void ClientController::DoSnapShot()
 {
 	if (m_Player)
 	{
+		m_BStream.BeginCommand(NetCommand::UpdateEntity);
 		m_Player->Serialize(&m_BStream);
 	}
 }

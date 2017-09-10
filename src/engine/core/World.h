@@ -33,6 +33,7 @@ public:
     virtual void Start() {}
 
 	void DoSnapShot(ByteStream* stream);
+	void DoCreationSnapShot(ByteStream* bs);
     //const AVector<Entity*>& GetDynamicEntities() const { return m_DynamicEntities; }
     //const AVector<Entity*>& GetStaticEntities() const { return m_StaticEntities; }
 

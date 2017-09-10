@@ -22,6 +22,7 @@ public:
     virtual void Update(float delta);
     virtual void Init();
     virtual void Destroy();
+	virtual int GetTypeID() const { return -1; }
 
 	inline void SetID(int newID) { m_ID = newID; }
 	inline int GetID() { return m_ID; }

@@ -17,11 +17,10 @@ SimpleEntity::~SimpleEntity()
 {
 }
 
-void SimpleEntity::Serialize(ByteStream* buffer)
+void SimpleEntity::Serialize(ByteStream* bs)
 {
-	buffer->BeginCommand(NetCommand::UpdateEntity);
-	buffer->AddData(&m_ID, sizeof(int));
-	SerializeTransform(&m_Transform, buffer);
+	bs->AddData(&m_ID, sizeof(int));
+	SerializeTransform(&m_Transform, bs);
 }
 void SimpleEntity::DeSerialize(ByteStream* buffer)
 {

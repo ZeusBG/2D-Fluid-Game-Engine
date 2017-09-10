@@ -32,6 +32,5 @@ public:
 	void BroadCast(const ByteStream* buffer);
 	void AddAndWelcomePeer(Peer* p);
 	void SendWelcomeMessage(unsigned int playerId);
-	void Update();
 
 };

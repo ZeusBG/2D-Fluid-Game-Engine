@@ -21,14 +21,20 @@ void ServerController::Init(const char* ip, int port)
 void ServerController::CreateDefaultEntityForPeer(Peer* p)
 {
 	// TODO Remove hardcoded stuff later
+	ByteStream bs;
+	bs.BeginCommand(NetCommand::CreateEntity);
+	m_Engine->DoCreationSnapShot(&bs);
+
 	EntitySP entity = m_Engine->CreateEntity("SimpleEntity");
 	m_Engine->AddEntity(entity);
 	p->SetEntity(entity);
+
 	// Send the new peer his entity
-	ByteStream bs;
 	int entityID = entity->GetID();
 	int objectType = 999;
 	bs.BeginCommand(NetCommand::CreateEntity);
+	short numEntities = 1;
+	bs.AddData(&numEntities, sizeof(short));
 	bs.AddData(&entityID, sizeof(int));
 	bs.AddData(&objectType, sizeof(int));
 	m_Server->SendDataTo(p->GetPeerPtr(), &bs);
@@ -37,6 +43,7 @@ void ServerController::CreateDefaultEntityForPeer(Peer* p)
 	bs.EmptyByteStream();
 	bs.BeginCommand(NetCommand::CreateEntity);
 	objectType = 2;
+	bs.AddData(&numEntities, sizeof(short));
 	bs.AddData(&entityID, sizeof(int));
 	bs.AddData(&objectType, sizeof(int));
 	BroadCastEventFromPeer(p, &bs);
@@ -67,6 +74,7 @@ void ServerController::UnpackRecievedData(ByteStream & bs)
 			{
 				int objectID = bs.ReadType<int>();
 				m_Engine->RemoveEntityByID(objectID);
+				break;
 			}
 		}
 	}
@@ -116,7 +124,7 @@ void ServerController::SendWelcomeMessage(unsigned int playerId)
 	ByteStream buff;
 	NetCommand cmd = NetCommand::TextMessage;
 	buff.AddData(&cmd, sizeof(NetCommand));
-	buff.AddData("Welcome !", strlen("Welcome !") + 1);
+	buff.AddData("Welcome !\0", strlen("Welcome !") + 1);
 	SendDataTo(playerId, &buff);
 }
 
@@ -200,5 +208,6 @@ void ServerController::OnEntityRemoved(const Entity* entity)
 
 void ServerController::DoSnapShot()
 {
+	m_BStream.BeginCommand(NetCommand::UpdateEntity);
 	m_Engine->DoSnapShot(&m_BStream);
 }

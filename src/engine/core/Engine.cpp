@@ -73,7 +73,7 @@ void Engine::Run()
 
     m_EngineClock.Start();
     float delta = 0.0f;
-
+	float frameTime = 0.0f;
     while (m_IsRunning)
     {
 		RemovePendingEntities();
@@ -84,14 +84,14 @@ void Engine::Run()
         }
 		if (m_NetworkManager != nullptr)
 		{
-			m_NetworkManager->DoSnapShot();
 			m_NetworkManager->HandleRecievedPackets();
+			m_NetworkManager->DoSnapShot();
 			m_NetworkManager->SendPendingPackets();
 		}
         GetModule<IRenderer>()->DoRenderingCommands();
-        delta = m_EngineClock.MeasureTime();
-
-        Sync(delta);
+        frameTime = m_EngineClock.MeasureTime();
+        Sync(frameTime);
+		delta = frameTime + m_EngineClock.MeasureTime();
     }
 }
 
@@ -123,6 +123,11 @@ void Engine::DoSnapShot(ByteStream* bsstream)
 	GetModule<World>()->DoSnapShot(bsstream);
 }
 
+void Engine::DoCreationSnapShot(ByteStream * bs)
+{
+	GetModule<World>()->DoCreationSnapShot(bs);
+}
+
 float Engine::TimeSinceStart()
 {
     return m_EngineClock.GetTimeSinceStart();
@@ -151,6 +156,7 @@ void Engine::RemovePendingEntities()
 	{
 		_RemoveEntity(entity);
 	}
+	m_EntitiesToBeRemoved.clear();
 }
 
 void Engine::AddEntity(std::shared_ptr<Entity> entity)
@@ -167,7 +173,6 @@ EntitySP Engine::CreateEntityWithID(const char* name, int id)
 {
 	EntitySP entity = ObjectsFactory::CreteEntity(name);
 	entity->SetID(id);
-	//GetModule<World>()->AddEntity(entity);
 	return entity;
 }
 
@@ -185,7 +190,6 @@ bool Engine::RemoveEntityByID(int id)
 		return false;
 	m_EntitiesToBeRemoved.push_back(GetModule<World>()->GetEntityByID(id));
 	return true;
-	//return GetModule<World>()->RemoveEntityByID(id);
 }
 
 Engine* Engine::GetEngine()

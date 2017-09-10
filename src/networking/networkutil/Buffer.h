@@ -28,6 +28,8 @@ struct ByteStream
 	void AddData(const void* data, unsigned size);
 	bool Empty() const { return Index >= Size; }
 	void BeginCommand(NetCommand cmd);
+	void SkipBytes(unsigned int numBytes);
+	std::string ReadString();
 
 	template <typename T>
 	T ReadType()
