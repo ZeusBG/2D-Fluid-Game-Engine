@@ -128,15 +128,13 @@ void ClientController::SpawnEntity(int entityTypeId, int id)
 	// is made. These entities should be inflated from the prototype
 	if (entityTypeId == 999)
 	{
-		m_Player = m_Engine->CreateEntityWithID("SimpleEntity", id);
-		m_Player->AddComponent(std::make_shared<CharacterControllerComponent>());
-		m_Player->AddComponent(std::make_shared<SimpleVisualComponent>());
+		m_Player = m_Engine->CreateEntityFromType(entityTypeId);
+		m_Player->SetID(id);
 		m_Engine->AddEntity(m_Player);
 	}
-	else if (entityTypeId == 2)
+	else
 	{
-		auto entity = m_Engine->CreateEntityWithID("SimpleEntity", id);
-		entity->AddComponent(std::make_shared<SimpleVisualComponent>());
+		auto entity = m_Engine->CreateEntityFromType(entityTypeId);
 		m_Engine->AddEntity(entity);
 	}
 }
@@ -144,8 +142,10 @@ void ClientController::SpawnEntity(int entityTypeId, int id)
 void ClientController::Start()
 {
 	m_Client->StartAsync();
-	if (!m_Client->Connect(m_ServerIp.c_str(), m_ServerPort))
-		return;
+	while (!m_Client->Connect(m_ServerIp.c_str(), m_ServerPort))
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
 	m_Engine->SetNetworkManager(this);
 	m_Engine->Run();
 }

@@ -62,6 +62,7 @@ public:
 	EntitySP GetEntityByID(int id);
 	EntitySP CreateEntityWithID(const char* entity, int id);
 	EntitySP CreateEntity(const  char* name);
+	EntitySP CreateEntityFromType(int type);
 	bool RemoveEntityByID(int id);
 
     template <typename T>

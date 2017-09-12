@@ -46,6 +46,8 @@ void Engine::Init(const SystemSettings settings)
     m_EngineModules.push_back(std::make_shared<CameraHandler>());
     m_EngineModules.back()->Init(this);
 
+	ObjectsFactory::LoadPrototypeFile("resources/EntityTypeMap.json");
+
 }
 
 void Engine::Sync(float delta)
@@ -180,6 +182,12 @@ EntitySP Engine::CreateEntity(const char* name)
 {
 	auto entity = ObjectsFactory::CreteEntity(name);
 	entity->AddComponent(std::make_shared<SimpleVisualComponent>());
+	return entity;
+}
+
+EntitySP Engine::CreateEntityFromType(int type)
+{
+	auto entity = ObjectsFactory::CreateEntityFromType(type);
 	return entity;
 }
 
