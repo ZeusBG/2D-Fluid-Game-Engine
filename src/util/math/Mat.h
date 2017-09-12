@@ -61,6 +61,7 @@ public:
 
     void operator*= (const Mat3x3& right);
     float* operator[](int idx) { return mat[idx]; }
+	const float* operator[](int idx) const { return mat[idx]; }
 
     static Mat3x3 GetRotateMatrix(const float rad)
     {

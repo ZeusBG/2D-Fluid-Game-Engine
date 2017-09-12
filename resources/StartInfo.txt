@@ -1,0 +1,3 @@
+SinglePlayer
+localhost
+43434

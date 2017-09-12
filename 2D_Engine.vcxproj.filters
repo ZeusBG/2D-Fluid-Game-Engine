@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="engine">
@@ -48,6 +48,18 @@
     </Filter>
     <Filter Include="util\math">
       <UniqueIdentifier>{1CA6F0CE-8810-A545-D14E-56EB3DF8829A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="networking">
+      <UniqueIdentifier>{5e7cd3d1-895b-4c0f-affe-fb63dba310a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="networking\server">
+      <UniqueIdentifier>{e8fa0289-b918-4dad-8ddb-7608384de7a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="networking\client">
+      <UniqueIdentifier>{954497da-dde8-42c1-802f-497c1c8cfc71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="networking\netowrkutil">
+      <UniqueIdentifier>{918c234c-ea79-4ea0-9f1b-89b2d5a78181}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,10 +114,10 @@
     <ClInclude Include="src\engine\object\basecomponents\CameraComponent.h">
       <Filter>engine\object\basecomponents</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\object\basecomponents\Component.h">
+    <ClInclude Include="src\engine\object\basecomponents\component.h">
       <Filter>engine\object\basecomponents</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\object\basecomponents\VisualComponent.h">
+    <ClInclude Include="src\engine\object\basecomponents\visualcomponent.h">
       <Filter>engine\object\basecomponents</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\physics\Collider.h">
@@ -173,6 +185,30 @@
     </ClInclude>
     <ClInclude Include="src\util\math\Vec.h">
       <Filter>util\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\server\ServerController.h">
+      <Filter>networking\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\server\Server.h">
+      <Filter>networking\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\networkutil\Buffer.h">
+      <Filter>networking\netowrkutil</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\client\Client.h">
+      <Filter>networking\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\networkutil\networkutils.h">
+      <Filter>networking\netowrkutil</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\client\ClientController.h">
+      <Filter>networking\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\networkutil\Peer.h">
+      <Filter>networking\netowrkutil</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\NetworkManager.h">
+      <Filter>networking</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +298,30 @@
     </ClCompile>
     <ClCompile Include="src\util\math\Vec.cpp">
       <Filter>util\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\server\Server.cpp">
+      <Filter>networking\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\server\ServerController.cpp">
+      <Filter>networking\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\networkutil\Buffer.cpp">
+      <Filter>networking\netowrkutil</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\client\Client.cpp">
+      <Filter>networking\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\networkutil\networkutils.cpp">
+      <Filter>networking\netowrkutil</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\client\ClientController.cpp">
+      <Filter>networking\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\networkutil\Peer.cpp">
+      <Filter>networking\netowrkutil</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\NetworkManager.cpp">
+      <Filter>networking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

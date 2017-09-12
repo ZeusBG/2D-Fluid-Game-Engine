@@ -4,11 +4,14 @@
 #include "../object/Entity.h"
 #include "IModule.h"
 #include "rapidjson/document.h"
+
+struct ByteStream;
+
 class World : public IModule
 {
 private:
     AVector<EntitySP> m_Entities;
-
+	std::unordered_map<int, EntitySP> m_IDToEntityMap;
     //AVector<Entity*> m_DynamicEntities;
     //AVector<Entity*> m_StaticEntities;
 
@@ -20,12 +23,17 @@ public:
     virtual const char* GetName();
     void Destroy();
     void LoadLevel(const rapidjson::Value& val);
-    void AddEntity(std::shared_ptr<Entity>& entity) { entity->Init(); m_Entities.push_back(entity); }
-    const AVector<EntitySP> GetVisibleEntities();
+	void AddEntity(std::shared_ptr<Entity>& entity);
 
+	EntitySP GetEntityByID(int id);
+    const AVector<EntitySP> GetVisibleEntities();
     const AVector<EntitySP>& GetEntities() const { return m_Entities; }
+	bool RemoveEntityByID(int id);
 
     virtual void Start() {}
+
+	void DoSnapShot(ByteStream* stream);
+	void DoCreationSnapShot(ByteStream* bs);
     //const AVector<Entity*>& GetDynamicEntities() const { return m_DynamicEntities; }
     //const AVector<Entity*>& GetStaticEntities() const { return m_StaticEntities; }
 

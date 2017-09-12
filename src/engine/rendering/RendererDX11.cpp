@@ -249,8 +249,8 @@ PSHandle RendererDX11::CreatePSFromFile(const char* file, ShaderVersion version)
     if (FAILED(hr))
     {
         //TODO replace with logger when we have logger implemented
-        MessageBox(nullptr,
-            L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        MessageBoxA(nullptr,
+            "The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", "Error", MB_OK);
         return nullptr;
     }
 
@@ -280,8 +280,8 @@ VSData RendererDX11::CreateVSFromFile(const char* file, D3D11_INPUT_ELEMENT_DESC
     if (FAILED(hr))
     {
         //TODO replace with logger when we have logger implemented
-        MessageBox(nullptr,
-            L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        MessageBoxA(nullptr,
+            "The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", "Error", MB_OK);
         return result;
     }
 

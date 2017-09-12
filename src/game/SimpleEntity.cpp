@@ -1,6 +1,7 @@
 #pragma once
 #include "SimpleEntity.h"
-
+#include "networking/networkutil/Buffer.h"
+#include "networking/networkutil/networkutils.h"
 #include "game/ObjectsFactory.h"
 IMPLEMENT_METADATA(SimpleEntity);
 SimpleEntity::SimpleEntity()
@@ -14,4 +15,14 @@ void SimpleEntity::Update(float delta)
 }
 SimpleEntity::~SimpleEntity()
 {
+}
+
+void SimpleEntity::Serialize(ByteStream* bs)
+{
+	bs->AddData(&m_ID, sizeof(int));
+	SerializeTransform(&m_Transform, bs);
+}
+void SimpleEntity::DeSerialize(ByteStream* buffer)
+{
+	DeSerializeTransform(&m_Transform, buffer);
 }

@@ -1,0 +1,31 @@
+{
+	"Entities" :
+	[
+	{
+		"ID" : 999,
+		"Class" : "SimpleEntity",
+		"Components" :
+			[
+			{
+				"Component" : "SimpleVisualComponent"
+			},
+			{
+				"Component" : "CharacterControllerComponent"
+			},
+			{
+				"Component" : "CameraComponent"
+			}
+			]
+	},
+	{
+		"ID" : 2,
+		"Class" : "SimpleEntity",
+		"Components" :
+			[
+			{
+				"Component" : "SimpleVisualComponent"
+			}
+			]
+	}
+	]
+}

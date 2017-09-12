@@ -1,12 +1,13 @@
 #pragma once
-#include "../GameState.h"
-#include "../StateStack.h"
-#include "../../util/Collections.h"
-#define NOMINMAX
+#include "engine/GameState.h"
+#include "engine/StateStack.h"
+#include "util/Collections.h"
+#define NOMINMAX // Used for Windows.h
 #include "Window.h"
 #include "SystemSettings.h"
 #include "engine/object/Entity.h"
-#include "../time/Clock.h"
+#include "engine/time/Clock.h"
+#include "networking/NetworkManager.h"
 #include <mutex>
 #include <chrono>
 
@@ -19,6 +20,8 @@ class World;
 class IInput;
 struct SystemSettings;
 class RenderCommanderDx11;
+struct ByteStream;
+
 class Engine
 {
     static Engine* s_Engine;
@@ -26,16 +29,21 @@ class Engine
 
     Clock m_EngineClock;
     AVector<std::shared_ptr<IModule>> m_EngineModules;
+	AVector<std::shared_ptr<Entity>> m_EntitiesToBeRemoved;
 
     const float m_FrameCap = 1.0f / 60.0f;
     StateStack m_StateStack;
     SystemSettings m_Settings;
     bool m_IsRunning;
 
+	NetworkManager* m_NetworkManager;
+
     void Sync(float dt);
     Engine();
     void StartModules();
     void Destroy();
+	void _RemoveEntity(EntitySP);
+	void RemovePendingEntities();
 public:
     void Init(const SystemSettings settings);
     void Run();
@@ -43,12 +51,19 @@ public:
     void LoadMap(const char* map);
     void PushState(const GameState& state);
     void PopState();
+	void DoSnapShot(ByteStream* bs);
+	void DoCreationSnapShot(ByteStream* bs);
 
     float TimeSinceStart();
     const SystemSettings* GetSettings() const { return &m_Settings; }
     void SetSystemSettings(const SystemSettings& settings) { m_Settings = settings; }
-
+	inline void SetNetworkManager(NetworkManager* networkManager) { m_NetworkManager = networkManager; }
     void AddEntity(std::shared_ptr<Entity> entity);
+	EntitySP GetEntityByID(int id);
+	EntitySP CreateEntityWithID(const char* entity, int id);
+	EntitySP CreateEntity(const  char* name);
+	EntitySP CreateEntityFromType(int type);
+	bool RemoveEntityByID(int id);
 
     template <typename T>
     std::shared_ptr<T> GetModule()
