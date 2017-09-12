@@ -26,14 +26,18 @@ void Client::RecievePendingMessages()
 
 void Client::SendPendingMessages()
 {
-	while (!m_SendData.empty())
+	std::queue<ByteStream> sendInfoQueue;
 	{
 		std::lock_guard <std::mutex> lock(m_DataSendQueueMutex);
-		ENetPacket * packet = enet_packet_create(m_SendData.front().Data,
-			m_SendData.front().Index,
+		sendInfoQueue = std::move(m_SendData);
+	}
+	while (!sendInfoQueue.empty())
+	{
+		ENetPacket * packet = enet_packet_create(sendInfoQueue.front().Data,
+			sendInfoQueue.front().Index,
 			ENET_PACKET_FLAG_RELIABLE);
 		enet_peer_send(m_RemoteServer, 0, packet);
-		m_SendData.pop();
+		sendInfoQueue.pop();
 	}
 }
 
