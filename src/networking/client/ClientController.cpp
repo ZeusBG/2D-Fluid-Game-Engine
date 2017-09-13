@@ -11,13 +11,12 @@
 
 ClientController::ClientController()
 {
-	m_Client = new Client();
+	m_Client = std::make_shared<Client>();
 }
 ClientController::~ClientController()
 {
 	m_Client->Stop();
 	m_Client->WaitFinish();
-	delete m_Client;
 }
 
 void ClientController::HandleRecievedPackets()

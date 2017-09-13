@@ -67,7 +67,7 @@ void Server::SendPendingData()
 	}
 }
 
-void Server::BradCast(const ByteStream* stream)
+void Server::BroadCast(const ByteStream* stream)
 {
 	std::lock_guard<std::mutex> lg(m_DataSendQueueMutex);
 	m_SendData.push({ nullptr, stream });

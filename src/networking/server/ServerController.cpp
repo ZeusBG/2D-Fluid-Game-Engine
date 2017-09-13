@@ -10,7 +10,7 @@
 
 ServerController::ServerController()
 {
-	m_Server = new Server();
+	m_Server = std::make_shared<Server>();
 }
 
 void ServerController::Init(const char* ip, int port)
@@ -18,7 +18,7 @@ void ServerController::Init(const char* ip, int port)
 	m_Server->Init(ip, port);
 }
 
-void ServerController::CreateDefaultEntityForPeer(Peer* p)
+void ServerController::CreateDefaultEntityForPeer(PeerSP p)
 {
 	// TODO Remove hardcoded stuff later
 	ByteStream bs;
@@ -90,14 +90,14 @@ void ServerController::Start()
 
 void ServerController::SendDataTo(unsigned int playerId, const ByteStream* data)
 {
-	m_Server->SendDataTo(m_Players[playerId].GetPeerPtr(), data);
+	m_Server->SendDataTo(m_Players[playerId]->GetPeerPtr(), data);
 }
 
-void ServerController::BroadCastEventFromPeer(Peer* pFrom, const ByteStream* buffer)
+void ServerController::BroadCastEventFromPeer(PeerSP pFrom, const ByteStream* buffer)
 {
 	for (int i = 0; i < m_Players.size(); ++i)
 	{
-		if (pFrom == &m_Players[i])
+		if (pFrom == m_Players[i])
 			continue;
 		SendDataTo(i, buffer);
 	}
@@ -111,11 +111,10 @@ void ServerController::BroadCast(const ByteStream* buffer)
 	}
 }
 
-//TODO fix this
-void ServerController::AddAndWelcomePeer(Peer* p)
+void ServerController::AddAndWelcomePeer(PeerSP p)
 {
+	m_Players.push_back(p);
 	CreateDefaultEntityForPeer(p);
-	m_Players.push_back(*p);
 	SendWelcomeMessage(m_Players.size() - 1);
 }
 
@@ -132,7 +131,6 @@ ServerController::~ServerController()
 {
 	m_Server->Stop();
 	m_Server->WaitFinish();
-	delete m_Server;
 }
 
 void ServerController::HandleRecievedPackets()
@@ -147,8 +145,7 @@ void ServerController::HandleRecievedPackets()
 			/* Store any relevant client information here. */
 			e.peer->data = "Client information";
 
-			//TODO remove the ugly new when shared_ptr is used
-			Peer* newPeer = new Peer(e.peer);
+			std::shared_ptr<Peer> newPeer = std::make_shared<Peer>(e.peer);
 			AddAndWelcomePeer(newPeer);
 		}
 		break;
@@ -172,16 +169,18 @@ void ServerController::RemovePeer(ENetPeer* p)
 {
 	for (int i = 0; i < m_Players.size(); ++i)
 	{
-		if (m_Players[i].GetPeerPtr() == p)
+		if (m_Players[i]->GetPeerPtr() == p)
 		{
 			ByteStream bs;
 			bs.BeginCommand(NetCommand::RemoveEntity);
-			int id = m_Players[i].GetGameEntityPtr()->GetID();
+			int id = m_Players[i]->GetGameEntityPtr()->GetID();
 			bs.AddData(&id, sizeof(int));
-			BroadCastEventFromPeer(&m_Players[i], &bs);
-			m_Engine->RemoveEntityByID(id);
+			BroadCastEventFromPeer(m_Players[i], &bs);
 
+			m_Engine->RemoveEntityByID(id);
+			enet_peer_reset(m_Players[i]->GetPeerPtr());
 			m_Players.erase(m_Players.begin() + i);
+
 			break;
 		}
 	}
@@ -189,7 +188,7 @@ void ServerController::RemovePeer(ENetPeer* p)
 
 void ServerController::SendPendingPackets()
 {
-	m_Server->BradCast(&m_BStream);
+	m_Server->BroadCast(&m_BStream);
 	m_Server->SendPendingData();
 	m_BStream.EmptyByteStream();
 }
@@ -198,9 +197,9 @@ void ServerController::OnEntityRemoved(const Entity* entity)
 {
 	for (int i = 0; i < m_Players.size(); ++i)
 	{
-		if (m_Players[i].GetGameEntityPtr().get() == entity)
+		if (m_Players[i]->GetGameEntityPtr().get() == entity)
 		{
-			m_Players.erase(m_Players.begin() + i);
+			m_Players[i]->SetEntity(nullptr);
 			break;
 		}
 	}

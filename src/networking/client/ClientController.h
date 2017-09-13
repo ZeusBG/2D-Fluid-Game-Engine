@@ -12,10 +12,9 @@ class Entity;
 
 class ClientController : public NetworkManager
 {
-	Client* m_Client;
+	std::shared_ptr<Client> m_Client;
 	std::string m_ServerIp;
 	unsigned int m_ServerPort;
-	unsigned int m_Port;
 	std::shared_ptr<Entity> m_Player;
 public:
 	ClientController();
@@ -25,11 +24,10 @@ public:
 	virtual void SendPendingPackets() override;
 	virtual void OnEntityRemoved(const Entity* entity) override {};
 	virtual void DoSnapShot() override;
-	virtual void Init(const char* ip, int port);
+	virtual void Init(const char* ip, int port) override;
 	
 	void UnpackRecievedData(ByteStream& bs);
 	void SpawnEntity(int entityTypeId, int id);
 	void Start();
 	void SendDataTo(const ByteStream* data);
-	void Update();
 };

@@ -33,7 +33,7 @@ public:
 	~Server();
 	void Init(const char* ip, int port);
 	void SendPendingData();
-	void BradCast(const ByteStream* stream);
+	void BroadCast(const ByteStream* stream);
 	void Start();
 	bool PollEvent(ENetEvent* event);
 	void SendDataTo(ENetPeer* p, const ByteStream* buff);

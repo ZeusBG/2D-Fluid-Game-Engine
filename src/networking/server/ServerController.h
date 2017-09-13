@@ -10,10 +10,10 @@ class Entity;
 
 class ServerController : public NetworkManager
 {
-	Server* m_Server;
-	std::vector<Peer> m_Players;
+	std::shared_ptr<Server> m_Server;
+	std::vector<PeerSP> m_Players;
 
-	void CreateDefaultEntityForPeer(Peer* p);
+	void CreateDefaultEntityForPeer(PeerSP p);
 	void RemovePeer(ENetPeer* p);
 public:
 	ServerController();
@@ -28,9 +28,9 @@ public:
 	void UnpackRecievedData(ByteStream& bs);
 	void Start();
 	void SendDataTo(unsigned int playerId, const ByteStream* data);
-	void BroadCastEventFromPeer(Peer* pFrom, const ByteStream* buffer);
+	void BroadCastEventFromPeer(PeerSP pFrom, const ByteStream* buffer);
 	void BroadCast(const ByteStream* buffer);
-	void AddAndWelcomePeer(Peer* p);
+	void AddAndWelcomePeer(PeerSP p);
 	void SendWelcomeMessage(unsigned int playerId);
 
 };

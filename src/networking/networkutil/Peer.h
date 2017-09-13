@@ -23,3 +23,5 @@ public:
 	inline std::shared_ptr<Entity> GetGameEntityPtr() { return m_GameEntity; }
 	inline void SetEntity(std::shared_ptr<Entity> e) { m_GameEntity = e; }
 };
+
+typedef std::shared_ptr<Peer> PeerSP;

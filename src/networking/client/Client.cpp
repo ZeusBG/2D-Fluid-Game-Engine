@@ -115,6 +115,7 @@ void Client::Stop()
 
 Client::~Client()
 {
-	atexit(enet_deinitialize);
+	enet_peer_reset(m_RemoteServer);
 	enet_host_destroy(m_Client);
+	atexit(enet_deinitialize);
 }
