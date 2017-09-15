@@ -48,6 +48,8 @@ void World::Destroy()
     {
         e->Destroy();
     }
+	m_Entities.clear();
+	m_IDToEntityMap.clear();
 }
 
 void World::LoadLevel(const rapidjson::Value& val)

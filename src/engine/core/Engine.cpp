@@ -105,6 +105,7 @@ void Engine::Stop()
 void Engine::LoadMap(const char* map)
 {
     // TODO: Make file reading on a separate thread
+	GetModule<World>()->Destroy();
     std::ifstream ifs(map);
     bool t = ifs.good();
     rapidjson::IStreamWrapper isw(ifs);
