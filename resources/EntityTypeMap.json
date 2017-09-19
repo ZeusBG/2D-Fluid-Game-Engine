@@ -7,11 +7,16 @@
 		"Transform" :
 		{
 			"Position" : [100,100],
-			"Scale" : [2,2]
+			"Scale" : [100,100]
 		},
 		"Components" :
 			[
-
+			{
+				"Component" : { "Class" : "CharacterControllerComponent"}
+			},
+			{
+				"Component" : { "Class" : "CameraComponent"}
+			}
 			]
 	},
 	{
@@ -19,8 +24,8 @@
 		"Class" : "SimpleEntityBase",
 		"Transform" :
 		{
-			"Position" : [100,100],
-			"Scale" : [2,2]
+			"Position" : [140,140],
+			"Scale" : [100,100]
 		},
 		"Components" :
 			[
