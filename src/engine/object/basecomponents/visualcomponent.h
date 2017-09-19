@@ -17,6 +17,9 @@ public:
     //costructor with mesh file, PS and VS ?
     //forward to Mesh
     VisualComponent();
+
+	virtual void DeSerializeFromJSON(const rapidjson::Value& val) override;
+
     inline void SetVertexShader(SharedShaderPtr shader) { m_VertexShader = shader; }
     inline SharedShaderPtr GetVertexShader() const { return m_VertexShader; }
 

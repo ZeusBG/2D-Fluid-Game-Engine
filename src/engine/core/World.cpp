@@ -2,6 +2,7 @@
 #include "World.h"
 #include "game/ObjectsFactory.h"
 #include "networking/networkutil/Buffer.h"
+#include <rapidjson/document.h>
 #include <algorithm>
 
 World::World() {};

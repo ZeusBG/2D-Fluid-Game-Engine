@@ -1,14 +1,12 @@
 #pragma once
 #include <memory>
-#include "../engine/core/Engine.h"
-#include "../engine/core/SystemSettings.h"
+#include "game/SimpleEntityBase.h"
 
-
-class SimpleEntity : public Entity
+class SimpleEntity : public SimpleEntityBase
 {
     ADD_SOLID_CLASS_METADATA(SimpleEntity)
 public:
-	static const int SIMPLE_ENTITY_ID = 2;
+	static const int SIMPLE_ENTITY_ID = 3;
     SimpleEntity();
     virtual ~SimpleEntity();
     virtual void Update(float delta);

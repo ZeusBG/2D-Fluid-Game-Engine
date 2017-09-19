@@ -46,6 +46,9 @@ void Engine::Init(const SystemSettings settings)
     m_EngineModules.push_back(std::make_shared<CameraHandler>());
     m_EngineModules.back()->Init(this);
 
+	m_EngineModules.push_back(std::make_shared<Physics>());
+	m_EngineModules.back()->Init(this);
+
 	ObjectsFactory::LoadPrototypeFile("resources/EntityTypeMap.json");
 
 }
@@ -79,7 +82,7 @@ void Engine::Run()
     while (m_IsRunning)
     {
 		RemovePendingEntities();
-        m_EngineClock.MeasureTime();
+		delta = m_EngineClock.ResetAndMeasureTime();
         for (const auto& module : m_EngineModules)
         {
             module->Update(delta);
@@ -93,7 +96,7 @@ void Engine::Run()
         GetModule<IRenderer>()->DoRenderingCommands();
         frameTime = m_EngineClock.MeasureTime();
         Sync(frameTime);
-		delta = frameTime + m_EngineClock.MeasureTime();
+
     }
 }
 

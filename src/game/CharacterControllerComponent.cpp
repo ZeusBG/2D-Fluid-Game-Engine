@@ -2,9 +2,10 @@
 #include "engine/input/InputHandler.h"
 
 #include "game/CharacterControllerComponent.h"
-
+#include "engine/object/Transform.h"
 #include "util/math/Vec.h"
-
+#include "engine/camera/CameraHandler.h"
+#include "engine/object/basecomponents/RigidBodyComponent.h"
 IMPLEMENT_METADATA(CharacterControllerComponent)
 
 void CharacterControllerComponent::Update(float dt)
@@ -23,36 +24,22 @@ void CharacterControllerComponent::Update(float dt)
     sight.Normalize();
     
     //istoilov : Make proper API calls
-    
-    m_Owner->AddTranslate(speed);
+	m_Owner->GetComponent<RigidBodyComponent>()->ApplyLinearImpulse(speed);
+    //m_Owner->AddTranslate(speed);
     sight = sight * 100; // Fix rotation please
     m_Owner->SetSight(sight);
 
-    //if (InputHandler::Instance()->isMouseButtonJustPressed(MouseButton_LEFT))
-    //{
-    //    if (accShootDelay >= attackCooldown)
-    //    {
-    //        vec2 targetPos = InputHandler::Instance()->getMousePosition();
-    //        vec2 pos = getPosition();
-    //        vec2 direction = targetPos - pos;
-    //        if (!direction.equalWithEpsilon(vec2Zero))
-    //        {
-    //            direction = direction.normalize();
-    //            vec2 initialPos = pos + direction * 50.0f;
-    //            Projectile* arrow = (Projectile *)getGameState<PlayState>()->getLevelData().createBaseObjectFromTemplateID("PlayerArrow", initialPos.x, initialPos.y);
-    //            arrow->setDamage(damage);  //sets proper damage to arrow. Allows to be modified with power-ups.
-    //            arrow->setSpeed(direction * arrow->getMaxVelocity() * projectileSpeedModifier);
-    //            getGameState<GameState>()->addObject(arrow);
+	if (inputHandler->IsKeyPressed(SDL_SCANCODE_F))
+		g_Engine->GetModule<CameraHandler>()->GetActiveCamera()->Zoom(5.0f);
+	if (inputHandler->IsKeyPressed(SDL_SCANCODE_G))
+		g_Engine->GetModule<CameraHandler>()->GetActiveCamera()->Zoom(-5.0f);
+}
 
-    //            visualComponent->setCurrentRenderSpriteByName("Shoot");
-    //            visualComponent->getCurrentSpritePlaying()->play();
-    //        }
-    //        accShootDelay = 0.0f;
-    //    }
-    //}
+void CharacterControllerComponent::Init()
+{
 }
 
 CharacterControllerComponent::CharacterControllerComponent() :
-    m_MoveVelocity(10.f),
+    m_MoveVelocity(100.f),
     m_RotationVelocity(1.f)
 {}

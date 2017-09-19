@@ -3,28 +3,27 @@
 	[
 	{
 		"ID" : 999,
-		"Class" : "SimpleEntity",
+		"Class" : "SimpleEntityBase",
+		"Transform" :
+		{
+			"Position" : [100,100],
+			"Scale" : [2,2]
+		},
 		"Components" :
 			[
-			{
-				"Component" : "SimpleVisualComponent"
-			},
-			{
-				"Component" : "CharacterControllerComponent"
-			},
-			{
-				"Component" : "CameraComponent"
-			}
+
 			]
 	},
 	{
 		"ID" : 2,
-		"Class" : "SimpleEntity",
+		"Class" : "SimpleEntityBase",
+		"Transform" :
+		{
+			"Position" : [100,100],
+			"Scale" : [2,2]
+		},
 		"Components" :
 			[
-			{
-				"Component" : "SimpleVisualComponent"
-			}
 			]
 	}
 	]

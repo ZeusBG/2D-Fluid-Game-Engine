@@ -2,7 +2,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include "rapidjson/document.h"
+#include "rapidjson/fwd.h"
 class Component;
 class Entity;
 

@@ -15,9 +15,11 @@ public:
 
     bool operator!= (const Vec2& rhs) const { return (x != rhs.x || y != rhs.y); }
 
+	Vec2 operator* (const Vec2& other) const { return Vec2(x * other.x, y * other.y); }
     Vec2 operator* (const float c) const { return Vec2(x*c, y * c); }
     Vec2 operator- (const Vec2& rhs) const { return Vec2(x - rhs.x, y - rhs.y); }
     Vec2 operator+ (const Vec2& rhs) const { return Vec2(x + rhs.x, y + rhs.y); }
+	inline void operator+= (const Vec2& rhs) { x += rhs.x, y += rhs.y; }
 
     bool EqualWithEpsilon(const Vec2& rhs) const;
 

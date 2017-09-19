@@ -3,6 +3,7 @@
 #include "engine/object/Entity.h"
 #include "engine/core/MetaData.h"
 #include <rapidjson/istreamwrapper.h>
+#include "rapidjson/document.h"
 #include <fstream>
 
 std::unordered_map<int,const rapidjson::Value*> ObjectsFactory::s_IDToJSON;
@@ -40,13 +41,24 @@ std::shared_ptr<Entity> ObjectsFactory::CreteEntity(const std::string& name)
 std::shared_ptr<Entity> ObjectsFactory::CreateEntityFromJSON(const rapidjson::Value& json)
 {
     EntitySP entity = std::static_pointer_cast<Entity>(MetaDataStorage::GetInstance()->Get(json["Class"].GetString())->CreateInstance());
-    entity->DeSerialize(json["Class"]);
+    entity->DeSerializeFromJSON(json);
     const auto& components = json["Components"].GetArray();
     for (const auto& component : components)
     {
-        auto& c = ObjectsFactory::CreateComponent(component["Component"].GetString());
-        c->DeSerialize(component);
-        entity->AddComponent(c);
+		const auto& coponentInfo = component["Component"];
+		auto entityComponent = entity->GetComponentByName(coponentInfo["Class"].GetString());
+		if (entityComponent != nullptr)
+		{
+			entityComponent->DeSerializeFromJSON(coponentInfo);
+		}
+		else
+		{
+			// In case somebody added a component, which
+			// is not from the defualt ones for this entity
+			auto& c = ObjectsFactory::CreateComponent(coponentInfo["Class"].GetString());
+			entity->AddComponent(c);
+			c->DeSerializeFromJSON(coponentInfo);
+		}
     }
     return entity;
 }

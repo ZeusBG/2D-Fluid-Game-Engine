@@ -3,7 +3,7 @@
 #include "engine/core/Engine.h"
 #include "engine/rendering/shaderobjects/SimplePS.h"
 #include "engine/rendering/shaderobjects/SimpleVS.h"
-
+#include <rapidjson/document.h>
 IMPLEMENT_METADATA(SimpleVisualComponent)
 
 SimpleVisualComponent::SimpleVisualComponent()
@@ -21,4 +21,9 @@ SimpleVisualComponent::SimpleVisualComponent()
 
     m_Mesh.AddIndex(2, 1, 0);
     m_Mesh.AddIndex(0, 3, 2);
+}
+
+void SimpleVisualComponent::DeSerializeFromJSON(const rapidjson::Value& val)
+{
+	VisualComponent::DeSerializeFromJSON(val);
 }

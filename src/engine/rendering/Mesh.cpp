@@ -2,6 +2,8 @@
 #include "engine/object/basecomponents/VisualComponent.h"
 #include "engine/core/Engine.h"
 #include "RenderCommander.h"
+#include <rapidjson/document.h>
+
 void Mesh::SetVertices(const AVector<XMFLOAT2>& vertices)
 {
     m_Vertices = vertices;
@@ -99,4 +101,28 @@ void Mesh::Destroy()
     auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
     renderCommander->ReleaseResource(m_IndexBuffer, ResourceType::Buffer);
     renderCommander->ReleaseResource(m_VertexBuffer, ResourceType::Buffer);
+}
+
+void Mesh::DeSerializeFromJSON(const rapidjson::Value& val)
+{
+	m_Vertices.clear();
+	m_Indices.clear();
+	if (!val.HasMember("Vertices") || !val.HasMember("Indices"))
+	{
+		assert("No indices or vertices found in Mesh json !" && false);
+		return;
+	}
+	const auto& vertices = val["Vertices"].GetArray();
+
+	for (auto vIt = vertices.Begin(); vIt != vertices.End();)
+	{
+		m_Vertices.push_back({ vIt++->GetFloat(), vIt++->GetFloat() });
+	}
+
+	const auto& indices = val["Indices"].GetArray();
+
+	for (auto vIt = indices.Begin(); vIt != indices.End();)
+	{
+		m_Indices.push_back(vIt++->GetFloat());
+	}
 }

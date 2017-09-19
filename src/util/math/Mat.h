@@ -96,6 +96,13 @@ public:
         mat[1][1] *= c;
         //mat[2][2] *= c;
     }
+
+	void Scale(float x, float y)
+	{
+		mat[0][0] *= x;
+		mat[1][1] *= y;
+		//mat[2][2] *= c;
+	}
     
 
 public:

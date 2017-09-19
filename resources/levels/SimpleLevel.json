@@ -2,28 +2,135 @@
 	"Entities" :
 	[
 	{
+		"ID" : 1,
 		"Class" : "SimpleEntity",
+		"Transform" :
+		{
+			"Position" : [100,100],
+			"Scale" : [2,2]
+		},
 		"Components" :
 			[
-			{
-			"Component" : "SimpleVisualComponent"
-			},
-			{
-			"Component" : "CharacterControllerComponent"
-			},
-			{
-			"Component" : "CameraComponent"
+				{"Component" : {
+					"Class" : "SimpleVisualComponent",
+					"Mesh" :
+					{
+						"Vertices" : [ 1,  1, -1, 1, -1, -1, 1, -1 ],
+						"Indices" : [2, 1, 0, 0, 3, 2]
+					}
+				}
+				},
+				{"Component" : {
+					"Class" : "RigidBodyComponent",
+					"Type" : "Dynamic"
+				}
 			}
 			]
 	},
 	{
-		"Class" : "SimpleEntity",
+		"ID" : 2,
+		"Class" : "SimpleEntityBase",
+		"Transform" :
+		{
+			"Position" : [150,100],
+			"Scale" : [2,2]
+		},
 		"Components" :
-			[
-			{
-			"Component" : "SimpleVisualComponent"
+		[
+			{"Component" : { 
+				"Class" : "SimpleVisualComponent",
+				"Mesh" :
+				{
+					"Vertices" : [ 1,  1, -1, 1, -1, -1, 1, -1 ],
+					"Indices" : [2, 1, 0, 0, 3, 2]
+				}
 			}
-			]
+			},
+			{"Component" : 
+				{
+				"Class" : "RigidBodyComponent",
+				"Type" : "Dynamic"
+				}
+			}
+		]
+	},
+	{
+		"Class" : "SimpleEntityBase",
+		"Transform" :
+		{
+			"Position" : [130,-500],
+			"Scale" : [10000,10]
+		},
+		"Components" :
+		[
+			{"Component" : { 
+				"Class" : "SimpleVisualComponent",
+				"Mesh" :
+				{
+					"Vertices" : [ 1,  1, -1, 1, -1, -1, 1, -1 ],
+					"Indices" : [2, 1, 0, 0, 3, 2]
+				}
+			}
+			},
+			{"Component" : 
+				{
+				"Class" : "RigidBodyComponent",
+				"Type" : "Static"
+				}
+			}
+		]
+	},
+	{
+		"Class" : "SimpleEntityBase",
+		"Transform" :
+		{
+			"Position" : [530,-200],
+			"Scale" : [10,10000]
+		},
+		"Components" :
+		[
+			{"Component" : { 
+				"Class" : "SimpleVisualComponent",
+				"Mesh" :
+				{
+					"Vertices" : [ 1,  1, -1, 1, -1, -1, 1, -1 ],
+					"Indices" : [2, 1, 0, 0, 3, 2]
+				}
+			}
+			},
+			{"Component" : 
+				{
+				"Class" : "RigidBodyComponent",
+				"Type" : "Static"
+				}
+			}
+		]
+	},
+	{
+		"Class" : "SimpleEntityBase",
+		"Transform" :
+		{
+			"Position" : [-130,-200],
+			"Scale" : [10,10000]
+		},
+		"Components" :
+		[
+			{"Component" : { 
+				"Class" : "SimpleVisualComponent",
+				"Mesh" :
+				{
+					"Vertices" : [ 1,  1, -1, 1, -1, -1, 1, -1 ],
+					"Indices" : [2, 1, 0, 0, 3, 2]
+				}
+			}
+			},
+			{"Component" : 
+				{
+				"Class" : "RigidBodyComponent",
+				"Type" : "Static"
+				}
+			}
+		]
 	}
 	]
 }

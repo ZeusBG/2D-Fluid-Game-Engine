@@ -1,6 +1,6 @@
 #pragma once
 #include "engine/rendering/IRenderer.h"
-
+#include <rapidjson/fwd.h>
 #include <string>
 #include <memory>
 #include <d3d11_1.h>
@@ -17,6 +17,7 @@ class IShader
 {
 public:
     IShader(const char* fileName) : m_FileName(fileName) {}
+	IShader() {}
     virtual void Init() = 0;
     virtual void Destroy() = 0;
 
@@ -25,6 +26,8 @@ public:
 
 	//TODO remvoe ID3D11DeviceContext from abstraction
     virtual void BindData(VisualComponent* vc) = 0;
+
+	virtual void DeSerializeFromJSON(const rapidjson::Value& val);
 
     //TODO make facotry for shaders
     template<typename T>

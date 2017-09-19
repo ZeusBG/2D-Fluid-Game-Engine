@@ -9,6 +9,7 @@ public:
     void Init();
 
     void Update(float dt);
+	void Zoom(float distance);
 
     inline void SetPosition(const Vec2& pos) { m_Position = pos; }
     inline void SetPosition(const Vec3& pos) { m_Position = pos; }
@@ -42,6 +43,7 @@ private:
     float m_AspectRatio;
     int m_ScreenWidth;
     int m_ScreenHeight;
+	float m_Zoom = 0.0f;
 
 };
 

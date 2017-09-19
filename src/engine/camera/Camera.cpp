@@ -12,8 +12,16 @@ Camera::Camera(float fov, float aspectRatio) :
 void Camera::Update(float dt)
 {
     m_Position += m_MoveVelocity;
-
     BuildViewMatrix();
+}
+
+void Camera::Zoom(float distance)
+{
+	// TODO: zoom by moving the camera !
+
+	m_ScreenWidth -= distance * m_AspectRatio;
+	m_ScreenHeight -= distance;
+	BuildProjectionMatrix();
 }
 
 void Camera::BuildProjectionMatrix()
@@ -34,8 +42,7 @@ void Camera::BuildViewMatrix()
     m_ViewMatrix.SetRowJ(yAxis);
     m_ViewMatrix.SetRowK(zAxis);
 
-    m_ViewMatrix.Translate(-m_Position.x, -m_Position.y, 0.f);
-
+    m_ViewMatrix.Translate(-m_Position.x, -m_Position.y, 0.0f);
 }
 
 void Camera::Init()

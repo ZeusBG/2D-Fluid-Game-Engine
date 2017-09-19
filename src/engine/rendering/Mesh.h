@@ -20,6 +20,7 @@ public:
     unsigned GetVerticesCount() const { return m_Vertices.size(); }
     unsigned GetIndicesCount() const { return m_Indices.size(); }
     void Destroy();
+	void DeSerializeFromJSON(const rapidjson::Value& val);
 private:
     AVector<XMFLOAT2> m_Vertices;
     AVector<unsigned int> m_Indices;

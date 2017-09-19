@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include <rapidjson/document.h>
 
 IMPLEMENT_METADATA(Entity);
 
@@ -47,4 +48,26 @@ void Entity::Destroy()
 void Entity::SetSight(const Vec2& sight)
 {
     m_Transform.SetSight(sight);
+}
+
+void Entity::DeSerializeFromJSON(const rapidjson::Value& val)
+{
+	if (val.HasMember("Transform"))
+	{
+		const auto& transform = val["Transform"];
+		const auto& position = transform["Position"].GetArray();
+		m_Transform.SetTranslate({ position[0].GetFloat(), position[1].GetFloat() });
+		const auto& scale = transform["Scale"].GetArray();
+		m_Transform.Scale(scale[0].GetFloat(), scale[1].GetFloat());
+	}
+}
+
+std::shared_ptr<Component> Entity::GetComponentByName(const char* name)
+{
+	for (const auto& component : m_Components)
+	{
+		if (component->GetName() == name)
+			return component;
+	}
+	return nullptr;
 }
