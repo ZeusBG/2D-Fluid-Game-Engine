@@ -43,23 +43,23 @@
     <Filter Include="game">
       <UniqueIdentifier>{9F35977C-8B6C-980D-3459-7E10206F140F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="networking">
+      <UniqueIdentifier>{8D85AFC8-793D-F115-E244-CA71CE1B8C06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="networking\client">
+      <UniqueIdentifier>{1BA967B2-87BF-6548-D036-F1693C8C36D0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="networking\networkutil">
+      <UniqueIdentifier>{E483624E-D07D-8BA0-B9EA-21B1A583F10C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="networking\server">
+      <UniqueIdentifier>{33BE40D7-9FD4-3E6D-E84B-CA8E54A10FF5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="util">
       <UniqueIdentifier>{43339F7C-2F6A-A00D-D856-8610C46C1C0F}</UniqueIdentifier>
     </Filter>
     <Filter Include="util\math">
       <UniqueIdentifier>{1CA6F0CE-8810-A545-D14E-56EB3DF8829A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="networking">
-      <UniqueIdentifier>{5e7cd3d1-895b-4c0f-affe-fb63dba310a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="networking\server">
-      <UniqueIdentifier>{e8fa0289-b918-4dad-8ddb-7608384de7a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="networking\client">
-      <UniqueIdentifier>{954497da-dde8-42c1-802f-497c1c8cfc71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="networking\netowrkutil">
-      <UniqueIdentifier>{918c234c-ea79-4ea0-9f1b-89b2d5a78181}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +171,30 @@
     <ClInclude Include="src\game\SimpleVisualComponent.h">
       <Filter>game</Filter>
     </ClInclude>
+    <ClInclude Include="src\networking\NetworkManager.h">
+      <Filter>networking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\client\Client.h">
+      <Filter>networking\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\client\ClientController.h">
+      <Filter>networking\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\networkutil\Buffer.h">
+      <Filter>networking\networkutil</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\networkutil\Peer.h">
+      <Filter>networking\networkutil</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\networkutil\networkutils.h">
+      <Filter>networking\networkutil</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\server\Server.h">
+      <Filter>networking\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\server\ServerController.h">
+      <Filter>networking\server</Filter>
+    </ClInclude>
     <ClInclude Include="src\util\Collections.h">
       <Filter>util</Filter>
     </ClInclude>
@@ -186,29 +210,11 @@
     <ClInclude Include="src\util\math\Vec.h">
       <Filter>util\math</Filter>
     </ClInclude>
-    <ClInclude Include="src\networking\server\ServerController.h">
-      <Filter>networking\server</Filter>
+    <ClInclude Include="src\engine\object\basecomponents\RigidBodyComponent.h">
+      <Filter>engine\object\basecomponents</Filter>
     </ClInclude>
-    <ClInclude Include="src\networking\server\Server.h">
-      <Filter>networking\server</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\networkutil\Buffer.h">
-      <Filter>networking\netowrkutil</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\client\Client.h">
-      <Filter>networking\client</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\networkutil\networkutils.h">
-      <Filter>networking\netowrkutil</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\client\ClientController.h">
-      <Filter>networking\client</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\networkutil\Peer.h">
-      <Filter>networking\netowrkutil</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\NetworkManager.h">
-      <Filter>networking</Filter>
+    <ClInclude Include="src\game\SimpleEntityBase.h">
+      <Filter>game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -290,6 +296,30 @@
     <ClCompile Include="src\game\main.cpp">
       <Filter>game</Filter>
     </ClCompile>
+    <ClCompile Include="src\networking\NetworkManager.cpp">
+      <Filter>networking</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\client\Client.cpp">
+      <Filter>networking\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\client\ClientController.cpp">
+      <Filter>networking\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\networkutil\Buffer.cpp">
+      <Filter>networking\networkutil</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\networkutil\Peer.cpp">
+      <Filter>networking\networkutil</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\networkutil\networkutils.cpp">
+      <Filter>networking\networkutil</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\server\Server.cpp">
+      <Filter>networking\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\server\ServerController.cpp">
+      <Filter>networking\server</Filter>
+    </ClCompile>
     <ClCompile Include="src\util\math\Mat.cpp">
       <Filter>util\math</Filter>
     </ClCompile>
@@ -299,29 +329,17 @@
     <ClCompile Include="src\util\math\Vec.cpp">
       <Filter>util\math</Filter>
     </ClCompile>
-    <ClCompile Include="src\networking\server\Server.cpp">
-      <Filter>networking\server</Filter>
+    <ClCompile Include="src\engine\object\basecomponents\RigidBodyComponent.cpp">
+      <Filter>engine\object\basecomponents</Filter>
     </ClCompile>
-    <ClCompile Include="src\networking\server\ServerController.cpp">
-      <Filter>networking\server</Filter>
+    <ClCompile Include="src\engine\rendering\IShader.cpp">
+      <Filter>engine\rendering</Filter>
     </ClCompile>
-    <ClCompile Include="src\networking\networkutil\Buffer.cpp">
-      <Filter>networking\netowrkutil</Filter>
+    <ClCompile Include="src\game\SimpleEntityBase.cpp">
+      <Filter>game</Filter>
     </ClCompile>
-    <ClCompile Include="src\networking\client\Client.cpp">
-      <Filter>networking\client</Filter>
-    </ClCompile>
-    <ClCompile Include="src\networking\networkutil\networkutils.cpp">
-      <Filter>networking\netowrkutil</Filter>
-    </ClCompile>
-    <ClCompile Include="src\networking\client\ClientController.cpp">
-      <Filter>networking\client</Filter>
-    </ClCompile>
-    <ClCompile Include="src\networking\networkutil\Peer.cpp">
-      <Filter>networking\netowrkutil</Filter>
-    </ClCompile>
-    <ClCompile Include="src\networking\NetworkManager.cpp">
-      <Filter>networking</Filter>
+    <ClCompile Include="src\engine\object\basecomponents\Component.cpp">
+      <Filter>engine\object\basecomponents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

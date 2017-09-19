@@ -25,7 +25,7 @@ void ServerController::CreateDefaultEntityForPeer(PeerSP p)
 	bs.BeginCommand(NetCommand::CreateEntity);
 	m_Engine->DoCreationSnapShot(&bs);
 
-	EntitySP entity = m_Engine->CreateEntity("SimpleEntity");
+	EntitySP entity = m_Engine->CreateEntity("SimpleEntityBase");
 	m_Engine->AddEntity(entity);
 	p->SetEntity(entity);
 

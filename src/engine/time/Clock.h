@@ -7,8 +7,10 @@ public:
 	Clock();
 	void Start();
 	float MeasureTime();
+	float ResetAndMeasureTime();
 	float GetLastDelta();
 	float GetTimeSinceStart();
+
 private:
 	TimePoint m_TimeStarted;
 	TimePoint m_LastMeasured;

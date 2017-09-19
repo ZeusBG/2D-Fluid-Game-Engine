@@ -1,6 +1,6 @@
 #pragma once
-#include "engine/core/MetaData.h"
-#include "rapidjson/document.h"
+#include "rapidjson/fwd.h"
+#include <memory>
 
 struct ByteStream;
 
@@ -13,7 +13,7 @@ public:
     virtual void Update(float delta) = 0;
     virtual void BeginPlay() {}
     virtual void Destroy() {};
-    virtual void DeSerialize(const rapidjson::Value& val) {}
+    virtual void DeSerializeFromJSON(const rapidjson::Value& val) {}
 	virtual void Serialize(ByteStream* buffer) {}
 	virtual void DeSerialize(ByteStream* buffer) {}
 };

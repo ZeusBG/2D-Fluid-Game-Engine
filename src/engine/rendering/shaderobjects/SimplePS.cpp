@@ -7,6 +7,8 @@
 #include <d3d11_1.h>
 #include <d3dcompiler.h>
 
+IMPLEMENT_METADATA(SimplePS);
+
 void SimplePS::Init()
 {
     auto renderer = Engine::GetEngine()->GetModule<RendererDX11>();
@@ -29,3 +31,4 @@ void SimplePS::BindData(VisualComponent* vc)
 	auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
 	renderCommander->BindPS(&m_PSShader, sizeof(ID3D11PixelShader*));
 }
+

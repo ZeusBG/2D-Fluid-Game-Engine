@@ -64,14 +64,16 @@ struct MetaDataRegister {
 };
 
 #define META_DATA_COMMON \
+private: \
+    const static MetaData s_MetaData;\
 public: \
     static const MetaData* GetMetaData(){ return &s_MetaData; } \
-private: \
-    const static MetaData s_MetaData;
+	virtual const std::string& GetName(){ return s_MetaData.GetName(); } \
+private:
 
-//#define ADD_ABSTRACT_CLASS_METADATA(CLASS) \
-//    META_DATA_COMMON \
-//    static CLASS* FactoryFunc() { return nullptr; }
+#define ADD_ABSTRACT_CLASS_METADATA(CLASS) \
+    META_DATA_COMMON \
+    static std::shared_ptr<CLASS> FactoryFunc() { return nullptr; }
 
 #define ADD_SOLID_CLASS_METADATA(CLASS) \
     META_DATA_COMMON \

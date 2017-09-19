@@ -10,11 +10,12 @@
 class VisualComponent;
 class SimpleVS : public IShader
 {
+	ADD_SOLID_CLASS_METADATA(SimpleVS);
 public:
     
 
     SimpleVS(const char* fileName) : IShader(fileName) {}
-
+	SimpleVS() {}
     virtual void Init();
     virtual void Destroy();
     virtual void BindData(VisualComponent* vc);

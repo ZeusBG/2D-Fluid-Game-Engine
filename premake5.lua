@@ -5,15 +5,46 @@ project "2D_Engine"
    kind "WindowedApp"
    language "C++"
    targetdir "bin/%{cfg.buildcfg}"
-   includedirs { "$(ProjectDir)/src", "$(ProjectDir)/extern/sdl/include", "$(ProjectDir)/extern/enet-1.3.13/include", "$(ProjectDir)/extern" }
-   files { "src/**.h", "src/**.c", "src/**.cpp", "src/**.hpp", "src/**.hlsl" }
-   excludes { "*.hlsl", "src/networking/server/main.cpp" }
-   
+   includedirs 
+   { 
+      "$(ProjectDir)/src",
+	  "$(ProjectDir)/extern/sdl/include",
+	  "$(ProjectDir)/extern/enet-1.3.13/include",
+	  "$(ProjectDir)/extern",
+      "$(ProjectDir)/extern/Box2D"
+   }
 
-   flags { "WinMain" }
+   files 
+   { 
+      "src/**.h",
+	  "src/**.c",
+	  "src/**.cpp",
+	  "src/**.hpp",
+	  "src/**.hlsl"
+   }
+
+   excludes
+   { 
+      "*.hlsl",
+	  "src/networking/server/main.cpp"
+   }
+
+   flags { "WinMain", "MultiProcessorCompile" }
    rtti ("On")
-   links { "$(ProjectDir)/extern/sdl/SDL2", "d3d11", "d3dcompiler", "$(ProjectDir)/extern/enet-1.3.13/enet.lib", "ws2_32.lib", "winmm.lib" }
-   libdirs { "$(ProjectDir)/extern/sdl/SDL2.dll", "$(ProjectDir)/extern/sdl" }
+   links 
+   {
+      "$(ProjectDir)/extern/sdl/SDL2",
+	  "d3d11", "d3dcompiler",
+	  "$(ProjectDir)/extern/enet-1.3.13/enet.lib",
+	  "ws2_32.lib",
+	  "winmm.lib",
+	  "$(ProjectDir)/extern/Box2D/bin/$(Configuration)/Box2D.lib"
+   }
+   libdirs
+   {
+      "$(ProjectDir)/extern/sdl/SDL2.dll",
+	  "$(ProjectDir)/extern/sdl"
+   }
 
    postbuildcommands { "copy /Y $(ProjectDir)extern\\sdl\\SDL2.dll $(ProjectDir)$(OutDir)" }
 

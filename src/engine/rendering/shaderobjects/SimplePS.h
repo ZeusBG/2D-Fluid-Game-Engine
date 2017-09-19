@@ -11,9 +11,12 @@ class VisualComponent;
 struct ID3D11PixelShader;
 class SimplePS : public IShader
 {
+	// TODO Later when there is a shader factory
+	// change the create function !!
+	ADD_SOLID_CLASS_METADATA(SimplePS);
 public:
     SimplePS(const char* fileName) : IShader(fileName) {}
-
+	SimplePS() {}
     virtual void Init();
     virtual void Destroy();
     virtual void BindData(VisualComponent* vc);

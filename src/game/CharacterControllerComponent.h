@@ -16,8 +16,8 @@ class CharacterControllerComponent : public Component
 public:
     CharacterControllerComponent();
 
-    virtual void Update(float dt);
-
+    virtual void Update(float dt) override;
+	virtual void Init() override;
 private:
     //unit type : m/s
     float m_MoveVelocity;

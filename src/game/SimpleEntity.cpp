@@ -3,15 +3,18 @@
 #include "networking/networkutil/Buffer.h"
 #include "networking/networkutil/networkutils.h"
 #include "game/ObjectsFactory.h"
+
 IMPLEMENT_METADATA(SimpleEntity);
+
 SimpleEntity::SimpleEntity()
 {
-    m_Transform.Scale(100.f);
+	AddComponent(ObjectsFactory::CreateComponent("CharacterControllerComponent"));
+	AddComponent(ObjectsFactory::CreateComponent("CameraComponent"));
 }
 
 void SimpleEntity::Update(float delta)
 {
-    Entity::Update(delta);
+    SimpleEntityBase::Update(delta);
 }
 SimpleEntity::~SimpleEntity()
 {
@@ -19,10 +22,9 @@ SimpleEntity::~SimpleEntity()
 
 void SimpleEntity::Serialize(ByteStream* bs)
 {
-	bs->AddData(&m_ID, sizeof(int));
-	SerializeTransform(&m_Transform, bs);
+	SimpleEntityBase::Serialize(bs);
 }
-void SimpleEntity::DeSerialize(ByteStream* buffer)
+void SimpleEntity::DeSerialize(ByteStream* bs)
 {
-	DeSerializeTransform(&m_Transform, buffer);
+	SimpleEntityBase::DeSerialize(bs);
 }

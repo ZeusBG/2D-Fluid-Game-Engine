@@ -3,7 +3,7 @@
 #include "../object/BaseObject.h"
 #include "../object/Entity.h"
 #include "IModule.h"
-#include "rapidjson/document.h"
+#include "rapidjson/fwd.h"
 
 struct ByteStream;
 

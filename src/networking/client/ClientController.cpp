@@ -134,6 +134,7 @@ void ClientController::SpawnEntity(int entityTypeId, int id)
 	else
 	{
 		auto entity = m_Engine->CreateEntityFromType(entityTypeId);
+		entity->SetID(id);
 		m_Engine->AddEntity(entity);
 	}
 }
