@@ -19,7 +19,17 @@ enum RenderCmdType
     SetInputLayout,
     SetConstantBuffers,
     DrawIndexed,
-    ReleaseResource
+    ReleaseResource,
+	CreateTex,
+	BindTex,
+	CreateSampler2DCmd,
+	SetSampler2DCmd,
+	ReleaseTexture
+};
+
+enum TextureFormat
+{
+	RGBA
 };
 
 enum ResourceType
@@ -82,6 +92,20 @@ struct UpdateSubresourceData
     void* Data;
     unsigned int SrcRowPitch;
     unsigned int SrcDepthPitch;
+};
+
+struct CreateTextureInfo
+{
+	void* data;
+	unsigned int Width;
+	unsigned int Height;
+	TextureFormat Format;
+	int TexID;
+};
+
+struct BindTextureInfo
+{
+	int TextureID;
 };
 
 struct RenderCommand

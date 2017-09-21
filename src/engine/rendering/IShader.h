@@ -26,7 +26,7 @@ public:
 
 	//TODO remvoe ID3D11DeviceContext from abstraction
     virtual void BindData(VisualComponent* vc) = 0;
-
+	virtual void InitConstantBuffers() {}
 	virtual void DeSerializeFromJSON(const rapidjson::Value& val);
 
     //TODO make facotry for shaders

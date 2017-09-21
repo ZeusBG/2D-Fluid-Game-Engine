@@ -40,6 +40,6 @@ void CharacterControllerComponent::Init()
 }
 
 CharacterControllerComponent::CharacterControllerComponent() :
-    m_MoveVelocity(100.f),
+    m_MoveVelocity(1000.f),
     m_RotationVelocity(1.f)
 {}

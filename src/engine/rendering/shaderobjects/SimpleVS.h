@@ -12,15 +12,14 @@ class SimpleVS : public IShader
 {
 	ADD_SOLID_CLASS_METADATA(SimpleVS);
 public:
-    
-
     SimpleVS(const char* fileName) : IShader(fileName) {}
 	SimpleVS() {}
-    virtual void Init();
-    virtual void Destroy();
-    virtual void BindData(VisualComponent* vc);
-    virtual void UpdateShaderParams();
-private:
+    virtual void Init() override;
+    virtual void Destroy() override;
+    virtual void BindData(VisualComponent* vc) override;
+    virtual void UpdateShaderParams() override;
+	virtual void InitConstantBuffers() override;
+protected:
     VSData m_VSShader;
     ID3D11Buffer* m_WorldMatrix;
     // Add input layout

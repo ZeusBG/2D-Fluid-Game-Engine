@@ -38,15 +38,7 @@ void SimpleVS::Init()
     };
     UINT numElements = ARRAYSIZE(layout);
     m_VSShader = renderer->CreateVSFromFile(m_FileName.c_str(), layout, numElements, ShaderVersion::V4_0);
-
-    D3D11_BUFFER_DESC bd;
-    ZeroMemory(&bd, sizeof(bd));
-    bd.Usage = D3D11_USAGE_DEFAULT;
-    bd.ByteWidth = sizeof(WVP);
-    bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-    bd.CPUAccessFlags = 0;
-    auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
-    renderCommander->CreateBuffer(&bd, nullptr, &m_WorldMatrix);
+	InitConstantBuffers();
 }
 
 void SimpleVS::Destroy()
@@ -59,7 +51,18 @@ void SimpleVS::Destroy()
 
 void SimpleVS::UpdateShaderParams()
 {
+}
 
+void SimpleVS::InitConstantBuffers()
+{
+	D3D11_BUFFER_DESC bd;
+	ZeroMemory(&bd, sizeof(bd));
+	bd.Usage = D3D11_USAGE_DEFAULT;
+	bd.ByteWidth = sizeof(WVP);
+	bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	bd.CPUAccessFlags = 0;
+	auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
+	renderCommander->CreateBuffer(&bd, nullptr, &m_WorldMatrix);
 }
 
 void SimpleVS::BindData(VisualComponent* vc)

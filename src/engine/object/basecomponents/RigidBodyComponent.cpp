@@ -95,7 +95,20 @@ void RigidBodyComponent::DeSerializeFromJSON(const rapidjson::Value& val)
 		else if (strcmp(fixtureInfo["Name"].GetString(), "Box") == 0)
 		{
 			auto box = std::make_shared<b2PolygonShape>();
-			box->SetAsBox(val["Fixture"]["h"].GetFloat(), val["Collider"]["w"].GetFloat());
+
+			float width = 1.0f;
+			float height = 1.0f;
+			if (val["Fixture"].HasMember("w"))
+			{
+				width = val["Fixture"]["w"].GetFloat();
+			}
+			if (val["Fixture"].HasMember("h"))
+			{
+				height = val["Fixture"]["h"].GetFloat();
+			}
+			width *= scale.x;
+			height *= scale.y;
+			box->SetAsBox(width, height);
 			m_Collider = box;
 		}
 		else if (strcmp(fixtureInfo["Name"].GetString(), "None") == 0)

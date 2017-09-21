@@ -12,7 +12,7 @@ class Mesh
 public:
     void SetVertices(const AVector<XMFLOAT2>& vertices);
     void AddVertex(float x, float y);
-    void InitializeBuffers(ID3D11Device* device, VisualComponent* visualComponent);
+    void InitializeBuffers(VisualComponent* visualComponent);
     void RenderBuffers() const;
     void ReleaseResource();
     void SetIndices(const AVector<unsigned int> indices) { m_Indices = indices; }

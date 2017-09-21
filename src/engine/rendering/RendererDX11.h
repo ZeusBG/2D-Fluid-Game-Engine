@@ -1,5 +1,6 @@
 #pragma once
 #include "IRenderer.h"
+#include "TextureManagerDX11.h"
 #include <d3d11_1.h>
 #include <d3dcompiler.h>
 #include <queue>
@@ -32,7 +33,9 @@ public:
 
     ID3D11Buffer* CreateConstantBuffer(UINT size);
     void ProcessCommand(RenderCommand& cmd);
+	void LoadTexture(void* data, unsigned width, unsigned height, TextureFormat format, int texID);
 	RenderCommand& GetLastCommand() { return m_CommandBuffer.front(); }
+	void CreateDefaultSampler2D(ID3D11SamplerState** state);
 
     virtual ID3D11Device* GetDevice() { return m_pd3dDevice1; }
 
@@ -42,12 +45,19 @@ public:
     virtual void AddRenderCommand(const RenderCommand& cmd);
     virtual void DoRenderingCommands();
 	virtual void Start();
+
+	inline TextureManagerDX11& GetTextureManager() { return m_TextureManager; }
 private:
     int m_ScreenWidth;
     int m_ScreenHeight;
     HRESULT CompileShaderFromFile(const char* file, LPCSTR entryPoint, LPCSTR shaderModel, ID3DBlob** blobOut);
     HRESULT InitDevice();
     std::queue<RenderCommand> m_CommandBuffer;
+
+	static std::pair<TextureFormat, DXGI_FORMAT> s_FormatConverter[];
+	static std::pair<TextureFormat, int> s_FormatSizeConverter[];
+
+	TextureManagerDX11 m_TextureManager;
 };
 
 using RendererDX11SP = std::shared_ptr<RendererDX11>;

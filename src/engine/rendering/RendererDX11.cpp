@@ -11,6 +11,15 @@
 #include <d3dcompiler.h>
 #include <directxmath.h>
 
+std::pair<TextureFormat, DXGI_FORMAT> RendererDX11::s_FormatConverter[] =
+{
+	{ TextureFormat::RGBA,  DXGI_FORMAT_R8G8B8A8_UNORM}
+};
+
+std::pair<TextureFormat, int> RendererDX11::s_FormatSizeConverter[] =
+{
+	{ TextureFormat::RGBA,  4 }
+};
 
 RendererDX11::RendererDX11() {}
 RendererDX11::~RendererDX11() {}
@@ -471,10 +480,109 @@ void RendererDX11::ProcessCommand(RenderCommand& cmd)
                 static_cast<ID3D11InputLayout*>(info->Ptr)->Release();
         }
         break;
+		case RenderCmdType::CreateTex:
+		{
+			CreateTextureInfo* info = reinterpret_cast<CreateTextureInfo*>(cmd.CommandStructure);
+			LoadTexture(info->data, info->Width, info->Height, info->Format, info->TexID);
+		}
+		break;
+		case RenderCmdType::BindTex:
+		{
+			BindTextureInfo* info = reinterpret_cast<BindTextureInfo*>(cmd.CommandStructure);
+			m_pImmediateContext1->PSSetShaderResources(0, 1, m_TextureManager.GetTexture(info->TextureID));
+		}
+		break;
+		case RenderCmdType::ReleaseTexture:
+		{
+			int* info = reinterpret_cast<int*>(cmd.CommandStructure);
+			ID3D11ShaderResourceView** tex = m_TextureManager.GetTexture(*info);
+			(*tex)->Release();
+			m_TextureManager.OnTextureRemoved(*info);
+		}
+		break;
+		case RenderCmdType::CreateSampler2DCmd:
+		{
+			ID3D11SamplerState** samplerState = nullptr;
+			memcpy(&samplerState, cmd.CommandData, sizeof(ID3D11SamplerState**));
+			CreateDefaultSampler2D(samplerState);
+		}
+		break;
+		case RenderCmdType::SetSampler2DCmd:
+		{
+			ID3D11SamplerState** samplerState = nullptr;
+			memcpy(&samplerState, cmd.CommandData, sizeof(ID3D11SamplerState**));
+			m_pImmediateContext1->PSSetSamplers(0, 1, samplerState);
+		}
+		break;
     }
 }
 
+void RendererDX11::LoadTexture(void* data, unsigned width, unsigned height, TextureFormat format, int texID)
+{
+	// Create texture
+	D3D11_TEXTURE2D_DESC desc;
+	desc.Width = width;
+	desc.Height = height;
+	desc.MipLevels = 1;
+	desc.ArraySize = 1;
+	desc.Format = s_FormatConverter[format].second;
+	desc.SampleDesc.Count = 1;
+	desc.SampleDesc.Quality = 0;
+	desc.Usage = D3D11_USAGE_DEFAULT;
+	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+	desc.CPUAccessFlags = 0;
+	desc.MiscFlags = 0;
+
+	D3D11_SUBRESOURCE_DATA initData;
+	initData.pSysMem = data;
+	initData.SysMemPitch = static_cast<UINT>(width * s_FormatSizeConverter[format].second);
+	initData.SysMemSlicePitch = static_cast<UINT>(width * height * s_FormatSizeConverter[format].second);
+
+	ID3D11Texture2D* tex = nullptr;
+	HRESULT hr = m_pd3dDevice1->CreateTexture2D(&desc, &initData, &tex);
+
+	if (SUCCEEDED(hr) && tex != 0)
+	{
+		D3D11_SHADER_RESOURCE_VIEW_DESC SRVDesc;
+		memset(&SRVDesc, 0, sizeof(SRVDesc));
+		SRVDesc.Format = s_FormatConverter[format].second;
+		SRVDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+		SRVDesc.Texture2D.MipLevels = -1;
+
+		hr = m_pd3dDevice1->CreateShaderResourceView(tex, &SRVDesc, m_TextureManager.GetTexture(texID));
+		if (FAILED(hr))
+		{
+			tex->Release();
+		}
+	}
+}
+
 const char* RendererDX11::GetName() { return "Renderer"; }
+
+void RendererDX11::CreateDefaultSampler2D(ID3D11SamplerState** samplerState)
+{
+	D3D11_SAMPLER_DESC samplerDesc;
+	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.MipLODBias = 0.0f;
+	samplerDesc.MaxAnisotropy = 1;
+	samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+	samplerDesc.BorderColor[0] = 0;
+	samplerDesc.BorderColor[1] = 0;
+	samplerDesc.BorderColor[2] = 0;
+	samplerDesc.BorderColor[3] = 0;
+	samplerDesc.MinLOD = 0;
+	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+	// Create the texture sampler state.
+	HRESULT result = m_pd3dDevice1->CreateSamplerState(&samplerDesc, samplerState);
+	if (FAILED(result))
+	{
+		LOG_L1(Rendering, WARNING, "Sampler2D failed to Create !");
+	}
+}
 
 void RendererDX11::Destroy()
 {

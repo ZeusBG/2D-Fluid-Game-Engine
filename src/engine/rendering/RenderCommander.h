@@ -6,6 +6,7 @@ struct ID3D11Resource;
 struct ID3D11VertexShader;
 struct ID3D11Buffer;
 struct ID3D11InputLayout;
+struct ID3D11SamplerState;
 
 class RenderCommanderDx11 : public IModule
 {
@@ -29,4 +30,9 @@ public:
 	void DrawIndexed(unsigned int indexCount, unsigned int startIndex, unsigned int baseVertexlocation);
 	void CreateBuffer(D3D11_BUFFER_DESC* Desc, D3D11_SUBRESOURCE_DATA* InitialData, ID3D11Buffer** Buffer);
     void ReleaseResource(void* resourcePtr, ResourceType type);
+	void CreateTexture(uint8_t* data, uint32_t width, uint32_t height, TextureFormat format, int texID);
+	void BindTexture(int textureID);
+	void CreateSampler2D(ID3D11SamplerState** state);
+	void SetSampler2D(ID3D11SamplerState** state);
+	void DeleteTexture(int texID);
 };

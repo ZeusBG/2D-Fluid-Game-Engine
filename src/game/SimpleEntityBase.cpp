@@ -9,7 +9,7 @@ IMPLEMENT_METADATA(SimpleEntityBase);
 SimpleEntityBase::SimpleEntityBase()
 {
 	AddComponent(ObjectsFactory::CreateComponent("RigidBodyComponent"));
-	AddComponent(ObjectsFactory::CreateComponent("SimpleVisualComponent"));
+	//AddComponent(ObjectsFactory::CreateComponent("SimpleVisualComponent"));
 }
 
 void SimpleEntityBase::Update(float delta)

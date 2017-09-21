@@ -114,6 +114,9 @@
     <ClInclude Include="src\engine\object\basecomponents\CameraComponent.h">
       <Filter>engine\object\basecomponents</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\object\basecomponents\RigidBodyComponent.h">
+      <Filter>engine\object\basecomponents</Filter>
+    </ClInclude>
     <ClInclude Include="src\engine\object\basecomponents\component.h">
       <Filter>engine\object\basecomponents</Filter>
     </ClInclude>
@@ -144,6 +147,9 @@
     <ClInclude Include="src\engine\rendering\RendererDX11.h">
       <Filter>engine\rendering</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\rendering\TextureManagerDX11.h">
+      <Filter>engine\rendering</Filter>
+    </ClInclude>
     <ClInclude Include="src\engine\rendering\shaderobjects\SimplePS.h">
       <Filter>engine\rendering\shaderobjects</Filter>
     </ClInclude>
@@ -166,6 +172,9 @@
       <Filter>game</Filter>
     </ClInclude>
     <ClInclude Include="src\game\SimpleEntity.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SimpleEntityBase.h">
       <Filter>game</Filter>
     </ClInclude>
     <ClInclude Include="src\game\SimpleVisualComponent.h">
@@ -210,10 +219,13 @@
     <ClInclude Include="src\util\math\Vec.h">
       <Filter>util\math</Filter>
     </ClInclude>
-    <ClInclude Include="src\engine\object\basecomponents\RigidBodyComponent.h">
-      <Filter>engine\object\basecomponents</Filter>
+    <ClInclude Include="src\game\SimpleTexturedVC.h">
+      <Filter>game</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\SimpleEntityBase.h">
+    <ClInclude Include="src\game\SimpleTexturedVS.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SimpleTexturedPS.h">
       <Filter>game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -251,11 +263,20 @@
     <ClCompile Include="src\engine\object\basecomponents\CameraComponent.cpp">
       <Filter>engine\object\basecomponents</Filter>
     </ClCompile>
+    <ClCompile Include="src\engine\object\basecomponents\Component.cpp">
+      <Filter>engine\object\basecomponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\object\basecomponents\RigidBodyComponent.cpp">
+      <Filter>engine\object\basecomponents</Filter>
+    </ClCompile>
     <ClCompile Include="src\engine\object\basecomponents\VisualComponent.cpp">
       <Filter>engine\object\basecomponents</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\physics\Physics.cpp">
       <Filter>engine\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\IShader.cpp">
+      <Filter>engine\rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\Mesh.cpp">
       <Filter>engine\rendering</Filter>
@@ -264,6 +285,9 @@
       <Filter>engine\rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\RendererDX11.cpp">
+      <Filter>engine\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\TextureManagerDX11.cpp">
       <Filter>engine\rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\shaderobjects\SimplePS.cpp">
@@ -288,6 +312,9 @@
       <Filter>game</Filter>
     </ClCompile>
     <ClCompile Include="src\game\SimpleEntity.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\SimpleEntityBase.cpp">
       <Filter>game</Filter>
     </ClCompile>
     <ClCompile Include="src\game\SimpleVisualComponent.cpp">
@@ -329,17 +356,15 @@
     <ClCompile Include="src\util\math\Vec.cpp">
       <Filter>util\math</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\object\basecomponents\RigidBodyComponent.cpp">
-      <Filter>engine\object\basecomponents</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\rendering\IShader.cpp">
-      <Filter>engine\rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\SimpleEntityBase.cpp">
+    <ClCompile Include="extern\lodepng\lodepng.cpp" />
+    <ClCompile Include="src\game\SimpleTexturedVC.cpp">
       <Filter>game</Filter>
     </ClCompile>
-    <ClCompile Include="src\engine\object\basecomponents\Component.cpp">
-      <Filter>engine\object\basecomponents</Filter>
+    <ClCompile Include="src\game\SimpleTexturedVS.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\SimpleTexturedPS.cpp">
+      <Filter>game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

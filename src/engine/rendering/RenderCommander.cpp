@@ -130,6 +130,64 @@ void RenderCommanderDx11::ReleaseResource(void* resourcePtr, ResourceType type)
     m_Renderer->AddRenderCommand(cmd);
 }
 
+void RenderCommanderDx11::CreateTexture(uint8_t* data, uint32_t width, uint32_t height, TextureFormat format, int texID)
+{
+	RenderCommand cmd;
+	cmd.type = RenderCmdType::CreateTex;
+
+	CreateTextureInfo createTextureInfo;
+	createTextureInfo.data = data;
+	createTextureInfo.Width = width;
+	createTextureInfo.Height = height;
+	createTextureInfo.Format = format;
+	createTextureInfo.TexID = texID;
+	cmd.AddStructure<CreateTextureInfo>(createTextureInfo);
+
+	m_Renderer->AddRenderCommand(cmd);
+
+}
+
+void RenderCommanderDx11::BindTexture(int textureID)
+{
+	RenderCommand cmd;
+	cmd.type = RenderCmdType::BindTex;
+
+	BindTextureInfo bindTextureInfo;
+	bindTextureInfo.TextureID = textureID;
+	cmd.AddStructure<BindTextureInfo>(bindTextureInfo);
+	
+	m_Renderer->AddRenderCommand(cmd);
+}
+
+void RenderCommanderDx11::DeleteTexture(int textureID)
+{
+	RenderCommand cmd;
+	cmd.type = RenderCmdType::ReleaseTexture;
+	cmd.AddStructure(textureID);
+
+	m_Renderer->AddRenderCommand(cmd);
+}
+
+void RenderCommanderDx11::CreateSampler2D(ID3D11SamplerState** state)
+{
+	RenderCommand cmd;
+	cmd.type = CreateSampler2DCmd;
+
+	memcpy(cmd.CommandData, &state, sizeof(ID3D11SamplerState**));
+
+	m_Renderer->AddRenderCommand(cmd);
+}
+
+void RenderCommanderDx11::SetSampler2D(ID3D11SamplerState ** state)
+{
+	RenderCommand cmd;
+	cmd.type = SetSampler2DCmd;
+
+	memcpy(cmd.CommandData, &state, sizeof(ID3D11SamplerState**));
+
+	m_Renderer->AddRenderCommand(cmd);
+}
+
 void RenderCommanderDx11::SetIndexBuffers(ID3D11Buffer* indexBuffer, DataSizeFormat format, unsigned int offset)
 {
 	RenderCommand cmd;

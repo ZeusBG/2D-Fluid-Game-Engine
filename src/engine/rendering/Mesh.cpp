@@ -14,7 +14,7 @@ void Mesh::AddVertex(float x, float y)
     m_Vertices.push_back({ x,y });
 }
 
-void Mesh::InitializeBuffers(ID3D11Device* device, VisualComponent* visualComponent)
+void Mesh::InitializeBuffers(VisualComponent* visualComponent)
 {
     //Vertex* vertices;
     //unsigned long* indices;
