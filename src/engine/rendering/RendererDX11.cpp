@@ -36,6 +36,8 @@ void RendererDX11::Init(Engine* engine)
     m_hInst = window->GetHInstance();
 
     InitDevice();
+
+	m_TextureManager.Init();
 }
 
 void RendererDX11::Start()

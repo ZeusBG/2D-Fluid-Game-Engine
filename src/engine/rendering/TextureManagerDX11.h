@@ -20,10 +20,10 @@ private:
 	static const char* DEFAULT_TEXTURE;
 	static int s_TexIDGen;
 private:
-	ID3D11ShaderResourceView* m_DefaultTexture;
 	std::unordered_map<int, TextureInfo > m_Textures;
 	std::unordered_map<std::string, int> m_LoadedTextures;
 	std::shared_ptr<std::vector<unsigned char> > OpenTexture(const std::string& file, unsigned& width, unsigned& height);
+	int m_DefaultTextureID;
 
 public:
 	~TextureManagerDX11();

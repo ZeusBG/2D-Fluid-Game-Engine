@@ -9,6 +9,7 @@ int TextureManagerDX11::s_TexIDGen = 0;
 
 TextureManagerDX11::~TextureManagerDX11()
 {
+	this->OnTextureRemoved(m_DefaultTextureID);
 	assert(m_LoadedTextures.size() == 0);
 	assert(m_Textures.size() == 0);
 }
@@ -20,7 +21,7 @@ void TextureManagerDX11::Init()
 
 void TextureManagerDX11::LoadDefaultTexture()
 {
-	int texID = ++s_TexIDGen;
+	m_DefaultTextureID = ++s_TexIDGen;
 	unsigned width, height;
 
 	auto image = OpenTexture(DEFAULT_TEXTURE, width, height);
@@ -28,10 +29,10 @@ void TextureManagerDX11::LoadDefaultTexture()
 
 	// This is the default texture,
 	// it shouldnt be deleted
-	info.NumOwners = INT_MAX;
+	info.NumOwners = 1;
 	info.RawData = image;
-	m_Textures.insert({ texID, info });
-	g_Engine->GetModule<RendererDX11>()->LoadTexture(image->data(), width, height, TextureFormat::RGBA, texID);
+	m_Textures.insert({ m_DefaultTextureID, info });
+	g_Engine->GetModule<RendererDX11>()->LoadTexture(image->data(), width, height, TextureFormat::RGBA, m_DefaultTextureID);
 }
 
 void TextureManagerDX11::DeleteTexture(int texID)
@@ -77,6 +78,8 @@ int TextureManagerDX11::LoadTexture(const std::string& file)
 
 	TextureInfo info;
 	int texID = ++s_TexIDGen;
+	// Set the default texture, while this one is loading
+	info.ResoureView = *GetTexture(m_DefaultTextureID);
 
 	info.NumOwners = 1;
 	info.RawData = image;
