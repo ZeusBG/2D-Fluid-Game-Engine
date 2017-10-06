@@ -4,12 +4,11 @@
 
 #include "util/Collections.h"
 
-#include "engine/rendering/Mesh.h"
 #include "engine/rendering/IShader.h"
 
 // TODO istoilov : make it read for a file with vertices. Clean up STL
 #include <string.h>
-
+class IMesh;
 class VisualComponent : public Component
 {
     ADD_SOLID_CLASS_METADATA(VisualComponent)
@@ -25,23 +24,16 @@ public:
 
     inline void SetPixelShader(SharedShaderPtr shader) { m_PixelShader = shader; }
     inline SharedShaderPtr GetPixelShader() const { return m_PixelShader; }
+	inline void SetMesh(const std::shared_ptr<IMesh> mesh) { m_Mesh = mesh; }
 
-    inline void AddVertex(float x, float y);
-
-    //Overrides:
     virtual void Init();
-
     virtual void Destroy();
-
     virtual void Update(float delta);
-    virtual const Mesh& GetMesh() { return m_Mesh; }
-
-
+	virtual const std::shared_ptr<IMesh> GetMesh() { return m_Mesh; }
 protected:
-    Mesh m_Mesh;
+    std::shared_ptr<IMesh> m_Mesh;
     SharedShaderPtr m_VertexShader = nullptr;
     SharedShaderPtr m_PixelShader = nullptr;
-    // TODO Add texture
 
 };
 

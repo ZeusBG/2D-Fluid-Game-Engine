@@ -1,384 +1,419 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="engine">
-      <UniqueIdentifier>{FBDB78FB-E77D-A3D1-D038-B725BC792A22}</UniqueIdentifier>
+    <Filter Include="extern">
+      <UniqueIdentifier>{7BE134FC-6783-5FD2-503E-73263C7FE622}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\camera">
-      <UniqueIdentifier>{33DC186A-9F9C-94A0-68D7-DD1DD456D97C}</UniqueIdentifier>
+    <Filter Include="extern\lodepng">
+      <UniqueIdentifier>{B3602F2B-9F2E-2331-88C2-9357742FFF95}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\core">
-      <UniqueIdentifier>{5341430D-BFF6-BB02-48EB-B5D9B49FB206}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\input">
-      <UniqueIdentifier>{5A6C17B6-46CF-A65A-EF54-DF10DB9672DD}</UniqueIdentifier>
+    <Filter Include="src\engine">
+      <UniqueIdentifier>{32B5D758-1E6D-19A6-8774-F201734BB496}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\logging">
-      <UniqueIdentifier>{B11F3D82-9DED-3088-8681-A1AE72EE0CED}</UniqueIdentifier>
+    <Filter Include="src\engine\camera">
+      <UniqueIdentifier>{8A514EE1-F667-4C77-3FDF-D798AB341DFF}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\memory">
-      <UniqueIdentifier>{23FFB481-8FBF-30B8-58FA-7935C4797594}</UniqueIdentifier>
+    <Filter Include="src\engine\core">
+      <UniqueIdentifier>{EA741D25-5600-8BE9-5F11-0EDECB1BE7E9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\object">
-      <UniqueIdentifier>{41352786-ADF5-A2BC-7630-EC39E2AFE798}</UniqueIdentifier>
+    <Filter Include="src\engine\input">
+      <UniqueIdentifier>{D11238C9-BD0B-571B-E63D-3CA0D2953627}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\object\basecomponents">
-      <UniqueIdentifier>{913AB35E-7DF5-A20A-26AD-1B551247ED9A}</UniqueIdentifier>
+    <Filter Include="src\engine\logging">
+      <UniqueIdentifier>{E83F21E0-D423-E235-3D84-DC882987CCB7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\physics">
-      <UniqueIdentifier>{8D421EA7-7910-12AD-62A4-82D34E11EE11}</UniqueIdentifier>
+    <Filter Include="src\engine\memory">
+      <UniqueIdentifier>{7A74EAF8-E68A-E88E-2F02-74B09B57B916}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\rendering">
-      <UniqueIdentifier>{283BEE99-1434-0DEC-3D66-F27029BEECF7}</UniqueIdentifier>
+    <Filter Include="src\engine\object">
+      <UniqueIdentifier>{98AA5CFD-04C1-5A93-4D38-E6B4B98D2B1B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\rendering\shaderobjects">
-      <UniqueIdentifier>{B84BB85A-A471-82C1-8DB7-078D797CA78D}</UniqueIdentifier>
+    <Filter Include="src\engine\object\basecomponents">
+      <UniqueIdentifier>{08EFA73D-F43F-937F-1DA4-8141095426E9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\rendering\shaders">
-      <UniqueIdentifier>{21A09677-0DC5-E5F7-3610-CB872294E415}</UniqueIdentifier>
+    <Filter Include="src\engine\physics">
+      <UniqueIdentifier>{C4620205-B046-C35A-19A7-BDAD05AAADDC}</UniqueIdentifier>
     </Filter>
-    <Filter Include="engine\time">
-      <UniqueIdentifier>{99794C0D-052F-C502-8E23-BFD9FAD7BB06}</UniqueIdentifier>
+    <Filter Include="src\engine\rendering">
+      <UniqueIdentifier>{1F455B01-0BD4-E4CA-B4F2-F8C5A060F570}</UniqueIdentifier>
     </Filter>
-    <Filter Include="game">
-      <UniqueIdentifier>{9F35977C-8B6C-980D-3459-7E10206F140F}</UniqueIdentifier>
+    <Filter Include="src\engine\rendering\mesh">
+      <UniqueIdentifier>{5B520E52-C714-42DC-10C5-D0687CC61ABA}</UniqueIdentifier>
     </Filter>
-    <Filter Include="networking">
-      <UniqueIdentifier>{8D85AFC8-793D-F115-E244-CA71CE1B8C06}</UniqueIdentifier>
+    <Filter Include="src\engine\rendering\shaderobjects">
+      <UniqueIdentifier>{EFF9ABC9-DB35-AF33-4448-C72A30A3574E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="networking\client">
-      <UniqueIdentifier>{1BA967B2-87BF-6548-D036-F1693C8C36D0}</UniqueIdentifier>
+    <Filter Include="src\engine\rendering\shaders">
+      <UniqueIdentifier>{18B10DC0-046C-FD6B-AD23-76B699BD47FC}</UniqueIdentifier>
     </Filter>
-    <Filter Include="networking\networkutil">
-      <UniqueIdentifier>{E483624E-D07D-8BA0-B9EA-21B1A583F10C}</UniqueIdentifier>
+    <Filter Include="src\engine\time">
+      <UniqueIdentifier>{30AD2625-9C38-94E9-A549-17DE1154F0E9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="networking\server">
-      <UniqueIdentifier>{33BE40D7-9FD4-3E6D-E84B-CA8E54A10FF5}</UniqueIdentifier>
+    <Filter Include="src\game">
+      <UniqueIdentifier>{165530CF-0222-8BDA-2B3B-79821767C068}</UniqueIdentifier>
     </Filter>
-    <Filter Include="util">
-      <UniqueIdentifier>{43339F7C-2F6A-A00D-D856-8610C46C1C0F}</UniqueIdentifier>
+    <Filter Include="src\networking">
+      <UniqueIdentifier>{4422B6FF-30F0-A905-1984-1A2C05F1856A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="util\math">
-      <UniqueIdentifier>{1CA6F0CE-8810-A545-D14E-56EB3DF8829A}</UniqueIdentifier>
+    <Filter Include="src\networking\client">
+      <UniqueIdentifier>{F2F17507-5E5E-3102-2752-C95F937D536A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\networking\networkutil">
+      <UniqueIdentifier>{1BEB22E5-07FB-CEB5-70B4-33D45CE3BD4E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\networking\server">
+      <UniqueIdentifier>{0A074F2C-7673-0A27-3F67-A284AB922C8F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\util">
+      <UniqueIdentifier>{BA5238CF-A61F-93DA-CF38-8182BB64C868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\util\math">
+      <UniqueIdentifier>{F307AB0E-5FC8-2645-2803-70C294826B21}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\GameState.h">
-      <Filter>engine</Filter>
+      <Filter>src\engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\StateStack.h">
-      <Filter>engine</Filter>
+      <Filter>src\engine</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\camera\Camera.h">
-      <Filter>engine\camera</Filter>
+      <Filter>src\engine\camera</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\camera\CameraHandler.h">
-      <Filter>engine\camera</Filter>
+      <Filter>src\engine\camera</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\core\Engine.h">
-      <Filter>engine\core</Filter>
+      <Filter>src\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\core\IModule.h">
-      <Filter>engine\core</Filter>
+      <Filter>src\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\core\MetaData.h">
-      <Filter>engine\core</Filter>
+      <Filter>src\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\core\SystemSettings.h">
-      <Filter>engine\core</Filter>
+      <Filter>src\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\core\Window.h">
-      <Filter>engine\core</Filter>
+      <Filter>src\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\core\World.h">
-      <Filter>engine\core</Filter>
+      <Filter>src\engine\core</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\input\InputHandler.h">
-      <Filter>engine\input</Filter>
+      <Filter>src\engine\input</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\logging\Logging.h">
-      <Filter>engine\logging</Filter>
+      <Filter>src\engine\logging</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\memory\Allocator.h">
-      <Filter>engine\memory</Filter>
+      <Filter>src\engine\memory</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\object\BaseObject.h">
-      <Filter>engine\object</Filter>
+      <Filter>src\engine\object</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\object\Entity.h">
-      <Filter>engine\object</Filter>
+      <Filter>src\engine\object</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\object\Transform.h">
-      <Filter>engine\object</Filter>
+      <Filter>src\engine\object</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\object\basecomponents\CameraComponent.h">
-      <Filter>engine\object\basecomponents</Filter>
+      <Filter>src\engine\object\basecomponents</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\object\basecomponents\RigidBodyComponent.h">
-      <Filter>engine\object\basecomponents</Filter>
+      <Filter>src\engine\object\basecomponents</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\object\basecomponents\component.h">
-      <Filter>engine\object\basecomponents</Filter>
+      <Filter>src\engine\object\basecomponents</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\object\basecomponents\visualcomponent.h">
-      <Filter>engine\object\basecomponents</Filter>
+      <Filter>src\engine\object\basecomponents</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\physics\Collider.h">
-      <Filter>engine\physics</Filter>
+      <Filter>src\engine\physics</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\physics\Physics.h">
-      <Filter>engine\physics</Filter>
+      <Filter>src\engine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\IMesh.h">
+      <Filter>src\engine\rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\rendering\IRenderer.h">
-      <Filter>engine\rendering</Filter>
+      <Filter>src\engine\rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\rendering\IShader.h">
-      <Filter>engine\rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\engine\rendering\Mesh.h">
-      <Filter>engine\rendering</Filter>
+      <Filter>src\engine\rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\rendering\RenderCommand.h">
-      <Filter>engine\rendering</Filter>
+      <Filter>src\engine\rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\rendering\RenderCommander.h">
-      <Filter>engine\rendering</Filter>
+      <Filter>src\engine\rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\rendering\RendererDX11.h">
-      <Filter>engine\rendering</Filter>
+      <Filter>src\engine\rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\rendering\TextureManagerDX11.h">
-      <Filter>engine\rendering</Filter>
+      <Filter>src\engine\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\mesh\IMesh.h">
+      <Filter>src\engine\rendering\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\mesh\SimpleQuad.h">
+      <Filter>src\engine\rendering\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\mesh\TexturedQuad.h">
+      <Filter>src\engine\rendering\mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\rendering\shaderobjects\SimplePS.h">
-      <Filter>engine\rendering\shaderobjects</Filter>
+      <Filter>src\engine\rendering\shaderobjects</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\rendering\shaderobjects\SimpleVS.h">
-      <Filter>engine\rendering\shaderobjects</Filter>
+      <Filter>src\engine\rendering\shaderobjects</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\rendering\shaderobjects\WorldTransformVSObject.h">
-      <Filter>engine\rendering\shaderobjects</Filter>
+      <Filter>src\engine\rendering\shaderobjects</Filter>
     </ClInclude>
     <ClInclude Include="src\engine\time\Clock.h">
-      <Filter>engine\time</Filter>
+      <Filter>src\engine\time</Filter>
     </ClInclude>
     <ClInclude Include="src\game\CharacterControllerComponent.h">
-      <Filter>game</Filter>
+      <Filter>src\game</Filter>
     </ClInclude>
     <ClInclude Include="src\game\GameClient.h">
-      <Filter>game</Filter>
+      <Filter>src\game</Filter>
     </ClInclude>
     <ClInclude Include="src\game\ObjectsFactory.h">
-      <Filter>game</Filter>
+      <Filter>src\game</Filter>
     </ClInclude>
     <ClInclude Include="src\game\SimpleEntity.h">
-      <Filter>game</Filter>
+      <Filter>src\game</Filter>
     </ClInclude>
     <ClInclude Include="src\game\SimpleEntityBase.h">
-      <Filter>game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\SimpleVisualComponent.h">
-      <Filter>game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\NetworkManager.h">
-      <Filter>networking</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\client\Client.h">
-      <Filter>networking\client</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\client\ClientController.h">
-      <Filter>networking\client</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\networkutil\Buffer.h">
-      <Filter>networking\networkutil</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\networkutil\Peer.h">
-      <Filter>networking\networkutil</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\networkutil\networkutils.h">
-      <Filter>networking\networkutil</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\server\Server.h">
-      <Filter>networking\server</Filter>
-    </ClInclude>
-    <ClInclude Include="src\networking\server\ServerController.h">
-      <Filter>networking\server</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\Collections.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\StringUtils.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\math\Mat.h">
-      <Filter>util\math</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\math\MathUtils.h">
-      <Filter>util\math</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\math\Vec.h">
-      <Filter>util\math</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\SimpleTexturedVC.h">
-      <Filter>game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\SimpleTexturedVS.h">
-      <Filter>game</Filter>
+      <Filter>src\game</Filter>
     </ClInclude>
     <ClInclude Include="src\game\SimpleTexturedPS.h">
-      <Filter>game</Filter>
+      <Filter>src\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SimpleTexturedVC.h">
+      <Filter>src\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SimpleTexturedVS.h">
+      <Filter>src\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SimpleVisualComponent.h">
+      <Filter>src\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\NetworkManager.h">
+      <Filter>src\networking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\client\Client.h">
+      <Filter>src\networking\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\client\ClientController.h">
+      <Filter>src\networking\client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\networkutil\Buffer.h">
+      <Filter>src\networking\networkutil</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\networkutil\Peer.h">
+      <Filter>src\networking\networkutil</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\networkutil\networkutils.h">
+      <Filter>src\networking\networkutil</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\server\Server.h">
+      <Filter>src\networking\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\networking\server\ServerController.h">
+      <Filter>src\networking\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\Collections.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\StringUtils.h">
+      <Filter>src\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\math\Mat.h">
+      <Filter>src\util\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\math\MathUtils.h">
+      <Filter>src\util\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\math\Vec.h">
+      <Filter>src\util\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\rendering\SamplerDX.h">
+      <Filter>src\engine\rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="extern\lodepng\lodepng.cpp">
+      <Filter>extern\lodepng</Filter>
+    </ClCompile>
     <ClCompile Include="src\engine\camera\Camera.cpp">
-      <Filter>engine\camera</Filter>
+      <Filter>src\engine\camera</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\camera\CameraHandler.cpp">
-      <Filter>engine\camera</Filter>
+      <Filter>src\engine\camera</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\core\Engine.cpp">
-      <Filter>engine\core</Filter>
+      <Filter>src\engine\core</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\core\MetaData.cpp">
-      <Filter>engine\core</Filter>
+      <Filter>src\engine\core</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\core\Window.cpp">
-      <Filter>engine\core</Filter>
+      <Filter>src\engine\core</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\core\World.cpp">
-      <Filter>engine\core</Filter>
+      <Filter>src\engine\core</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\input\InputHandler.cpp">
-      <Filter>engine\input</Filter>
+      <Filter>src\engine\input</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\logging\Logging.cpp">
-      <Filter>engine\logging</Filter>
+      <Filter>src\engine\logging</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\object\Entity.cpp">
-      <Filter>engine\object</Filter>
+      <Filter>src\engine\object</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\object\Transform.cpp">
-      <Filter>engine\object</Filter>
+      <Filter>src\engine\object</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\object\basecomponents\CameraComponent.cpp">
-      <Filter>engine\object\basecomponents</Filter>
+      <Filter>src\engine\object\basecomponents</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\object\basecomponents\Component.cpp">
-      <Filter>engine\object\basecomponents</Filter>
+      <Filter>src\engine\object\basecomponents</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\object\basecomponents\RigidBodyComponent.cpp">
-      <Filter>engine\object\basecomponents</Filter>
+      <Filter>src\engine\object\basecomponents</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\object\basecomponents\VisualComponent.cpp">
-      <Filter>engine\object\basecomponents</Filter>
+      <Filter>src\engine\object\basecomponents</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\physics\Physics.cpp">
-      <Filter>engine\physics</Filter>
+      <Filter>src\engine\physics</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\IShader.cpp">
-      <Filter>engine\rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="src\engine\rendering\Mesh.cpp">
-      <Filter>engine\rendering</Filter>
+      <Filter>src\engine\rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\RenderCommander.cpp">
-      <Filter>engine\rendering</Filter>
+      <Filter>src\engine\rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\RendererDX11.cpp">
-      <Filter>engine\rendering</Filter>
+      <Filter>src\engine\rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\TextureManagerDX11.cpp">
-      <Filter>engine\rendering</Filter>
+      <Filter>src\engine\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\mesh\IMesh.cpp">
+      <Filter>src\engine\rendering\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\mesh\SimpleQuad.cpp">
+      <Filter>src\engine\rendering\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\mesh\TexturedQuad.cpp">
+      <Filter>src\engine\rendering\mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\shaderobjects\SimplePS.cpp">
-      <Filter>engine\rendering\shaderobjects</Filter>
+      <Filter>src\engine\rendering\shaderobjects</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\shaderobjects\SimpleVS.cpp">
-      <Filter>engine\rendering\shaderobjects</Filter>
+      <Filter>src\engine\rendering\shaderobjects</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\rendering\shaderobjects\WorldTransfromVSObject.cpp">
-      <Filter>engine\rendering\shaderobjects</Filter>
+      <Filter>src\engine\rendering\shaderobjects</Filter>
     </ClCompile>
     <ClCompile Include="src\engine\time\Clock.cpp">
-      <Filter>engine\time</Filter>
+      <Filter>src\engine\time</Filter>
     </ClCompile>
     <ClCompile Include="src\game\CharacterControllerComponent.cpp">
-      <Filter>game</Filter>
+      <Filter>src\game</Filter>
     </ClCompile>
     <ClCompile Include="src\game\GameClient.cpp">
-      <Filter>game</Filter>
+      <Filter>src\game</Filter>
     </ClCompile>
     <ClCompile Include="src\game\ObjectsFactory.cpp">
-      <Filter>game</Filter>
+      <Filter>src\game</Filter>
     </ClCompile>
     <ClCompile Include="src\game\SimpleEntity.cpp">
-      <Filter>game</Filter>
+      <Filter>src\game</Filter>
     </ClCompile>
     <ClCompile Include="src\game\SimpleEntityBase.cpp">
-      <Filter>game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\SimpleVisualComponent.cpp">
-      <Filter>game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\main.cpp">
-      <Filter>game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\networking\NetworkManager.cpp">
-      <Filter>networking</Filter>
-    </ClCompile>
-    <ClCompile Include="src\networking\client\Client.cpp">
-      <Filter>networking\client</Filter>
-    </ClCompile>
-    <ClCompile Include="src\networking\client\ClientController.cpp">
-      <Filter>networking\client</Filter>
-    </ClCompile>
-    <ClCompile Include="src\networking\networkutil\Buffer.cpp">
-      <Filter>networking\networkutil</Filter>
-    </ClCompile>
-    <ClCompile Include="src\networking\networkutil\Peer.cpp">
-      <Filter>networking\networkutil</Filter>
-    </ClCompile>
-    <ClCompile Include="src\networking\networkutil\networkutils.cpp">
-      <Filter>networking\networkutil</Filter>
-    </ClCompile>
-    <ClCompile Include="src\networking\server\Server.cpp">
-      <Filter>networking\server</Filter>
-    </ClCompile>
-    <ClCompile Include="src\networking\server\ServerController.cpp">
-      <Filter>networking\server</Filter>
-    </ClCompile>
-    <ClCompile Include="src\util\math\Mat.cpp">
-      <Filter>util\math</Filter>
-    </ClCompile>
-    <ClCompile Include="src\util\math\MathUtils.cpp">
-      <Filter>util\math</Filter>
-    </ClCompile>
-    <ClCompile Include="src\util\math\Vec.cpp">
-      <Filter>util\math</Filter>
-    </ClCompile>
-    <ClCompile Include="extern\lodepng\lodepng.cpp" />
-    <ClCompile Include="src\game\SimpleTexturedVC.cpp">
-      <Filter>game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\SimpleTexturedVS.cpp">
-      <Filter>game</Filter>
+      <Filter>src\game</Filter>
     </ClCompile>
     <ClCompile Include="src\game\SimpleTexturedPS.cpp">
-      <Filter>game</Filter>
+      <Filter>src\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\SimpleTexturedVC.cpp">
+      <Filter>src\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\SimpleTexturedVS.cpp">
+      <Filter>src\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\SimpleVisualComponent.cpp">
+      <Filter>src\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\main.cpp">
+      <Filter>src\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\NetworkManager.cpp">
+      <Filter>src\networking</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\client\Client.cpp">
+      <Filter>src\networking\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\client\ClientController.cpp">
+      <Filter>src\networking\client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\networkutil\Buffer.cpp">
+      <Filter>src\networking\networkutil</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\networkutil\Peer.cpp">
+      <Filter>src\networking\networkutil</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\networkutil\networkutils.cpp">
+      <Filter>src\networking\networkutil</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\server\Server.cpp">
+      <Filter>src\networking\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\networking\server\ServerController.cpp">
+      <Filter>src\networking\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\math\Mat.cpp">
+      <Filter>src\util\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\math\MathUtils.cpp">
+      <Filter>src\util\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\math\Vec.cpp">
+      <Filter>src\util\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\rendering\SamplerDX.cpp">
+      <Filter>src\engine\rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\engine\rendering\shaders\SimplePS.hlsl">
-      <Filter>engine\rendering\shaders</Filter>
+      <Filter>src\engine\rendering\shaders</Filter>
     </None>
     <None Include="src\engine\rendering\shaders\SimpleVS.hlsl">
-      <Filter>engine\rendering\shaders</Filter>
+      <Filter>src\engine\rendering\shaders</Filter>
     </None>
     <None Include="src\engine\rendering\shaders\SingleColorPS.hlsl">
-      <Filter>engine\rendering\shaders</Filter>
+      <Filter>src\engine\rendering\shaders</Filter>
     </None>
     <None Include="src\engine\rendering\shaders\WorldTransformVS.hlsl">
-      <Filter>engine\rendering\shaders</Filter>
+      <Filter>src\engine\rendering\shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

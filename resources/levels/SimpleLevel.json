@@ -12,12 +12,7 @@
 		"Components" :
 			[
 				{"Component" : {
-					"Class" : "SimpleTexturedVC",
-					"Mesh" :
-					{
-						"Vertices" : [ -1,  -1, -1, 1, 1, 1, 1, -1 ],
-						"Indices" : [0, 1, 2, 0, 2, 3]
-					}
+					"Class" : "SimpleTexturedVC"
 				}
 				},
 				{"Component" : {
@@ -43,12 +38,7 @@
 		"Components" :
 		[
 			{"Component" : { 
-				"Class" : "SimpleVisualComponent",
-				"Mesh" :
-				{
-					"Vertices" : [ 1,  1, -1, 1, -1, -1, 1, -1 ],
-					"Indices" : [2, 1, 0, 0, 3, 2]
-				}
+				"Class" : "SimpleTexturedVC"
 			}
 			},
 			{"Component" : 
@@ -69,12 +59,7 @@
 		"Components" :
 		[
 			{"Component" : { 
-				"Class" : "SimpleVisualComponent",
-				"Mesh" :
-				{
-					"Vertices" : [ 1,  1, -1, 1, -1, -1, 1, -1 ],
-					"Indices" : [2, 1, 0, 0, 3, 2]
-				}
+				"Class" : "SimpleVisualComponent"
 			}
 			},
 			{"Component" : 
@@ -95,12 +80,7 @@
 		"Components" :
 		[
 			{"Component" : { 
-				"Class" : "SimpleVisualComponent",
-				"Mesh" :
-				{
-					"Vertices" : [ 1,  1, -1, 1, -1, -1, 1, -1 ],
-					"Indices" : [2, 1, 0, 0, 3, 2]
-				}
+				"Class" : "SimpleVisualComponent"
 			}
 			},
 			{"Component" : 
@@ -121,12 +101,7 @@
 		"Components" :
 		[
 			{"Component" : { 
-				"Class" : "SimpleVisualComponent",
-				"Mesh" :
-				{
-					"Vertices" : [ 1,  1, -1, 1, -1, -1, 1, -1 ],
-					"Indices" : [2, 1, 0, 0, 3, 2]
-				}
+				"Class" : "SimpleVisualComponent"
 			}
 			},
 			{"Component" : 

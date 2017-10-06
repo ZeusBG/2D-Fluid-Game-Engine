@@ -4,6 +4,7 @@
 #include "engine/core/Engine.h"
 #include "engine/object/basecomponents/VisualComponent.h"
 #include "engine/rendering/RenderCommander.h"
+#include "engine/rendering/IMesh.h"
 
 #include <rapidjson/document.h>
 
@@ -15,7 +16,7 @@ VisualComponent::VisualComponent()
 
 void VisualComponent::Init()
 {
-    m_Mesh.InitializeBuffers(this);
+    m_Mesh->InitializeBuffers(this);
     m_VertexShader->Init();
     m_PixelShader->Init();
 }
@@ -24,7 +25,7 @@ void VisualComponent::Destroy()
 {
     m_PixelShader->Destroy();
     m_VertexShader->Destroy();
-    m_Mesh.Destroy();
+    m_Mesh->Destroy();
 }
 
 void VisualComponent::DeSerializeFromJSON(const rapidjson::Value& val)
@@ -34,19 +35,14 @@ void VisualComponent::DeSerializeFromJSON(const rapidjson::Value& val)
 	if (val.HasMember("PixelShader"))
 		m_PixelShader->DeSerializeFromJSON(val["PixelShader"]);
 	if (val.HasMember("Mesh"))
-		m_Mesh.DeSerializeFromJSON(val["Mesh"]);
-}
-
-void VisualComponent::AddVertex(float x, float y)
-{
-	m_Mesh.AddVertex(x, y);
+		m_Mesh->DeSerializeFromJSON(val["Mesh"]);
 }
 
 void VisualComponent::Update(float delta)
 {
     m_PixelShader->BindData(this);
     m_VertexShader->BindData(this);
-    m_Mesh.RenderBuffers();
+    m_Mesh->BindData();
     auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
-    renderCommander->DrawIndexed(m_Mesh.GetIndicesCount(), 0, 0);
+    renderCommander->DrawIndexed(m_Mesh->GetIndicesCount(), 0, 0);
 }

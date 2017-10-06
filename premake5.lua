@@ -20,7 +20,8 @@ project "2D_Engine"
 	  "src/**.c",
 	  "src/**.cpp",
 	  "src/**.hpp",
-	  "src/**.hlsl"
+	  "src/**.hlsl",
+	  "extern/lodepng/**.cpp"
    }
 
    excludes

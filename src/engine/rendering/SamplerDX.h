@@ -1,17 +1,11 @@
 #pragma once
-#include "engine/rendering/IRenderer.h"
-#include <rapidjson/fwd.h>
-#include <string>
-#include <memory>
 
-class IShader;
-struct IShaderDeleter;
+struct SamplerDesc
+{
 
-using SharedShaderPtr = std::shared_ptr<IShader>;
-using UniqueShaderPtr = std::unique_ptr<IShader, IShaderDeleter>;
+};
 
-class VisualComponent;
-class IShader
+class SamplerDX
 {
 public:
     IShader(const char* fileName) : m_FileName(fileName) {}
@@ -25,7 +19,6 @@ public:
 	//TODO remvoe ID3D11DeviceContext from abstraction
     virtual void BindData(VisualComponent* vc) = 0;
 	virtual void InitConstantBuffers() {}
-	virtual void DeSerializeFromJSON(const rapidjson::Value& val);
 
     //TODO make facotry for shaders
     template<typename T>

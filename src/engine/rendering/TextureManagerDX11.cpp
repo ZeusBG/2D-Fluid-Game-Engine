@@ -31,6 +31,8 @@ void TextureManagerDX11::LoadDefaultTexture()
 	// it shouldnt be deleted
 	info.NumOwners = 1;
 	info.RawData = image;
+	info.name = DEFAULT_TEXTURE;
+
 	m_Textures.insert({ m_DefaultTextureID, info });
 	g_Engine->GetModule<RendererDX11>()->LoadTexture(image->data(), width, height, TextureFormat::RGBA, m_DefaultTextureID);
 }
@@ -83,8 +85,9 @@ int TextureManagerDX11::LoadTexture(const std::string& file)
 
 	info.NumOwners = 1;
 	info.RawData = image;
+	info.name = file;
 	m_Textures.insert({ texID, info });
-
+	m_LoadedTextures.insert({ file, texID });
 	renderCommander->CreateTexture(static_cast<uint8_t*>(image->data()), width, height, TextureFormat::RGBA, texID);
 	return texID;
 }

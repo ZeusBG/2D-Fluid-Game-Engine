@@ -58,6 +58,10 @@ private:
 	static std::pair<TextureFormat, int> s_FormatSizeConverter[];
 
 	TextureManagerDX11 m_TextureManager;
+
+	// When true, rendering commands are executed
+	// when added.
+	bool m_Debug;
 };
 
 using RendererDX11SP = std::shared_ptr<RendererDX11>;

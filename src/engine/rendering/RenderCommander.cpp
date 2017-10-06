@@ -103,13 +103,13 @@ void RenderCommanderDx11::DrawIndexed(unsigned int indexCount, unsigned int star
 	m_Renderer->AddRenderCommand(cmd);
 }
 
-void RenderCommanderDx11::CreateBuffer(D3D11_BUFFER_DESC* Desc, D3D11_SUBRESOURCE_DATA* InitialData, ID3D11Buffer** Buffer)
+void RenderCommanderDx11::CreateBuffer(const D3D11_BUFFER_DESC& Desc, D3D11_SUBRESOURCE_DATA* InitialData, ID3D11Buffer** Buffer)
 {
 	RenderCommand cmd;
 	cmd.type = RenderCmdType::CreateBuffer;
 
 	CreateBufferInfo info;
-	info.Desc = *Desc;
+	info.Desc = Desc;
 	info.InitialData = InitialData;
 	info.Buffer = Buffer;
 	cmd.AddStructure<CreateBufferInfo>(info, InitialData, sizeof(D3D11_SUBRESOURCE_DATA));

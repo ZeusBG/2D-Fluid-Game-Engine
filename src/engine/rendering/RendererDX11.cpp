@@ -21,7 +21,7 @@ std::pair<TextureFormat, int> RendererDX11::s_FormatSizeConverter[] =
 	{ TextureFormat::RGBA,  4 }
 };
 
-RendererDX11::RendererDX11() {}
+RendererDX11::RendererDX11() { m_Debug = false; }
 RendererDX11::~RendererDX11() {}
 using namespace DirectX;
 
@@ -352,6 +352,10 @@ void RendererDX11::DestroyVS(VSData vs)
 void RendererDX11::AddRenderCommand(const RenderCommand& cmd)
 {
     m_CommandBuffer.push(cmd);
+	if (m_Debug)
+	{
+		DoRenderingCommands();
+	}
 }
 
 void RendererDX11::DoRenderingCommands()
@@ -467,6 +471,7 @@ void RendererDX11::ProcessCommand(RenderCommand& cmd)
             if (info->InitialData)
                 initialData = reinterpret_cast<D3D11_SUBRESOURCE_DATA*>(cmd.CommandData);
             auto result = m_pd3dDevice1->CreateBuffer(&info->Desc, initialData, info->Buffer);
+			int a = 10;
         }
         break;
         case RenderCmdType::ReleaseResource:
@@ -570,7 +575,7 @@ void RendererDX11::CreateDefaultSampler2D(ID3D11SamplerState** samplerState)
 	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 	samplerDesc.MipLODBias = 0.0f;
 	samplerDesc.MaxAnisotropy = 1;
-	samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+	samplerDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
 	samplerDesc.BorderColor[0] = 0;
 	samplerDesc.BorderColor[1] = 0;
 	samplerDesc.BorderColor[2] = 0;

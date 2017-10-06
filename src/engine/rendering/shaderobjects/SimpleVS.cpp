@@ -18,9 +18,9 @@ IMPLEMENT_METADATA(SimpleVS);
 
 struct WVP
 {
-    XMMATRIX m_WMat;
-    XMMATRIX m_VMat;
-    XMMATRIX m_PMat;
+    DirectX::XMMATRIX m_WMat;
+	DirectX::XMMATRIX m_VMat;
+	DirectX::XMMATRIX m_PMat;
 
 };
 
@@ -62,7 +62,7 @@ void SimpleVS::InitConstantBuffers()
 	bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	bd.CPUAccessFlags = 0;
 	auto renderCommander = Engine::GetEngine()->GetModule<RenderCommanderDx11>();
-	renderCommander->CreateBuffer(&bd, nullptr, &m_WorldMatrix);
+	renderCommander->CreateBuffer(bd, nullptr, &m_WorldMatrix);
 }
 
 void SimpleVS::BindData(VisualComponent* vc)

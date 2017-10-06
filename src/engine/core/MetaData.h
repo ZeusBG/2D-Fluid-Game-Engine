@@ -45,7 +45,7 @@ public:
     {
         if (!s_Instance)
         {
-//            std::lock_guard<std::mutex> lg(s_SingletonMutex);
+            std::lock_guard<std::mutex> lg(s_SingletonMutex);
             if (!s_Instance)
             {
                 s_Instance = new MetaDataStorage();

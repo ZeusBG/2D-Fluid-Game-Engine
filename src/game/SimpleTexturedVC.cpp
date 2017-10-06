@@ -3,15 +3,17 @@
 #include "engine/core/Engine.h"
 #include "engine/rendering/RenderCommander.h"
 #include "engine/rendering/RendererDX11.h"
+#include "engine/rendering/mesh/TexturedQuad.h"
 #include "game/SimpleTexturedPS.h"
 #include "game/SimpleTexturedVS.h"
 #include <memory>
 IMPLEMENT_METADATA(SimpleTexturedVC)
 
-SimpleTexturedVC::SimpleTexturedVC()
+SimpleTexturedVC::SimpleTexturedVC() : SimpleVisualComponent()
 {
 	m_PixelShader = std::static_pointer_cast<IShader>(IShader::ShaderSharedPtr<SimpleTexturedPS>("resources/shaders/SimpleTexturePS.hlsl"));
 	m_VertexShader = std::static_pointer_cast<IShader>(IShader::ShaderSharedPtr<SimpleTexturedVS>("resources/shaders/SimpleTextureVS.hlsl"));
+	m_Mesh = std::make_shared<TexturedQuad>();
 }
 
 void SimpleTexturedVC::Update(float dt)
